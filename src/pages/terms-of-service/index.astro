@@ -1,0 +1,258 @@
+---
+import PolicyLayout from '../../components/legal/PolicyLayout.astro';
+import PolicySection from '../../components/legal/PolicySection.astro';
+import LegalCallout from '../../components/legal/LegalCallout.astro';
+
+const pageTitle = 'Terms of Service – AP Score Hub Usage Terms & Disclaimers';
+const pageDescription =
+  'Read the AP Score Hub Terms of Service. Understand our educational disclaimers, College Board trademark notices, acceptable use policies, and limitations of liability.';
+const canonicalUrl = 'https://apushcalculator.com/terms-of-service/';
+
+const tocItems = [
+  { id: 'acceptance', label: '1. Acceptance of Terms' },
+  { id: 'educational-nature', label: '2. Educational Purpose & Nature of Service' },
+  { id: 'trademark-disclaimer', label: '3. College Board Trademark Disclaimer' },
+  { id: 'score-estimates', label: '4. Scoring Estimates & No Guarantees' },
+  { id: 'acceptable-use', label: '5. Permitted & Prohibited Uses' },
+  { id: 'intellectual-property', label: '6. Intellectual Property Rights' },
+  { id: 'disclaimer-warranties', label: '7. Disclaimer of Warranties' },
+  { id: 'limitation-liability', label: '8. Limitation of Liability' },
+  { id: 'governing-law', label: '9. Governing Law & Jurisdiction' },
+  { id: 'modifications-contact', label: '10. Modifications & Contact' },
+];
+
+const keySummary = {
+  title: 'Key Terms Summary (In Plain English)',
+  points: [
+    'AP Score Hub is an independent study tool, NOT an official College Board scoring service.',
+    'Calculated scores are statistical estimates for educational planning, not guaranteed results.',
+    'Calculators are free for personal study and classroom use; automated scraping is prohibited.',
+    'AP® and Advanced Placement® are registered trademarks of the College Board.',
+  ],
+};
+---
+
+<PolicyLayout
+  title={pageTitle}
+  description={pageDescription}
+  pageHeading="Terms of Service"
+  pageSubtitle="Please review these Terms of Service governing your access to and use of AP Score Hub score calculators, rubric tools, and educational resources."
+  activePolicy="terms"
+  lastUpdated="September 4, 2026"
+  tocItems={tocItems}
+  canonicalUrl={canonicalUrl}
+  keySummary={keySummary}
+>
+  <!-- Section 1: Acceptance -->
+  <PolicySection
+    id="acceptance"
+    number="01"
+    title="Acceptance of Terms"
+    badge="Agreement"
+  >
+    <p>
+      By accessing or using <strong>AP Score Hub</strong> (available at <code>https://apushcalculator.com</code> and related sub-paths), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service ("Terms") and our <a href="/privacy-policy/" class="text-blue-700 font-bold hover:underline">Privacy Policy</a>.
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      If you do not agree with any part of these Terms, you must immediately discontinue use of this website. If you are using this website on behalf of a school, educational institution, or tutoring organization, you represent that you have authority to bind that entity to these Terms.
+    </p>
+  </PolicySection>
+
+  <!-- Section 2: Educational Purpose -->
+  <PolicySection
+    id="educational-nature"
+    number="02"
+    title="Educational Purpose & Nature of Service"
+    badge="Scope of Service"
+  >
+    <p>
+      AP Score Hub is provided as a free, independent digital study aid designed to help Advanced Placement® students, teachers, and tutors model score weights and practice exam performances.
+    </p>
+    <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-600">
+      <li>All tools, including composite calculators, rubric evaluators, score predictors, and what-if simulators, are offered strictly for self-assessment and educational preparation.</li>
+      <li>AP Score Hub does not administer official exams, issue accredited grades, report scores to universities, or grant academic credentials.</li>
+    </ul>
+  </PolicySection>
+
+  <!-- Section 3: College Board Trademark Disclaimer -->
+  <PolicySection
+    id="trademark-disclaimer"
+    number="03"
+    title="College Board Trademark & Endorsement Disclaimer"
+    badge="Trademark Notice"
+  >
+    <LegalCallout type="warning" title="Mandatory College Board Trademark Notice">
+      <p class="mb-2">
+        <strong>AP®</strong>, <strong>Advanced Placement®</strong>, and <strong>College Board®</strong> are registered trademarks of the College Entrance Examination Board (the "College Board"), which was not involved in the production of, does not sponsor, and does not endorse this website.
+      </p>
+      <p>
+        AP Score Hub is an independent educational resource entirely unaffiliated with the College Board. Any reference to AP courses, exam rubrics, or historical curves is made strictly for nominative identification and educational commentary under fair use principles.
+      </p>
+    </LegalCallout>
+  </PolicySection>
+
+  <!-- Section 4: Scoring Estimates & No Guarantees -->
+  <PolicySection
+    id="score-estimates"
+    number="04"
+    title="Scoring Estimates & Disclaimer of Professional Advice"
+    badge="Score Limitations"
+  >
+    <p>
+      Users must understand the inherent limitations of predictive and estimating algorithms:
+    </p>
+
+    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3 text-xs sm:text-sm">
+      <h3 class="font-bold text-neutral-900">Important Score Disclaimers</h3>
+      <ul class="space-y-2 text-neutral-700">
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600 font-bold">•</span>
+          <span><strong>Estimations, Not Actual Grades:</strong> Calculated composites and 1–5 score tiers are statistical estimates derived from publicly released Course and Exam Descriptions (CED) and historical equating charts. They do not constitute official grades.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600 font-bold">•</span>
+          <span><strong>Annual Equating Variability:</strong> Because the College Board psychometrically curves and equates each official exam administration independently, cutoff thresholds vary each year. A score that yields a 5 on one exam form may yield a 4 on another.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600 font-bold">•</span>
+          <span><strong>No Guarantee of Academic or College Outcome:</strong> We make no representations or warranties that achieving an estimated score on this site will result in a corresponding score on official AP exams, award of college credit, or admission to any academic institution.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-blue-600 font-bold">•</span>
+          <span><strong>No Professional Counseling:</strong> Content provided across this platform does not constitute personalized college admissions counseling, psychological advice, or legal advice.</span>
+        </li>
+      </ul>
+    </div>
+  </PolicySection>
+
+  <!-- Section 5: Permitted & Prohibited Uses -->
+  <PolicySection
+    id="acceptable-use"
+    number="05"
+    title="Permitted & Prohibited Uses"
+    badge="Acceptable Use"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
+      <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2 text-xs sm:text-sm">
+        <h3 class="font-bold text-emerald-950 flex items-center gap-1.5">
+          <span class="text-emerald-700 font-bold">✓</span>
+          Permitted Uses
+        </h3>
+        <ul class="space-y-1.5 text-emerald-900/90">
+          <li>• Individual student practice exam evaluation</li>
+          <li>• Classroom demonstration by certified educators</li>
+          <li>• Study group performance analysis</li>
+          <li>• Sharing customized score URLs with tutors</li>
+          <li>• Printing score breakdowns for offline study</li>
+        </ul>
+      </div>
+
+      <div class="p-4 rounded-xl bg-rose-50/70 border border-rose-200 space-y-2 text-xs sm:text-sm">
+        <h3 class="font-bold text-rose-950 flex items-center gap-1.5">
+          <span class="text-rose-700 font-bold">✗</span>
+          Prohibited Uses
+        </h3>
+        <ul class="space-y-1.5 text-rose-900/90">
+          <li>• Automated scraping or extraction via bots/crawlers</li>
+          <li>• Commercial re-selling or packaging of calculator tools</li>
+          <li>• Framing or mirroring the website without permission</li>
+          <li>• Launching denial-of-service (DDoS) attacks</li>
+          <li>• Decompiling client-side scripts to create clones</li>
+        </ul>
+      </div>
+    </div>
+  </PolicySection>
+
+  <!-- Section 6: Intellectual Property -->
+  <PolicySection
+    id="intellectual-property"
+    number="06"
+    title="Intellectual Property Rights"
+    badge="Copyright"
+  >
+    <p>
+      The website design, proprietary calculation algorithms, styling, user interface, brand assets, and original explanatory editorial content are the intellectual property of <strong>[LEGAL ENTITY / OPERATOR NAME]</strong> and are protected by applicable copyright, trademark, and unfair competition laws.
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      AP exam frameworks, official rubric definitions, and exam structure specifications are the intellectual property of the College Entrance Examination Board and are cited herein strictly under fair use for educational analysis.
+    </p>
+  </PolicySection>
+
+  <!-- Section 7: Disclaimer of Warranties -->
+  <PolicySection
+    id="disclaimer-warranties"
+    number="07"
+    title="Disclaimer of Warranties"
+    badge="Warranties"
+  >
+    <p class="text-xs sm:text-sm uppercase tracking-wide font-bold text-neutral-800">
+      Please read this section carefully, as it limits the legal liability of the website operator:
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      AP Score Hub is provided strictly on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis, without express or implied warranties of any kind. To the fullest extent permissible under applicable law, we disclaim all warranties, including but not limited to implied warranties of merchantability, fitness for a particular educational purpose, uninterrupted service, or freedom from technical errors or bugs.
+    </p>
+  </PolicySection>
+
+  <!-- Section 8: Limitation of Liability -->
+  <PolicySection
+    id="limitation-liability"
+    number="08"
+    title="Limitation of Liability"
+    badge="Liability"
+  >
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      To the maximum extent permitted by law, in no event shall <strong>[LEGAL ENTITY / OPERATOR NAME]</strong>, its creators, operators, or contributors be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:
+    </p>
+    <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-neutral-600">
+      <li>Your access to, use of, or inability to access or use the calculators;</li>
+      <li>Any reliance placed on calculations, predictions, or score estimates;</li>
+      <li>Discrepancies between our estimated scores and actual official exam results;</li>
+      <li>Any unauthorized access or transmission interruptions.</li>
+    </ul>
+  </PolicySection>
+
+  <!-- Section 9: Governing Law -->
+  <PolicySection
+    id="governing-law"
+    number="09"
+    title="Governing Law & Dispute Resolution"
+    badge="Jurisdiction"
+  >
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      These Terms and any dispute arising out of or related to your use of AP Score Hub shall be governed by and construed in accordance with the laws of <strong>[GOVERNING JURISDICTION / STATE / COUNTRY]</strong>, without regard to its conflict of law principles.
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      Any legal action or proceeding arising under these Terms shall be instituted exclusively in the applicable courts situated within <strong>[GOVERNING JURISDICTION / STATE / COUNTRY]</strong>, and each party irrevocably submits to the personal jurisdiction of such courts.
+    </p>
+  </PolicySection>
+
+  <!-- Section 10: Modifications & Contact -->
+  <PolicySection
+    id="modifications-contact"
+    number="10"
+    title="Modifications to Terms & Legal Contact"
+    badge="Revisions"
+  >
+    <p>
+      We reserve the right to revise these Terms at our sole discretion. Any changes will be posted to this page with an updated "Last Updated" date. Continued use of the website following such modifications constitutes binding agreement to the revised Terms.
+    </p>
+
+    <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3 text-xs sm:text-sm mt-4">
+      <h3 class="font-bold text-neutral-900">Legal Contact Information</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Legal Entity / Operator</span>
+          <span class="font-medium text-neutral-900 mt-1 block">[LEGAL ENTITY / OPERATOR NAME]</span>
+        </div>
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Inquiry Email</span>
+          <span class="font-mono font-bold text-neutral-900 mt-1 block">[SUPPORT CONTACT EMAIL]</span>
+        </div>
+      </div>
+      <div>
+        <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Mailing Address</span>
+        <span class="font-medium text-neutral-700 mt-1 block">[OPERATOR MAILING ADDRESS]</span>
+      </div>
+    </div>
+  </PolicySection>
+</PolicyLayout>

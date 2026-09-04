@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../common/Header.astro';
+import Footer from '../common/Footer.astro';
+import Breadcrumb from '../common/Breadcrumb.astro';
+
+interface TocItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  pageHeading: string;
+  pageSubtitle: string;
+  activePolicy: 'support' | 'privacy' | 'terms' | 'dmca';
+  lastUpdated?: string;
+  tocItems: TocItem[];
+  canonicalUrl?: string;
+  keySummary?: {
+    title: string;
+    points: string[];
+  };
+}
+
+const {
+  title,
+  description,
+  pageHeading,
+  pageSubtitle,
+  activePolicy,
+  lastUpdated = 'September 4, 2026',
+  tocItems,
+  canonicalUrl,
+  keySummary,
+} = Astro.props;
+
+const policyTabs = [
+  { id: 'support', label: 'Support & Help', href: '/support/' },
+  { id: 'privacy', label: 'Privacy Policy', href: '/privacy-policy/' },
+  { id: 'terms', label: 'Terms of Service', href: '/terms-of-service/' },
+  { id: 'dmca', label: 'DMCA Notice', href: '/dmca/' },
+];
+
+const policyNames: Record<string, string> = {
+  support: 'Support Center',
+  privacy: 'Privacy Policy',
+  terms: 'Terms of Service',
+  dmca: 'DMCA & Copyright Policy',
+};
+
+const breadcrumbItems = [
+  { label: 'Legal & Support', href: '/support/' },
+  { label: policyNames[activePolicy] || pageHeading },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+>
+  <Header slot="header" />
+
+  <main class="py-8 sm:py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <Breadcrumb items={breadcrumbItems} />
+
+      <!-- Policy Header & Switcher Banner -->
+      <header class="mb-10 p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-xs space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-neutral-100 pb-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+              AP Score Hub Official Documentation
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-neutral-900 tracking-tight">
+              {pageHeading}
+            </h1>
+            <p class="text-sm sm:text-base text-neutral-600 max-w-3xl leading-relaxed">
+              {pageSubtitle}
+            </p>
+          </div>
+
+          <div class="shrink-0 flex md:flex-col items-start md:items-end gap-1 text-xs text-neutral-500 font-medium">
+            <span>Last Updated</span>
+            <span class="font-bold text-neutral-800 bg-neutral-100 px-2.5 py-1 rounded-md border border-neutral-200">
+              {lastUpdated}
+            </span>
+          </div>
+        </div>
+
+        <!-- Policy Navigation Pills / Switcher -->
+        <nav aria-label="Policy Documents" class="flex flex-wrap gap-2">
+          {policyTabs.map((tab) => {
+            const isActive = activePolicy === tab.id;
+            return (
+              <a
+                href={tab.href}
+                class={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 ${
+                  isActive
+                    ? 'bg-blue-700 text-white shadow-xs'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200/80 hover:text-neutral-900'
+                }`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {tab.label}
+              </a>
+            );
+          })}
+        </nav>
+      </header>
+
+      <!-- Key Summary Box (In Plain English) -->
+      {keySummary && (
+        <aside class="mb-10 p-6 rounded-2xl bg-gradient-to-br from-blue-50/70 via-indigo-50/40 to-blue-50/50 border border-blue-200/80 shadow-2xs space-y-3" aria-label="Key Summary">
+          <div class="flex items-center gap-2 text-blue-900 font-bold text-sm sm:text-base font-heading">
+            <svg class="w-5 h-5 text-blue-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3>{keySummary.title}</h3>
+          </div>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-neutral-700">
+            {keySummary.points.map((pt) => (
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold shrink-0 mt-0.5">✓</span>
+                <span>{pt}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      <!-- Mobile Quick Jump Bar -->
+      <div class="lg:hidden mb-8 p-4 rounded-xl bg-white border border-neutral-200">
+        <label for="mobile-toc-select" class="block text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2">
+          Jump to Section
+        </label>
+        <select
+          id="mobile-toc-select"
+          class="w-full text-xs font-medium bg-neutral-50 border border-neutral-300 rounded-lg p-2.5 text-neutral-800 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+          onchange="if (this.value) window.location.hash = this.value;"
+        >
+          <option value="">Select a section...</option>
+          {tocItems.map((item) => (
+            <option value={item.id}>{item.label}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Main Layout Grid: Content + Sticky Sidebar -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Content Column -->
+        <article class="lg:col-span-8 space-y-8">
+          <slot />
+        </article>
+
+        <!-- Desktop Sticky Sidebar -->
+        <aside class="hidden lg:block lg:col-span-4 sticky top-24 space-y-6">
+          <!-- Table of Contents -->
+          <div class="p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              On This Page
+            </h2>
+            <nav aria-label="Table of contents" class="space-y-1">
+              {tocItems.map((item) => (
+                <a
+                  href={`#${item.id}`}
+                  class="block px-2.5 py-1.5 rounded-lg text-xs font-medium text-neutral-600 hover:text-blue-700 hover:bg-blue-50/70 transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <!-- Document Transparency & Help Card -->
+          <div class="p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              Need Clarification?
+            </h3>
+            <p class="text-xs text-neutral-600 leading-relaxed">
+              Have questions about our calculations, privacy practices, or rubrics? We are here to help AP educators and students.
+            </p>
+            <div class="pt-2">
+              <a
+                href="/support/"
+                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-neutral-900 hover:bg-blue-700 text-white transition-colors"
+              >
+                <span>Visit Support Center</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Trademark Reminder Card -->
+          <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-[11px] text-neutral-500 space-y-2">
+            <p class="font-bold text-neutral-700">College Board Notice</p>
+            <p class="leading-relaxed">
+              AP® and Advanced Placement® are registered trademarks of the College Board, which was not involved in the production of, and does not endorse, this website.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer slot="footer" />
+</Layout>

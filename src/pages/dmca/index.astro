@@ -1,0 +1,204 @@
+---
+import PolicyLayout from '../../components/legal/PolicyLayout.astro';
+import PolicySection from '../../components/legal/PolicySection.astro';
+import LegalCallout from '../../components/legal/LegalCallout.astro';
+
+const pageTitle = 'DMCA & Copyright Policy – AP Score Hub Notice & Takedown';
+const pageDescription =
+  'Read the AP Score Hub DMCA & Copyright Policy. Learn about our intellectual property standards, no-user-content model, and procedures for submitting copyright notices.';
+const canonicalUrl = 'https://apushcalculator.com/dmca/';
+
+const tocItems = [
+  { id: 'platform-nature', label: '1. Platform Nature & No-UGC Model' },
+  { id: 'copyright-policy', label: '2. Copyright Standards & Fair Use' },
+  { id: 'takedown-notice', label: '3. Notice of Infringement Requirements' },
+  { id: 'false-claims', label: '4. Penalties for False Claims (§ 512(f))' },
+  { id: 'counter-notice', label: '5. Counter-Notification Procedure' },
+  { id: 'repeat-infringers', label: '6. Repeat Infringer Policy' },
+  { id: 'designated-agent', label: '7. Designated DMCA Agent' },
+];
+
+const keySummary = {
+  title: 'DMCA Policy Highlights (In Plain English)',
+  points: [
+    'AP Score Hub is an educational tool and does NOT host user-uploaded files or user posts.',
+    'All content is either original editorial material or fair-use educational commentary.',
+    'We promptly investigate and respond to valid copyright notices under 17 U.S.C. § 512.',
+    'A designated agent contact block is provided below for formal copyright correspondence.',
+  ],
+};
+---
+
+<PolicyLayout
+  title={pageTitle}
+  description={pageDescription}
+  pageHeading="DMCA & Copyright Policy"
+  pageSubtitle="Our commitment to intellectual property rights, fair-use educational commentary, and statutory notice-and-takedown procedures under the Digital Millennium Copyright Act."
+  activePolicy="dmca"
+  lastUpdated="September 4, 2026"
+  tocItems={tocItems}
+  canonicalUrl={canonicalUrl}
+  keySummary={keySummary}
+>
+  <!-- Section 1: Platform Nature -->
+  <PolicySection
+    id="platform-nature"
+    number="01"
+    title="Platform Nature & Absence of User-Generated Content"
+    badge="Platform Reality"
+  >
+    <p>
+      In compliance with Title 17, United States Code, Section 512 (the Digital Millennium Copyright Act, or "DMCA"), this page sets forth the copyright practices and notice procedures for <strong>AP Score Hub</strong> (<code>https://apushcalculator.com</code>).
+    </p>
+
+    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-2.5 text-xs sm:text-sm">
+      <h3 class="font-bold text-neutral-900">Important Operational Context</h3>
+      <p class="text-neutral-700 leading-relaxed">
+        Unlike social networks, forums, or file-sharing hubs, <strong>AP Score Hub does NOT operate as an open user-generated content (UGC) platform</strong>:
+      </p>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-600">
+        <li>Users cannot upload documents, PDFs, images, or test files to our servers.</li>
+        <li>There are no public discussion boards, comment threads, or blog submission forms.</li>
+        <li>All materials published across this site are authored by our team or referenced for mathematical and educational modeling.</li>
+      </ul>
+    </div>
+  </PolicySection>
+
+  <!-- Section 2: Copyright Standards & Fair Use -->
+  <PolicySection
+    id="copyright-policy"
+    number="02"
+    title="Copyright Standards & Educational Fair Use"
+    badge="Standards"
+  >
+    <p>
+      We respect the intellectual property rights of authors, creators, and testing organizations.
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      References to Advanced Placement® exam structures, section weight percentages, historical scoring boundaries, and public rubric criteria are sourced from officially released Course and Exam Descriptions (CED) published by the College Board. Such references are utilized strictly under the <strong>Fair Use doctrine</strong> of United States copyright law (17 U.S.C. § 107) for non-profit educational instruction, scholarship, commentary, and statistical estimation.
+    </p>
+  </PolicySection>
+
+  <!-- Section 3: Notice Requirements -->
+  <PolicySection
+    id="takedown-notice"
+    number="03"
+    title="Notice of Copyright Infringement Requirements"
+    badge="Takedown Notice"
+  >
+    <p>
+      If you are a copyright owner or an agent authorized to act on behalf of an owner, and you believe that any material available on AP Score Hub infringes your copyright, you may submit a formal notification pursuant to 17 U.S.C. § 512(c)(3).
+    </p>
+
+    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3 text-xs sm:text-sm my-3">
+      <h3 class="font-bold text-neutral-900">Statutory Requirements for a Valid DMCA Notice</h3>
+      <p class="text-neutral-600">
+        To be effective, your notice must be in writing and include all of the following:
+      </p>
+      <ol class="list-decimal pl-5 space-y-2 text-neutral-700">
+        <li>
+          <strong>Identification of the Copyrighted Work:</strong> A description of the copyrighted work that you claim has been infringed, or a representative list of such works.
+        </li>
+        <li>
+          <strong>Identification of the Infringing Material:</strong> The exact URL(s) on <code>https://apushcalculator.com</code> where the allegedly infringing material is located, with sufficient detail to allow us to locate it.
+        </li>
+        <li>
+          <strong>Contact Information of the Notifier:</strong> Your full legal name, mailing address, telephone number, and direct email address.
+        </li>
+        <li>
+          <strong>Good Faith Statement:</strong> A statement containing the exact phrase: <em>"I have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law."</em>
+        </li>
+        <li>
+          <strong>Accuracy &amp; Perjury Statement:</strong> A statement made under penalty of perjury: <em>"I swear, under penalty of perjury, that the information in this notification is accurate and that I am the copyright owner, or am authorized to act on behalf of the owner of an exclusive right that is allegedly infringed."</em>
+        </li>
+        <li>
+          <strong>Signature:</strong> A physical or verified electronic signature of the person authorized to act on behalf of the owner of the copyright interest.
+        </li>
+      </ol>
+    </div>
+
+    <p class="text-xs text-neutral-500 italic">
+      Incomplete notices that omit required statutory components cannot be processed under § 512(c)(3).
+    </p>
+  </PolicySection>
+
+  <!-- Section 4: False Claims Warning -->
+  <PolicySection
+    id="false-claims"
+    number="04"
+    title="Penalties for False or Misleading Claims (§ 512(f))"
+    badge="Legal Warning"
+  >
+    <LegalCallout type="warning" title="Warning Regarding Misrepresentations under 17 U.S.C. § 512(f)">
+      <p class="text-xs sm:text-sm leading-relaxed">
+        Under Section 512(f) of the Digital Millennium Copyright Act, any person who knowingly materially misrepresents that material or activity is infringing may be subject to substantial liability for damages, including court costs and attorneys' fees incurred by the alleged infringer or website operator. Please ensure that fair use and other legal defenses have been evaluated prior to filing.
+      </p>
+    </LegalCallout>
+  </PolicySection>
+
+  <!-- Section 5: Counter-Notification Procedure -->
+  <PolicySection
+    id="counter-notice"
+    number="05"
+    title="Counter-Notification Procedure"
+    badge="Counter-Notice"
+  >
+    <p>
+      If material you contributed was removed or disabled as a result of a mistaken DMCA notice, you may submit a formal counter-notification under 17 U.S.C. § 512(g)(3).
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      A valid counter-notification must be in writing and include: (a) identification of the material that has been removed or disabled; (b) a statement under penalty of perjury that you have a good faith belief the material was removed as a result of mistake or misidentification; (c) your legal name, address, and telephone number; (d) consent to the jurisdiction of the federal district court for your judicial district; and (e) your physical or electronic signature.
+    </p>
+  </PolicySection>
+
+  <!-- Section 6: Repeat Infringer Policy -->
+  <PolicySection
+    id="repeat-infringers"
+    number="06"
+    title="Repeat Infringer Policy"
+    badge="Compliance"
+  >
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      In accordance with 17 U.S.C. § 512(i)(1)(A), AP Score Hub maintains an explicit policy to terminate or restrict website access for any user or contributor who repeatedly infringes the intellectual property rights of others.
+    </p>
+  </PolicySection>
+
+  <!-- Section 7: Designated DMCA Agent -->
+  <PolicySection
+    id="designated-agent"
+    number="07"
+    title="Designated Copyright Agent Contact"
+    badge="Agent"
+  >
+    <p>
+      All notices of claimed copyright infringement must be directed to our designated copyright agent via email or physical postal mail:
+    </p>
+
+    <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3 text-xs sm:text-sm my-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Designated Agent</span>
+          <span class="font-bold text-neutral-900 mt-1 block">[DMCA DESIGNATED AGENT NAME]</span>
+          <span class="text-neutral-500 text-[11px] block">Copyright Compliance Officer</span>
+        </div>
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Website Operator</span>
+          <span class="font-medium text-neutral-900 mt-1 block">[LEGAL ENTITY / OPERATOR NAME]</span>
+          <span class="text-neutral-500 text-[11px] block">Operating AP Score Hub (apushcalculator.com)</span>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-neutral-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">DMCA Electronic Notice Email</span>
+          <span class="font-mono font-bold text-neutral-900 mt-1 block">[DMCA CONTACT EMAIL]</span>
+          <span class="text-neutral-500 text-[11px] block">Subject line must include: "DMCA Takedown Notice"</span>
+        </div>
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Postal Mailing Address</span>
+          <span class="font-medium text-neutral-700 mt-1 block">[DMCA MAILING ADDRESS]</span>
+        </div>
+      </div>
+    </div>
+  </PolicySection>
+</PolicyLayout>

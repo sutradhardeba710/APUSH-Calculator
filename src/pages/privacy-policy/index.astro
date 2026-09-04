@@ -1,0 +1,270 @@
+---
+import PolicyLayout from '../../components/legal/PolicyLayout.astro';
+import PolicySection from '../../components/legal/PolicySection.astro';
+import LegalCallout from '../../components/legal/LegalCallout.astro';
+
+const pageTitle = 'Privacy Policy – AP Score Hub Data Practices & Student Privacy';
+const pageDescription =
+  'Read the AP Score Hub Privacy Policy. Learn how our client-side calculators process scores locally in your browser with zero server-side storage and no tracking accounts.';
+const canonicalUrl = 'https://apushcalculator.com/privacy-policy/';
+
+const tocItems = [
+  { id: 'introduction', label: '1. Introduction & Overview' },
+  { id: 'local-processing', label: '2. Zero Server Storage Guarantee' },
+  { id: 'url-sharing', label: '3. Score Sharing & URL Parameters' },
+  { id: 'server-logs', label: '4. Hosting & Server Access Logs' },
+  { id: 'cookies-tracking', label: '5. Cookies & Tracking Technologies' },
+  { id: 'children-privacy', label: '6. Student & Children’s Privacy (COPPA)' },
+  { id: 'security-retention', label: '7. Data Security & Retention' },
+  { id: 'user-rights', label: '8. Your Privacy Rights (CCPA / GDPR)' },
+  { id: 'updates', label: '9. Changes to This Policy' },
+  { id: 'contact', label: '10. Privacy Contact Information' },
+];
+
+const keySummary = {
+  title: 'Key Privacy Highlights (In Plain English)',
+  points: [
+    'Your practice exam scores are processed locally on your device and are never sent to or stored on our servers.',
+    'No user accounts, profiles, logins, or credit card forms exist on this website.',
+    'We do not set tracking cookies or sell your personal information to data brokers.',
+    'Typefaces are self-hosted within the project, preventing third-party font tracking.',
+  ],
+};
+---
+
+<PolicyLayout
+  title={pageTitle}
+  description={pageDescription}
+  pageHeading="Privacy Policy"
+  pageSubtitle="We believe student study data belongs to students. This Privacy Policy details our transparent, client-side data practices for AP Score Hub."
+  activePolicy="privacy"
+  lastUpdated="September 4, 2026"
+  tocItems={tocItems}
+  canonicalUrl={canonicalUrl}
+  keySummary={keySummary}
+>
+  <!-- Section 1: Introduction -->
+  <PolicySection
+    id="introduction"
+    number="01"
+    title="Introduction & Overview"
+    badge="Scope"
+  >
+    <p>
+      This Privacy Policy describes the privacy practices of <strong>AP Score Hub</strong> (referred to as "we", "us", or "our"), operated at <code>https://apushcalculator.com</code>. It applies to all calculators, rubric tools, and informational guides available on this platform.
+    </p>
+    <p>
+      AP Score Hub is an independent educational website created to help high school students, teachers, and tutors calculate weighted AP composite scores and evaluate practice exam results. We are deeply committed to protecting the privacy of our users and designing tools that require minimal data collection.
+    </p>
+  </PolicySection>
+
+  <!-- Section 2: Zero Server Storage Guarantee -->
+  <PolicySection
+    id="local-processing"
+    number="02"
+    title="Local Client-Side Calculations & Zero Server Storage"
+    badge="Architecture"
+  >
+    <p>
+      Our core scoring algorithms operate on an architectural model known as <strong>client-side execution</strong>:
+    </p>
+
+    <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3">
+      <h3 class="font-bold text-neutral-900 text-sm sm:text-base">How Your Scores Are Processed</h3>
+      <ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-600 font-bold">✓</span>
+          <span><strong>Local Browser Memory:</strong> When you enter multiple-choice raw scores or adjust rubric sliders for the DBQ, LEQ, or SAQ, those values are processed solely within your browser’s temporary memory via JavaScript.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-600 font-bold">✓</span>
+          <span><strong>No Database Transmission:</strong> We do not operate a user database, backend API, or cloud storage system that receives, logs, or saves your individual test scores.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-emerald-600 font-bold">✓</span>
+          <span><strong>Instant Session Clearance:</strong> As soon as you refresh the page or close your browser tab, your entered scores are instantly discarded from memory.</span>
+        </li>
+      </ul>
+    </div>
+
+    <LegalCallout type="success" title="Zero Server-Side Storage Guarantee">
+      Your practice scores, simulated target scores, and rubric selections remain entirely private on your device. We do not know what scores you input, and we do not maintain historical logs of your performance.
+    </LegalCallout>
+  </PolicySection>
+
+  <!-- Section 3: Score Sharing & URL Parameters -->
+  <PolicySection
+    id="url-sharing"
+    number="03"
+    title="Score Sharing & URL Parameters"
+    badge="Functionality"
+  >
+    <p>
+      To make it easy for students to share results with teachers, tutors, or study groups, our calculators include a "Share Score" or "Copy Link" feature.
+    </p>
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      When you click this button, the application writes your current section scores directly into the URL query string (for example: <code>?mcq=45&saq=7&dbq=5&leq=4</code>).
+    </p>
+    <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-600">
+      <li>This string is generated locally on your device and copied to your clipboard using the browser’s standard Clipboard API.</li>
+      <li>Anyone who opens that specific URL with those query parameters will see the calculator pre-populated with those exact numbers.</li>
+      <li>We do not log, associate, or catalog these share links with any personal identity.</li>
+    </ul>
+  </PolicySection>
+
+  <!-- Section 4: Hosting & Server Access Logs -->
+  <PolicySection
+    id="server-logs"
+    number="04"
+    title="Hosting Infrastructure & Technical Server Logs"
+    badge="Technical"
+  >
+    <p>
+      Like all internet websites, when you visit AP Score Hub, the web servers hosting our static files automatically receive and record basic technical request information.
+    </p>
+
+    <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs sm:text-sm space-y-2">
+      <h4 class="font-bold text-neutral-900">Technical Log Data May Include:</h4>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-600">
+        <li>• Internet Protocol (IP) address</li>
+        <li>• Web browser type and version</li>
+        <li>• Operating system platform</li>
+        <li>• Date, time, and duration of visit</li>
+        <li>• Specific page URL requested</li>
+        <li>• Referring website address</li>
+      </ul>
+    </div>
+
+    <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+      <strong>Purpose of Logging:</strong> This technical data is used exclusively to maintain web server availability, defend against automated Distributed Denial of Service (DDoS) attacks, detect broken links, and optimize page load speeds. These server logs are automatically rotated and purged periodically.
+    </p>
+  </PolicySection>
+
+  <!-- Section 5: Cookies & Tracking Technologies -->
+  <PolicySection
+    id="cookies-tracking"
+    number="05"
+    title="Cookies, Tracking & External Font Services"
+    badge="Tracking"
+  >
+    <div class="space-y-3">
+      <h3 class="font-bold text-neutral-900 text-sm sm:text-base">No Persistent Tracking Cookies</h3>
+      <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+        The core AP Score Hub application does not set persistent tracking cookies, advertising beacons, or fingerprinting scripts. You can use every calculator and read every rubric guide without accepting tracking cookies.
+      </p>
+
+      <h3 class="font-bold text-neutral-900 text-sm sm:text-base">Self-Hosted Typography</h3>
+      <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+        Unlike websites that load fonts from external third-party CDN networks (which may log visitor IP addresses), our Outfit and Inter fonts are bundled and served locally directly from our own domain via static packages. No external requests are made to third-party font servers.
+      </p>
+
+      <h3 class="font-bold text-neutral-900 text-sm sm:text-base">Third-Party Analytics &amp; Advertising Notice</h3>
+      <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+        Currently, no advertising networks or third-party behavioral analytics (such as Google Analytics or Meta Pixel) are embedded in this website. Should anonymous, privacy-preserving performance metrics or non-intrusive display advertising be integrated in the future to support hosting costs, this policy will be updated with full disclosure of provider details and opt-out mechanisms.
+      </p>
+    </div>
+  </PolicySection>
+
+  <!-- Section 6: Student & Children's Privacy -->
+  <PolicySection
+    id="children-privacy"
+    number="06"
+    title="Student & Children’s Privacy (COPPA Compliance)"
+    badge="Children's Privacy"
+  >
+    <p>
+      AP courses and exams are administered to high school students, predominantly between the ages of 14 and 18. Protecting student privacy is paramount.
+    </p>
+
+    <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs sm:text-sm space-y-2">
+      <p class="text-neutral-700 leading-relaxed">
+        Under the <strong>Children's Online Privacy Protection Act (COPPA)</strong>, commercial websites cannot knowingly collect personal information from children under 13 without verifiable parental consent.
+      </p>
+      <ul class="list-disc pl-5 space-y-1 text-neutral-600">
+        <li>AP Score Hub does not knowingly collect, solicit, or maintain any personal information from children under the age of 13.</li>
+        <li>We do not offer user registrations, public profile creation, forum commenting, or contact forms that harvest student personal data.</li>
+        <li>If a parent, guardian, or educator believes a child under 13 has somehow transmitted personal information to us, please contact us immediately so we can promptly delete it.</li>
+      </ul>
+    </div>
+  </PolicySection>
+
+  <!-- Section 7: Data Security & Retention -->
+  <PolicySection
+    id="security-retention"
+    number="07"
+    title="Data Security & Data Retention"
+    badge="Security"
+  >
+    <p>
+      We implement industry-standard technical measures to ensure the integrity and security of the website:
+    </p>
+    <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-neutral-600">
+      <li><strong>HTTPS Encryption:</strong> All communications between your browser and our servers are encrypted in transit using Transport Layer Security (TLS/HTTPS).</li>
+      <li><strong>Input Sanitization:</strong> Calculator inputs are constrained client-side to valid numerical bounds, mitigating injection attacks.</li>
+      <li><strong>Data Minimization:</strong> By intentionally avoiding the collection of personal user data, we drastically minimize the risk of data breaches.</li>
+      <li><strong>Retention:</strong> Because calculator data is never stored on our servers, there is no personal score data to retain. Server diagnostic logs are automatically purged on a standard rotating schedule.</li>
+    </ul>
+  </PolicySection>
+
+  <!-- Section 8: Your Privacy Rights -->
+  <PolicySection
+    id="user-rights"
+    number="08"
+    title="Your Privacy Rights (CCPA, CPRA & GDPR Notice)"
+    badge="Legal Rights"
+  >
+    <p>
+      Depending on your state or country of residence (such as California under the CCPA/CPRA, or the European Economic Area / UK under the GDPR), you may have statutory privacy rights regarding your personal information.
+    </p>
+
+    <div class="space-y-2.5 text-xs sm:text-sm text-neutral-600">
+      <p>
+        <strong>Our Position on Data Sales:</strong> We do not sell, rent, or trade your personal information to third parties, data brokers, or marketing aggregators.
+      </p>
+      <p>
+        <strong>Right to Access, Rectify, or Delete:</strong> Because AP Score Hub does not collect personal names, email addresses, or individual score histories, we generally maintain no identifiable records linked to your identity. If you contact our support desk via email, you may request the deletion of that specific communication record at any time.
+      </p>
+    </div>
+  </PolicySection>
+
+  <!-- Section 9: Changes to This Policy -->
+  <PolicySection
+    id="updates"
+    number="09"
+    title="Changes to This Privacy Policy"
+    badge="Revisions"
+  >
+    <p>
+      We may occasionally update this Privacy Policy to reflect changes in our calculators, technical architecture, or relevant legal requirements. When updates are published, the "Last Updated" date at the top of this document will be revised. We encourage users to review this page periodically.
+    </p>
+  </PolicySection>
+
+  <!-- Section 10: Contact Information -->
+  <PolicySection
+    id="contact"
+    number="10"
+    title="Privacy Officer & Contact Information"
+    badge="Contact"
+  >
+    <p>
+      If you have questions, concerns, or requests regarding this Privacy Policy or our student data practices, please reach out to our privacy desk:
+    </p>
+
+    <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-3 text-xs sm:text-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Privacy Contact Email</span>
+          <span class="font-mono font-bold text-neutral-900 mt-1 block">[PRIVACY CONTACT EMAIL]</span>
+        </div>
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Website Operator / Entity</span>
+          <span class="font-medium text-neutral-900 mt-1 block">[LEGAL ENTITY / OPERATOR NAME]</span>
+        </div>
+      </div>
+      <div>
+        <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Mailing Address</span>
+        <span class="font-medium text-neutral-700 mt-1 block">[OPERATOR MAILING ADDRESS]</span>
+      </div>
+    </div>
+  </PolicySection>
+</PolicyLayout>

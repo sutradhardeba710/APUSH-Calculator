@@ -18,10 +18,13 @@ interface Props {
   siteName?: string;
 }
 
+const siteOrigin = Astro.site ? Astro.site.origin : Astro.url.origin;
+const defaultCanonical = new URL(Astro.url.pathname, siteOrigin).href;
+
 const {
   title,
   description,
-  canonicalUrl = Astro.url.href,
+  canonicalUrl = defaultCanonical,
   ogImage = '/images/og-apush-calculator.png',
   ogType = 'website',
   noindex = false,

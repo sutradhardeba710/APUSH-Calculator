@@ -86,7 +86,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         <h2 class="text-lg font-bold font-heading text-neutral-900">
           Enter Practice Test Scores
         </h2>
-        <span class="text-xs text-neutral-500">Instant local calculation</span>
+        <span class="text-xs text-neutral-500">Official scoring model</span>
       </div>
 
       <form id="subject-calc-form" class="space-y-4" onsubmit="return false;">
@@ -177,7 +177,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           <svg id="calc-btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
           </svg>
-          <span id="calc-btn-text">Recalculate Score Estimate</span>
+          <span id="calc-btn-text">Calculate Score Estimate</span>
         </button>
       </form>
     </div>
@@ -375,26 +375,36 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
   </div>
 
   <!-- Interactive What-If Simulator Module -->
-  <div class="p-6 sm:p-8 rounded-2xl bg-neutral-900 text-white space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-800 pb-4">
-      <div>
-        <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">
-          What-If Score Simulator
-        </h3>
-        <p class="text-xs sm:text-sm text-neutral-400">
-          See how marginal point adjustments in specific sections change your composite and AP score.
-        </p>
+  <div class="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
+      <div class="flex items-start gap-3">
+        <span class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 shrink-0 mt-0.5">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </span>
+        <div>
+          <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
+            What-If Score Simulator
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-500 mt-0.5">
+            Test how marginal point adjustments in specific sections change your composite and AP score.
+          </p>
+        </div>
       </div>
 
-      <div class="text-right shrink-0">
-        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider block">Simulated Score</span>
-        <div class="flex items-baseline gap-2 mt-0.5">
-          <span id="sim-score-badge" class="text-3xl font-black font-heading text-emerald-400 tabular-nums transition-all duration-200">
-            {initialResult.estimatedApScore}
+      <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-2.5 shrink-0 self-start sm:self-auto">
+        <div class="text-right">
+          <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">Simulated Score</span>
+          <span id="sim-composite-text" class="text-xs font-semibold text-neutral-600 tabular-nums">
+            {initialResult.compositeScore} composite
           </span>
-          <span id="sim-composite-text" class="text-sm font-bold text-neutral-300 tabular-nums">
-            ({initialResult.compositeScore} composite)
-          </span>
+        </div>
+        <div
+          id="sim-score-badge"
+          class={`w-10 h-10 rounded-lg ${initialResult.estimatedApScore >= 4 ? 'bg-emerald-600' : initialResult.estimatedApScore === 3 ? 'bg-blue-600' : 'bg-amber-600'} text-white font-black font-heading text-xl flex items-center justify-center tabular-nums shadow-xs transition-colors duration-200`}
+        >
+          {initialResult.estimatedApScore}
         </div>
       </div>
     </div>
@@ -403,31 +413,34 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {
         yearConfig.sections.map((sec) => (
-          <div class="p-4 rounded-xl bg-neutral-800/80 border border-neutral-700 space-y-2 hover:border-neutral-600 transition-colors">
+          <div class="p-4 rounded-xl bg-neutral-50/80 border border-neutral-200 space-y-3 hover:border-neutral-300 transition-colors">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-neutral-200">{sec.shortName}</span>
-              <span class="text-[11px] font-semibold text-neutral-400 tabular-nums">
+              <span class="text-xs font-bold text-neutral-900 font-heading">{sec.shortName}</span>
+              <span class="text-[11px] font-semibold text-blue-700 bg-blue-50/80 px-2 py-0.5 rounded border border-blue-100 tabular-nums">
                 +{(sec.weightPercent / sec.maxScore).toFixed(2)} pts/raw
               </span>
             </div>
-            <div class="flex items-center justify-between gap-2 pt-1">
+            <div class="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded-lg p-1.5 shadow-xs">
               <button
                 type="button"
                 data-sim-sec={sec.id}
                 data-sim-delta="-1"
-                class="sim-btn w-8 h-8 rounded-lg bg-neutral-700 hover:bg-neutral-600 active:scale-95 text-white font-bold text-xs flex items-center justify-center transition-all duration-150"
+                class="sim-btn w-8 h-8 rounded-md bg-neutral-100 hover:bg-neutral-200 active:scale-95 text-neutral-700 font-bold text-xs flex items-center justify-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600/30 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                 title={`Subtract 1 from ${sec.shortName}`}
               >
                 -1
               </button>
-              <span id={`sim-display-${sec.id}`} class="text-sm font-bold text-white tabular-nums">
-                {initialScores[sec.id] || 0}
-              </span>
+              <div class="text-center px-1">
+                <span id={`sim-display-${sec.id}`} class="text-base font-extrabold font-heading text-neutral-900 tabular-nums">
+                  {initialScores[sec.id] || 0}
+                </span>
+                <span class="text-[10px] text-neutral-400 block font-medium tabular-nums">/ {sec.maxScore}</span>
+              </div>
               <button
                 type="button"
                 data-sim-sec={sec.id}
                 data-sim-delta="1"
-                class="sim-btn w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-xs flex items-center justify-center transition-all duration-150"
+                class="sim-btn w-8 h-8 rounded-md bg-blue-700 hover:bg-blue-800 active:scale-95 text-white font-bold text-xs flex items-center justify-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600/30 cursor-pointer shadow-xs disabled:opacity-30 disabled:cursor-not-allowed"
                 title={`Add 1 to ${sec.shortName}`}
               >
                 +1
@@ -438,7 +451,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
       }
     </div>
 
-    <div id="sim-feedback-msg" class="text-xs text-neutral-400 text-center min-h-[1.5rem] transition-all duration-200">
+    <div id="sim-feedback-msg" class="text-xs text-neutral-600 bg-neutral-50 border border-neutral-200/80 rounded-xl p-3 text-center min-h-[2.75rem] flex items-center justify-center transition-all duration-200">
       Click +1 or -1 above to test score sensitivity across sections.
     </div>
   </div>
@@ -702,6 +715,23 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         scoreBadge.className = `w-24 h-24 sm:w-28 sm:h-28 rounded-2xl ${colorMap[res.apScore] || 'bg-blue-600 shadow-blue-500/20'} text-white flex items-center justify-center font-black font-heading text-5xl sm:text-6xl shadow-lg tabular-nums transition-all duration-300 transform`;
       }
 
+      const simScoreBadge = wrapper.querySelector('#sim-score-badge');
+      const simCompText = wrapper.querySelector('#sim-composite-text');
+      if (simScoreBadge) {
+        simScoreBadge.textContent = res.apScore.toString();
+        const simColorMap = {
+          5: 'bg-emerald-600',
+          4: 'bg-blue-600',
+          3: 'bg-sky-600',
+          2: 'bg-amber-600',
+          1: 'bg-rose-600',
+        };
+        simScoreBadge.className = `w-10 h-10 rounded-lg ${simColorMap[res.apScore] || 'bg-blue-600'} text-white font-black font-heading text-xl flex items-center justify-center tabular-nums shadow-xs transition-colors duration-200`;
+      }
+      if (simCompText) {
+        simCompText.textContent = `${res.composite.toFixed(2)} composite`;
+      }
+
       if (milestoneBox) {
         if (res.nextScore) {
           const curCutoff = activeCfg.cutoffs[res.apScore]?.minComposite || 0;
@@ -893,6 +923,8 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             const sec = activeCfg.sections.find((s) => s.id === id);
             const errorEl = wrapper.querySelector(`#error-${id}`);
             const numInput = wrapper.querySelector(`#input-${id}`);
+            const rangeInput = wrapper.querySelector(`#range-${id}`);
+            const pctBadge = wrapper.querySelector(`#pct-badge-${id}`);
 
             if (sec && (isNaN(valNum) || valNum < 0 || valNum > sec.maxScore)) {
               if (errorEl) {
@@ -912,9 +944,47 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
               }
             }
 
-            scores[id] = Math.max(0, Math.min(sec ? sec.maxScore : 100, isNaN(valNum) ? 0 : valNum));
-            updateUI(false);
-            updateUrlParams();
+            const clampedVal = Math.max(0, Math.min(sec ? sec.maxScore : 100, isNaN(valNum) ? 0 : valNum));
+            scores[id] = clampedVal;
+
+            // Keep number input and range slider synchronized
+            if (target === numInput && rangeInput) {
+              rangeInput.value = clampedVal;
+              updateSliderTrack(rangeInput, clampedVal, sec ? sec.maxScore : 100);
+            } else if (target === rangeInput && numInput) {
+              numInput.value = clampedVal;
+              updateSliderTrack(rangeInput, clampedVal, sec ? sec.maxScore : 100);
+            }
+
+            // Update percentage badge for this section
+            if (pctBadge && sec && sec.maxScore > 0) {
+              const pct = Math.round((clampedVal / sec.maxScore) * 100);
+              pctBadge.textContent = `${pct}%`;
+              pctBadge.className =
+                'text-xs font-bold px-2.5 py-1 rounded-lg border tabular-nums transition-colors duration-150 ' +
+                (pct >= 80
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  : pct >= 60
+                  ? 'bg-blue-50 text-blue-700 border-blue-200'
+                  : pct >= 40
+                  ? 'bg-amber-50 text-amber-700 border-amber-200'
+                  : 'bg-rose-50 text-rose-700 border-rose-200');
+            }
+
+            // Update button label so user knows to click Calculate
+            const calcBtnText = wrapper.querySelector('#calc-btn-text');
+            if (calcBtnText && calcBtnText.textContent !== 'Calculate Score Estimate') {
+              calcBtnText.textContent = 'Calculate Score Estimate';
+            }
+          }
+        });
+
+        // Trigger calculation when pressing Enter inside any input
+        form.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const calcBtn = wrapper.querySelector('#btn-calculate-now');
+            if (calcBtn) calcBtn.click();
           }
         });
       }
@@ -982,10 +1052,18 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             updateUI(true);
             updateUrlParams();
 
+            // On mobile / smaller screens, bring the calculated score into view
+            if (window.innerWidth < 1024) {
+              const resultCard = wrapper.querySelector('#calc-result-card');
+              if (resultCard) {
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+            }
+
             setTimeout(() => {
-              if (calcBtnText) calcBtnText.textContent = 'Recalculate Score Estimate';
-            }, 1000);
-          }, 140);
+              if (calcBtnText) calcBtnText.textContent = 'Calculate Score Estimate';
+            }, 1200);
+          }, 120);
         });
       }
 
@@ -1011,15 +1089,23 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
 
             if (simScoreBadge) {
               simScoreBadge.textContent = res.apScore.toString();
+              const simColorMap = {
+                5: 'bg-emerald-600',
+                4: 'bg-blue-600',
+                3: 'bg-sky-600',
+                2: 'bg-amber-600',
+                1: 'bg-rose-600',
+              };
+              simScoreBadge.className = `w-10 h-10 rounded-lg ${simColorMap[res.apScore] || 'bg-blue-600'} text-white font-black font-heading text-xl flex items-center justify-center tabular-nums shadow-xs transition-colors duration-200`;
               if (!prefersReducedMotion) {
                 simScoreBadge.classList.remove('animate-score-pop');
                 void simScoreBadge.offsetWidth;
                 simScoreBadge.classList.add('animate-score-pop');
               }
             }
-            if (simCompText) simCompText.textContent = `(${res.composite.toFixed(2)} composite)`;
+            if (simCompText) simCompText.textContent = `${res.composite.toFixed(2)} composite`;
             if (simMsg) {
-              simMsg.innerHTML = `<span class="text-blue-300 font-semibold">${sec.shortName} adjusted to ${updated}/${sec.maxScore}. Composite updated to ${res.composite.toFixed(2)}.</span>`;
+              simMsg.innerHTML = `<span class="text-blue-900 font-medium"><strong>${sec.shortName}</strong> adjusted to <strong>${updated}/${sec.maxScore}</strong>. Composite updated to <strong>${res.composite.toFixed(2)}</strong> (AP Score: <strong>${res.apScore}</strong>).</span>`;
             }
           }
         });

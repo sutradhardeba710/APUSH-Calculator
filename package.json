@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "ap-score-hub",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:scoring": "node --experimental-strip-types src/lib/scoring/verify-all-subjects.ts"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
@@ -20,5 +21,8 @@
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1"
   }
 }

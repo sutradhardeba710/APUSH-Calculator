@@ -1,0 +1,67 @@
+---
+interface Props {
+  type?: 'info' | 'warning' | 'success' | 'neutral';
+  title?: string;
+  className?: string;
+}
+
+const { type = 'info', title, className = '' } = Astro.props;
+
+const styles = {
+  info: {
+    container: 'bg-blue-50/80 border-blue-200 text-blue-900',
+    iconColor: 'text-blue-600',
+    titleColor: 'text-blue-950',
+    icon: 'info',
+  },
+  warning: {
+    container: 'bg-amber-50/80 border-amber-200 text-amber-900',
+    iconColor: 'text-amber-600',
+    titleColor: 'text-amber-950',
+    icon: 'warning',
+  },
+  success: {
+    container: 'bg-emerald-50/80 border-emerald-200 text-emerald-900',
+    iconColor: 'text-emerald-600',
+    titleColor: 'text-emerald-950',
+    icon: 'check',
+  },
+  neutral: {
+    container: 'bg-neutral-50 border-neutral-200 text-neutral-800',
+    iconColor: 'text-neutral-600',
+    titleColor: 'text-neutral-950',
+    icon: 'shield',
+  },
+}[type];
+---
+
+<div class={`p-4 sm:p-5 rounded-xl border text-xs sm:text-sm leading-relaxed flex items-start gap-3.5 my-5 ${styles.container} ${className}`} role="note">
+  <div class={`shrink-0 mt-0.5 ${styles.iconColor}`} aria-hidden="true">
+    {type === 'info' && (
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )}
+    {type === 'warning' && (
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    )}
+    {type === 'success' && (
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )}
+    {type === 'neutral' && (
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    )}
+  </div>
+  <div class="space-y-1 flex-1 min-w-0">
+    {title && <h4 class={`font-bold text-sm sm:text-base ${styles.titleColor}`}>{title}</h4>}
+    <div class="prose-clean">
+      <slot />
+    </div>
+  </div>
+</div>

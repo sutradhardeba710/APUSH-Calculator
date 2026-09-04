@@ -1,0 +1,35 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  number?: string;
+  badge?: string;
+  className?: string;
+}
+
+const { id, title, number, badge, className = '' } = Astro.props;
+---
+
+<section id={id} class={`scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-4 ${className}`}>
+  <div class="border-b border-neutral-100 pb-3 flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-2.5">
+      {number && (
+        <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-blue-50 border border-blue-100 font-mono text-xs font-bold text-blue-700">
+          {number}
+        </span>
+      )}
+      <h2 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 tracking-tight">
+        {title}
+      </h2>
+    </div>
+    {badge && (
+      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-neutral-100 text-neutral-600 border border-neutral-200">
+        {badge}
+      </span>
+    )}
+  </div>
+
+  <div class="text-sm sm:text-base text-neutral-700 leading-relaxed space-y-4">
+    <slot />
+  </div>
+</section>

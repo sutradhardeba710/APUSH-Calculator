@@ -8,19 +8,19 @@ const currentYear = new Date().getFullYear();
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
       <!-- Col 1: Brand & Mission -->
-      <div class="lg:col-span-2 space-y-3">
+      <div class="space-y-3">
         <a href="/" class="flex items-center gap-2 font-heading text-lg font-bold text-neutral-900">
           <span class="flex items-center justify-center w-7 h-7 rounded-md bg-blue-700 text-white font-black text-xs">
             AP
           </span>
           <span>AP Score Hub</span>
         </a>
-        <p class="text-xs text-neutral-500 leading-relaxed max-w-sm">
+        <p class="text-xs text-neutral-500 leading-relaxed">
           Independent educational AP score calculators and curve estimators based on official College Board exam weightings, Course and Exam Descriptions (CED), and historical equating models.
         </p>
         <div class="pt-2 flex items-center gap-2 text-xs text-emerald-700 font-medium">
           <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-          Updated for 2026–2027 College Board Guidelines
+          Updated for 2026–2027 Guidelines
         </div>
       </div>
 
@@ -29,19 +29,19 @@ const currentYear = new Date().getFullYear();
         <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-900">AP Score Calculators</h4>
         <ul class="space-y-2 text-xs">
           <li>
-            <a href="/ap-score-calculators/" class="font-bold text-blue-700 hover:underline">All AP Calculators Hub</a>
+            <a href="/ap-score-calculators/" class={`transition-colors ${Astro.url.pathname === '/ap-score-calculators/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>All AP Calculators Hub</a>
           </li>
           <li>
-            <a href="/apush-score-calculator/" class="hover:text-blue-700 transition-colors">AP U.S. History (APUSH)</a>
+            <a href="/apush-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/apush-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP U.S. History (APUSH)</a>
           </li>
           <li>
-            <a href="/ap-lang-score-calculator/" class="hover:text-blue-700 transition-colors">AP English Language</a>
+            <a href="/ap-lang-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-lang-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP English Language</a>
           </li>
           <li>
-            <a href="/ap-biology-score-calculator/" class="hover:text-blue-700 transition-colors">AP Biology</a>
+            <a href="/ap-biology-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-biology-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Biology</a>
           </li>
           <li>
-            <a href="/ap-calculus-ab-score-calculator/" class="hover:text-blue-700 transition-colors">AP Calculus AB</a>
+            <a href="/ap-calculus-ab-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-calculus-ab-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Calculus AB</a>
           </li>
         </ul>
       </div>
@@ -51,16 +51,16 @@ const currentYear = new Date().getFullYear();
         <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-900">STEM & Social Sciences</h4>
         <ul class="space-y-2 text-xs">
           <li>
-            <a href="/ap-calculus-bc-score-calculator/" class="hover:text-blue-700 transition-colors">AP Calculus BC</a>
+            <a href="/ap-calculus-bc-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-calculus-bc-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Calculus BC</a>
           </li>
           <li>
-            <a href="/ap-psychology-score-calculator/" class="hover:text-blue-700 transition-colors">AP Psychology</a>
+            <a href="/ap-psychology-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-psychology-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Psychology</a>
           </li>
           <li>
-            <a href="/ap-chemistry-score-calculator/" class="hover:text-blue-700 transition-colors">AP Chemistry</a>
+            <a href="/ap-chemistry-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-chemistry-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Chemistry</a>
           </li>
           <li>
-            <a href="/ap-csp-score-calculator/" class="hover:text-blue-700 transition-colors">AP Computer Science Principles</a>
+            <a href="/ap-csp-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/ap-csp-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>AP Computer Science Principles</a>
           </li>
         </ul>
       </div>
@@ -70,19 +70,40 @@ const currentYear = new Date().getFullYear();
         <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-900">APUSH Deep-Dive Tools</h4>
         <ul class="space-y-2 text-xs">
           <li>
-            <a href="/apush-dbq-score-calculator/" class="hover:text-blue-700 transition-colors">DBQ Rubric Calculator (7 Pts)</a>
+            <a href="/apush-dbq-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/apush-dbq-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>DBQ Rubric Calculator (7 Pts)</a>
           </li>
           <li>
-            <a href="/apush-leq-score-calculator/" class="hover:text-blue-700 transition-colors">LEQ Rubric Calculator (6 Pts)</a>
+            <a href="/apush-leq-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/apush-leq-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>LEQ Rubric Calculator (6 Pts)</a>
           </li>
           <li>
-            <a href="/apush-saq-score-calculator/" class="hover:text-blue-700 transition-colors">SAQ Scoring Calculator (9 Pts)</a>
+            <a href="/apush-saq-score-calculator/" class={`transition-colors ${Astro.url.pathname === '/apush-saq-score-calculator/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>SAQ Scoring Calculator (9 Pts)</a>
           </li>
           <li>
-            <a href="/apush-score-predictor/" class="hover:text-blue-700 transition-colors">Score Predictor & Curves</a>
+            <a href="/apush-score-predictor/" class={`transition-colors ${Astro.url.pathname === '/apush-score-predictor/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>Score Predictor & Curves</a>
           </li>
           <li>
-            <a href="/apush-score-distribution/" class="hover:text-blue-700 transition-colors">Historical Distributions</a>
+            <a href="/apush-score-distribution/" class={`transition-colors ${Astro.url.pathname === '/apush-score-distribution/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>Historical Distributions</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Support & Legal -->
+      <div class="space-y-3">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-900">Support & Legal</h4>
+        <ul class="space-y-2 text-xs">
+          <li>
+            <a href="/support/" class={`transition-colors flex items-center gap-1.5 ${Astro.url.pathname === '/support/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>
+              <span>Support &amp; Help Desk</span>
+            </a>
+          </li>
+          <li>
+            <a href="/privacy-policy/" class={`transition-colors ${Astro.url.pathname === '/privacy-policy/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/terms-of-service/" class={`transition-colors ${Astro.url.pathname === '/terms-of-service/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>Terms of Service</a>
+          </li>
+          <li>
+            <a href="/dmca/" class={`transition-colors ${Astro.url.pathname === '/dmca/' ? 'font-bold text-blue-700 hover:underline' : 'hover:text-blue-700'}`}>DMCA &amp; Copyright</a>
           </li>
         </ul>
       </div>
@@ -90,11 +111,19 @@ const currentYear = new Date().getFullYear();
 
     <!-- College Board Disclaimer & Bottom Bar -->
     <div class="border-t border-neutral-200 pt-6 text-[11px] text-neutral-400 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="max-w-3xl leading-relaxed text-center md:text-left">
+      <p class="max-w-2xl leading-relaxed text-center md:text-left">
         <strong>Notice:</strong> AP® and Advanced Placement® are registered trademarks of the College Board, which is not affiliated with, does not endorse, and was not involved in the production of this educational website. Score conversions are independent statistical estimates.
       </p>
-      <div class="flex items-center gap-4 shrink-0">
-        <span>© {currentYear} AP Score Hub. All rights reserved.</span>
+      <div class="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1 shrink-0 text-neutral-500">
+        <a href="/support/" class="hover:text-blue-700 transition-colors">Support</a>
+        <span class="text-neutral-300">·</span>
+        <a href="/privacy-policy/" class="hover:text-blue-700 transition-colors">Privacy</a>
+        <span class="text-neutral-300">·</span>
+        <a href="/terms-of-service/" class="hover:text-blue-700 transition-colors">Terms</a>
+        <span class="text-neutral-300">·</span>
+        <a href="/dmca/" class="hover:text-blue-700 transition-colors">DMCA</a>
+        <span class="text-neutral-300">·</span>
+        <span>© {currentYear} AP Score Hub.</span>
       </div>
     </div>
   </div>

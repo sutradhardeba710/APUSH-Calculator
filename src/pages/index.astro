@@ -7,9 +7,9 @@ import SourceSection from '../components/common/SourceSection.astro';
 import FAQ from '../components/faq/FAQ.astro';
 import { ALL_SUBJECTS } from '../data/exam-config/subjects-registry';
 
-const pageTitle = 'AP Score Calculator Hub (2026–2027) | Free Score Estimators & Curves';
+const pageTitle = 'ap score calculator – 2026 AP Exam Score Calculator Hub';
 const pageDescription =
-  'Estimate your AP exam score with our subject-specific calculators for APUSH, AP Lang, AP Bio, AP Calculus AB & BC, AP Psychology, AP Chem, and AP CSP. 100% free and mobile-friendly.';
+  'Use our free ap score calculator to calculate your AP exam scores for APUSH, AP Lang, AP Bio, and Calculus using official College Board weightings and curves.';
 
 const homeSchema = {
   '@context': 'https://schema.org',
@@ -26,24 +26,29 @@ const homeSchema = {
 
 const homeFaqs = [
   {
+    question: 'Is a 70% a 5 on the AP exam?',
+    answer:
+      'Yes, on many AP exams earning approximately 70% to 75% of the total composite points earns a score of 5. For instance, on AP U.S. History (APUSH), ~74 out of 100 composite points typically achieves a 5, while on AP Calculus BC, cutoffs around 63% to 65% regularly qualify for a 5.',
+  },
+  {
+    question: 'How is AP score calculated?',
+    answer:
+      'AP scores are calculated by converting raw points earned on multiple-choice questions (Section I) and free-response questions (Section II) into a weighted composite score using official College Board percentages. Psychometric equating then translates that composite into the final 1 to 5 score.',
+  },
+  {
+    question: 'How do I figure out my AP score?',
+    answer:
+      'To figure out your AP score from a practice test, score your multiple-choice questions (1 point each with no penalty for wrong answers), evaluate your free-response essays against official scoring rubrics, apply your subject’s specific section multipliers to find your composite, and check against published equating tables.',
+  },
+  {
+    question: 'are ap score calculators accurate',
+    answer:
+      'Yes. Our calculators use the exact section weights and question counts from official College Board Course and Exam Descriptions (CED), combined with historical score cutoffs released from recent exams. While specific equating curves vary slightly each year, our estimates typically fall within ±2 to 2.5 composite points.',
+  },
+  {
     question: 'What subjects are supported on the AP Score Calculator Hub?',
     answer:
       'We currently support dedicated calculators for AP U.S. History (APUSH), AP English Language and Composition (AP Lang), AP Biology, AP Calculus AB, AP Calculus BC, AP Psychology, AP Chemistry, and AP Computer Science Principles (AP CSP).',
-  },
-  {
-    question: 'How accurate are these AP score calculations?',
-    answer:
-      'Our calculators use the exact section weights and question counts from official College Board Course and Exam Descriptions (CED), combined with historical score cutoffs released from recent exams. While specific equating curves vary slightly each year, our estimates typically fall within ±2 to 2.5 composite points.',
-  },
-  {
-    question: 'Do I need to create an account or pay to use the calculators?',
-    answer:
-      'No. Every calculator on our hub is 100% free to use with zero registration, login, or personal data collection required. Calculations happen instantly in your web browser.',
-  },
-  {
-    question: 'What is the What-If Score Simulator?',
-    answer:
-      'The What-If Simulator lets you adjust your practice scores by +1 or -1 in any section to immediately see how sensitive your overall AP 1–5 score is to marginal improvements in that specific area.',
   },
 ];
 ---
@@ -54,6 +59,7 @@ const homeFaqs = [
   canonicalUrl="https://apushcalculator.com/"
 >
   <Header slot="header" activePath="/" />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(homeSchema)} />
 
   <!-- Hero Section -->
   <section class="bg-white border-b border-neutral-200 pt-10 pb-14 sm:pt-16 sm:pb-20">
@@ -68,7 +74,7 @@ const homeFaqs = [
         </h1>
 
         <p class="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-          Estimate your AP exam scores from practice test results using official College Board weightings, interactive what-if simulators, and historical curves.
+          Estimate your AP exam scores from practice test results using our free ap score calculator with official College Board weightings, interactive what-if simulators, and historical curves.
         </p>
 
         <!-- CTA Action Buttons -->
@@ -84,7 +90,7 @@ const homeFaqs = [
             href="/apush-score-calculator/"
             class="btn-tactile px-6 py-3 rounded-lg font-bold text-sm text-neutral-700 bg-white hover:bg-neutral-50 border border-neutral-300 shadow-sm transition-all duration-150"
           >
-            APUSH Calculator
+            apush score calculator free
           </a>
         </div>
       </div>
@@ -241,11 +247,21 @@ const homeFaqs = [
       </div>
     </section>
 
+    <!-- Scoring Methodology Section -->
+    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-white border border-neutral-200 space-y-4">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 tracking-tight">
+          how to calculate ap score with official weights
+        </h2>
+        <p class="text-sm sm:text-base text-neutral-600 mt-2 leading-relaxed">
+          Wondering how are ap scores calculated across different exams? Each official AP exam uses dedicated section multipliers specified in the Course and Exam Description (CED). Raw multiple-choice scores and free-response rubric points are multiplied and summed into a standardized composite, which psychometricians then map to the 1–5 AP scale using equating thresholds.
+        </p>
+      </div>
+    </section>
+
     <!-- FAQ Accordion with Schema -->
     <FAQ items={homeFaqs} />
   </main>
 
   <Footer slot="footer" />
 </Layout>
-
-<script type="application/ld+json" set:html={JSON.stringify(homeSchema)} />

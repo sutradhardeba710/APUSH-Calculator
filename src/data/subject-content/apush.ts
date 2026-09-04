@@ -3,37 +3,37 @@ import type { SubjectContent } from './types';
 export const apushContent: SubjectContent = {
   subjectId: 'apush',
   howItWorks: {
-    title: 'How AP U.S. History Scoring Works',
+    title: 'How to calculate apush score with official College Board weights',
     summary:
-      'The AP U.S. History exam calculates your final 1–5 score by converting raw points earned across four distinct sections into a 100-point weighted composite scale. Section weights are officially set by the College Board.',
+      'To calculate apush score college board standards convert raw points earned across four distinct exam sections into a 100-point weighted composite scale. Our apush score calculator free model automates this conversion using official percentages: 40% MCQ, 20% SAQ, 25% DBQ, and 15% LEQ.',
     steps: [
       {
         step: '1',
         title: 'Calculate Section 1A Multiple-Choice (40%)',
         explanation:
-          'You answer 55 stimulus-based questions in 55 minutes. There is no guessing penalty. Raw score is multiplied by ~0.7273 to produce up to 40 composite points.',
+          'You answer 55 stimulus-based questions in 55 minutes. There is no guessing penalty. To calculate apush exam score points for this section, raw correct answers are multiplied by ~0.7273 to produce up to 40 composite points.',
       },
       {
         step: '2',
         title: 'Calculate Section 1B Short Answers (20%)',
         explanation:
-          'You complete 3 Short Answer Questions with 3 parts each (9 total raw points) in 40 minutes. Each raw point is worth ~2.222 composite points.',
+          'You complete 3 Short Answer Questions with 3 parts each (9 total raw points) in 40 minutes. To calculate apush test score results, each raw point is weighted at ~2.222 composite points.',
       },
       {
         step: '3',
         title: 'Calculate Section 2A Document-Based Question (25%)',
         explanation:
-          'You write 1 DBQ essay scored on a 7-point rubric (Thesis, Context, 3 Evidence, 2 Sourcing/Analysis). Each raw DBQ point is worth ~3.571 composite points, making it the highest single-point leverage section.',
+          'You write 1 DBQ essay scored on a 7-point rubric (Thesis, Context, 3 Evidence, 2 Sourcing/Analysis). Each raw DBQ point is worth ~3.571 composite points, making it the highest single-point leverage section in the apush scoring conversion calculator.',
       },
       {
         step: '4',
         title: 'Calculate Section 2B Long Essay Question (15%)',
         explanation:
-          'You choose 1 of 3 LEQ prompts scored on a 6-point rubric in 40 minutes. Each raw point contributes 2.50 composite points to your total.',
+          'You choose 1 of 3 LEQ prompts scored on a 6-point rubric in 40 minutes. Each raw point contributes 2.50 composite points to your total in this apush test scoring calculator.',
       },
     ],
     gradingInsights:
-      'Every June, thousands of high school AP teachers and college professors convene at the annual AP Reading to evaluate DBQ, LEQ, and SAQ responses using analytic rubrics. The College Board uses statistical equating to ensure that earning a 5 on a more difficult test form requires fewer raw points than on an easier form.',
+      'Every June, high school AP teachers and college faculty evaluate DBQ, LEQ, and SAQ responses at the annual AP Reading. Whether taking paper exams or the apush score calculator digital format, the College Board applies statistical equating so composite point boundaries reflect identical college-level rigor.',
   },
   sectionGuide: [
     {
@@ -62,7 +62,7 @@ export const apushContent: SubjectContent = {
     },
   ],
   scoreBenchmarks: [
-    { score: 5, title: 'Extremely Well Qualified', cutoffDescription: '~74–100 Composite', academicValue: 'Qualifies for maximum college credit, course waivers, and honors placement at top universities.' },
+    { score: 5, title: 'Extremely Well Qualified', cutoffDescription: '~74–100 Composite', academicValue: 'Qualifies for maximum college credit, course waivers, and honors placement at top universities. This apush grade calculator benchmark reflects complete mastery.' },
     { score: 4, title: 'Well Qualified', cutoffDescription: '~60–73 Composite', academicValue: 'Granted full academic credit and general education waivers at the vast majority of U.S. colleges.' },
     { score: 3, title: 'Qualified (Passing)', cutoffDescription: '~47–59 Composite', academicValue: 'Meets credit threshold at state universities and public college systems across the nation.' },
     { score: 2, title: 'Possibly Qualified', cutoffDescription: '~35–46 Composite', academicValue: 'Close to passing tier; demonstrates foundational understanding with gaps in essay evidence or timing.' },
@@ -70,34 +70,39 @@ export const apushContent: SubjectContent = {
   ],
   faqs: [
     {
-      question: 'How is the APUSH exam scored in 2026 and 2027?',
+      question: 'What percentage is a 5 on APUSH?',
       answer:
-        'The AP U.S. History exam is composed of two sections: Section I (55 Multiple Choice at 40% + 3 Short Answer Questions at 20%) and Section II (1 DBQ at 25% + 1 LEQ at 15%). The total weighted composite is 100 points, which is then mapped to the 1–5 AP score scale.',
+        'Historically, a composite score of approximately 74 out of 100 (~74%) is sufficient to earn a 5 on APUSH. You do not need a 90% or 100%—earning ~42/55 on MCQ, 6/9 on SAQ, 5/7 on DBQ, and 4/6 on LEQ typically places you safely in the 5 tier.',
     },
     {
-      question: 'What composite score do I need for a 5 on APUSH?',
+      question: 'how to calculate apush score',
       answer:
-        'Historically, a composite score of approximately 74 out of 100 is sufficient to earn a 5 on AP U.S. History. This means you do not need perfection—scoring ~42/55 on MCQ, 6/9 on SAQ, 5/7 on DBQ, and 4/6 on LEQ generally puts you firmly in the 5 range.',
+        'To calculate your score, multiply your raw MCQ score by 0.7273, your SAQ score by 2.2222, your DBQ score by 3.5714, and your LEQ score by 2.5000. Sum all four weighted components to obtain your 100-point composite, then map it to the 1–5 AP score scale.',
     },
     {
-      question: 'How much is each DBQ point worth on the composite scale?',
+      question: 'how to manually calculate apush exam score',
       answer:
-        'Because the DBQ is worth 25% of the total exam and scored out of 7 raw rubric points, each DBQ point is worth approximately 3.57 composite points. It has the highest marginal return of any section on the exam.',
+        'To manually calculate apush exam score results, use the formula: Composite = (MCQ × 0.7273) + (SAQ × 2.2222) + (DBQ × 3.5714) + (LEQ × 2.5). A composite of 74–100 converts to a 5, 60–73 to a 4, 47–59 to a 3, 35–46 to a 2, and 0–34 to a 1.',
     },
     {
-      question: 'Is there a penalty for wrong answers on the multiple-choice section?',
+      question: 'are apush score calculators accurate',
       answer:
-        'No. AP exams do not penalize incorrect guesses. You should answer every single multiple-choice question before time expires.',
+        'Yes. This tool is built as the most accurate apush score calculator by applying official College Board Course and Exam Description (CED) section weightings (40% MCQ, 20% SAQ, 25% DBQ, 15% LEQ) and calibrated historical equating cutoffs within a ±2.5 point margin.',
     },
     {
-      question: 'How accurate is this APUSH score calculator?',
+      question: 'How does this tool compare to albert io apush score calculator or other platforms?',
       answer:
-        'This calculator applies the official College Board section weightings (40/20/25/15) and recent historical scoring thresholds published from released exams. While each year’s specific equating curve adjusts slightly for form difficulty, this estimate reliably reflects your actual exam score tier within ±2.5 composite points.',
+        'Unlike third-party alternatives such as albert io apush score calculator, apush score calculator albert io, albert apush score calculator, knowt apush score calculator, or fiveable apush score calculator, our platform provides an entirely free, privacy-first interface with zero account signups, interactive what-if score simulations, and instant local browser evaluation.',
     },
     {
-      question: 'What is the ACE method for APUSH Short Answer Questions?',
+      question: 'What is the apush calculator score conversion methodology?',
       answer:
-        'ACE stands for Answer, Cite, Explain: (A) Answer the question directly with a definitive claim, (C) Cite specific factual historical evidence (proper nouns, legislation, events), and (E) Explain the cause-and-effect relationship proving your answer.',
+        'The apush calculator score conversion process takes your raw scores, applies the exact mathematical multipliers for Section I and Section II, and projects your final AP 1–5 score against recent equating curves.',
+    },
+    {
+      question: 'Can I use this score calculator apush tool for both practice tests and class exams?',
+      answer:
+        'Yes. This apush test score calculator is designed for unit exams, mock finals, and full-length practice tests. As an ap score calculator apush students rely on, it functions as a comprehensive apush ap score calculator and apush ap exam score calculator to accurately evaluate your pacing and score tiers across all sections.',
     },
   ],
   relatedTools: [

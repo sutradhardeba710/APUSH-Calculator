@@ -1,0 +1,346 @@
+---
+import PolicyLayout from '../../components/legal/PolicyLayout.astro';
+import PolicySection from '../../components/legal/PolicySection.astro';
+import LegalCallout from '../../components/legal/LegalCallout.astro';
+
+const pageTitle = 'Support & Help Center – AP Score Hub Calculator Guides & FAQs';
+const pageDescription =
+  'Get help using AP Score Hub calculators. Learn how AP composite scores are calculated from College Board weights, understand curve equating, troubleshoot tools, and contact support.';
+const canonicalUrl = 'https://apushcalculator.com/support/';
+
+const tocItems = [
+  { id: 'how-it-works', label: '1. How AP Calculators Work' },
+  { id: 'curves-and-accuracy', label: '2. Curves, Equating & Accuracy' },
+  { id: 'tools-guide', label: '3. Interactive Tools Guide' },
+  { id: 'troubleshooting-faq', label: '4. Common Questions & Help' },
+  { id: 'reporting-feedback', label: '5. Reporting Bugs & Feedback' },
+  { id: 'official-resources', label: '6. Official College Board Links' },
+  { id: 'contact', label: '7. Contact Support Desk' },
+];
+
+const keySummary = {
+  title: 'AP Score Hub Support at a Glance',
+  points: [
+    'Calculations run 100% in your browser using official College Board CED formulas.',
+    'No account, login, or personal data is required to use any calculator on this site.',
+    'Cutoffs reflect historical psychometric equating and official 2026–2027 weightings.',
+    'For official AP score reports and testing accommodations, contact the College Board directly.',
+  ],
+};
+---
+
+<PolicyLayout
+  title={pageTitle}
+  description={pageDescription}
+  pageHeading="Support & Help Center"
+  pageSubtitle="Everything you need to know about our AP score calculators, rubric formulas, score curves, and troubleshooting your study sessions."
+  activePolicy="support"
+  lastUpdated="September 4, 2026"
+  tocItems={tocItems}
+  canonicalUrl={canonicalUrl}
+  keySummary={keySummary}
+>
+  <!-- Section 1: How AP Calculators Work -->
+  <PolicySection
+    id="how-it-works"
+    number="01"
+    title="How Our AP Score Calculators Work"
+    badge="Methodology"
+  >
+    <p>
+      AP Score Hub translates your raw practice test scores into an estimated Advanced Placement® composite score (1–5). Our calculation engine mirrors the exact two-stage mathematical workflow employed by the College Board.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-blue-700 text-white font-bold text-xs flex items-center justify-center">A</span>
+          <h3 class="font-bold text-neutral-900 text-sm">Stage 1: Raw to Composite Weighting</h3>
+        </div>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          Multiple-choice questions (MCQ) earn 1 raw point each with <strong>no penalty for incorrect answers</strong>. Free-response essays (DBQ, LEQ, SAQ, or FRQ) are graded on official rubric point scales. Each section raw score is multiplied by an official Course and Exam Description (CED) weighting multiplier so that each component reflects its designated percentage (e.g., 40% MCQ, 25% DBQ).
+        </p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80 space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-blue-700 text-white font-bold text-xs flex items-center justify-center">B</span>
+          <h3 class="font-bold text-neutral-900 text-sm">Stage 2: Equating & 1–5 Conversion</h3>
+        </div>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          The weighted section points are summed into a standardized composite score (typically out of 100 points, or 108 points for Calculus). This composite is evaluated against calibrated psychometric score boundaries to generate your estimated AP score between 1 and 5.
+        </p>
+      </div>
+    </div>
+
+    <LegalCallout type="info" title="Independent Educational Simulation">
+      Our calculators use published College Board formulas and public rubric criteria. However, because actual exam forms vary each administration, scores generated are <strong>statistical estimates</strong> intended for study diagnosis, not guaranteed official results.
+    </LegalCallout>
+  </PolicySection>
+
+  <!-- Section 2: Curves, Equating & Accuracy -->
+  <PolicySection
+    id="curves-and-accuracy"
+    number="02"
+    title="Score Curves, Equating & Estimation Accuracy"
+    badge="Psychometrics"
+  >
+    <p>
+      One of the most frequent questions students ask is: <em>"Why do score curves change between years, and how accurate is this calculator?"</em>
+    </p>
+
+    <div class="space-y-3">
+      <h3 class="text-base font-bold text-neutral-900">What is AP Equating?</h3>
+      <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+        The College Board does not grade on a predetermined bell curve or simple percentage. Instead, psychometricians perform an equating process. If an exam form has slightly more challenging multiple-choice passages or essay prompts, the composite cutoff for a 5 might be lowered to 73 composite points. If a form is slightly less challenging, the cutoff may rise to 76.
+      </p>
+    </div>
+
+    <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-3 text-xs sm:text-sm">
+      <h4 class="font-bold text-neutral-900">Typical APUSH Cutoff Ranges (100 Composite Scale)</h4>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center">
+        <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200">
+          <span class="block font-bold text-emerald-800 text-base">Score 5</span>
+          <span class="text-[11px] text-emerald-700">~74–100 pts</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-blue-50 border border-blue-200">
+          <span class="block font-bold text-blue-800 text-base">Score 4</span>
+          <span class="text-[11px] text-blue-700">~60–73 pts</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-sky-50 border border-sky-200">
+          <span class="block font-bold text-sky-800 text-base">Score 3</span>
+          <span class="text-[11px] text-sky-700">~47–59 pts</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200">
+          <span class="block font-bold text-amber-800 text-base">Score 2</span>
+          <span class="text-[11px] text-amber-700">~35–46 pts</span>
+        </div>
+        <div class="p-2.5 rounded-lg bg-rose-50 border border-rose-200">
+          <span class="block font-bold text-rose-800 text-base">Score 1</span>
+          <span class="text-[11px] text-rose-700">0–34 pts</span>
+        </div>
+      </div>
+      <p class="text-[11px] text-neutral-500 italic mt-2">
+        *Thresholds represent historical equating models from recently administered and released College Board exams. Actual cutoffs are determined each June.
+      </p>
+    </div>
+
+    <p class="text-xs sm:text-sm text-neutral-600">
+      <strong>Accuracy Margin:</strong> Our calculations typically fall within <strong>±2 to 2.5 composite points</strong> of official released exam conversion tables. If your composite sits within 1 point of a boundary, we display a clear advisory indicating you are near a score threshold.
+    </p>
+  </PolicySection>
+
+  <!-- Section 3: Interactive Tools Guide -->
+  <PolicySection
+    id="tools-guide"
+    number="03"
+    title="Interactive Features & Study Guide"
+    badge="How-To"
+  >
+    <p>
+      AP Score Hub provides interactive simulation features designed to help you optimize your study time before exam day:
+    </p>
+
+    <div class="space-y-4">
+      <div class="border border-neutral-200 rounded-xl p-4 sm:p-5 space-y-2">
+        <h3 class="font-bold text-neutral-900 text-sm sm:text-base flex items-center gap-2">
+          <span class="text-blue-600 font-bold">1.</span>
+          The "What-If" Simulator
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          Once your initial scores are entered, the What-If Simulator lets you increment individual sections (e.g., adding +1 DBQ sourcing point or +3 MCQ correct answers). It instantly calculates whether that targeted improvement will elevate your composite into the next AP score bracket.
+        </p>
+      </div>
+
+      <div class="border border-neutral-200 rounded-xl p-4 sm:p-5 space-y-2">
+        <h3 class="font-bold text-neutral-900 text-sm sm:text-base flex items-center gap-2">
+          <span class="text-blue-600 font-bold">2.</span>
+          Target Score Roadmap (What do I need for a 4 or 5?)
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          If your current practice composite yields a 3, the Target Score section automatically highlights the most efficient path to reach a 4 or 5 based on rubric point leverage.
+        </p>
+      </div>
+
+      <div class="border border-neutral-200 rounded-xl p-4 sm:p-5 space-y-2">
+        <h3 class="font-bold text-neutral-900 text-sm sm:text-base flex items-center gap-2">
+          <span class="text-blue-600 font-bold">3.</span>
+          Score Sharing via URL
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          Clicking "Share Score" or "Copy Link" encodes your current section inputs into the browser address bar as query parameters (e.g., <code>?mcq=44&saq=7...</code>). You can bookmark this URL or send it to your tutor or study partner. No server database is used; the recipient's browser reconstructs your exact breakdown purely on the client side.
+        </p>
+      </div>
+
+      <div class="border border-neutral-200 rounded-xl p-4 sm:p-5 space-y-2">
+        <h3 class="font-bold text-neutral-900 text-sm sm:text-base flex items-center gap-2">
+          <span class="text-blue-600 font-bold">4.</span>
+          Printable Study Summary
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+          Pressing <code>Ctrl+P</code> (or <code>Cmd+P</code> on Mac) triggers a dedicated print stylesheet. It automatically hides navigation headers, ads, and interactive sliders, providing a clean one-page summary of your score breakdown, section percentages, and target goals.
+        </p>
+      </div>
+    </div>
+  </PolicySection>
+
+  <!-- Section 4: Troubleshooting FAQ -->
+  <PolicySection
+    id="troubleshooting-faq"
+    number="04"
+    title="Common Troubleshooting & Technical Questions"
+    badge="FAQ"
+  >
+    <div class="space-y-4">
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1.5">
+        <h3 class="font-bold text-neutral-900 text-sm">Why did my calculated score differ from my teacher's grading?</h3>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          High school classroom teachers frequently apply altered curves, curve to an in-class grading scale (A/B/C/D), or use different historical year benchmarks. AP Score Hub adheres strictly to official College Board CED exam weightings and psychometric standard equating.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1.5">
+        <h3 class="font-bold text-neutral-900 text-sm">Is my test score saved when I close or refresh the page?</h3>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          No. Because AP Score Hub operates with zero server-side storage and does not use persistent tracking cookies, all inputs reset when the tab is closed unless you save the custom share URL generated by the "Share Score" button.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1.5">
+        <h3 class="font-bold text-neutral-900 text-sm">Are digital AP exams supported?</h3>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          Yes. For subjects transitioning to the Bluebook digital testing platform (including APUSH, AP Lang, and AP Bio), the question counts, timing, and section weighting percentages remain identical to paper versions. Our calculators accurately model both digital and paper testing formats.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1.5">
+        <h3 class="font-bold text-neutral-900 text-sm">Can I use this calculator offline?</h3>
+        <p class="text-xs text-neutral-600 leading-relaxed">
+          Once the calculator webpage has fully loaded in your web browser, all calculation logic runs locally on your device. You can adjust sliders, change inputs, and view composite updates even if your internet connection temporarily drops.
+        </p>
+      </div>
+    </div>
+  </PolicySection>
+
+  <!-- Section 5: Reporting Bugs & Feedback -->
+  <PolicySection
+    id="reporting-feedback"
+    number="05"
+    title="Reporting Bugs, Calculation Discrepancies & Subject Requests"
+    badge="Feedback"
+  >
+    <p>
+      We continuously maintain our calculators to reflect the latest Course and Exam Descriptions released by the College Board. If you spot a discrepancy or wish to request a new calculator, here is how you can assist:
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-3">
+      <div class="p-4 rounded-xl border border-neutral-200 bg-white space-y-1.5">
+        <span class="font-bold text-blue-700 text-xs uppercase tracking-wider">Step 1</span>
+        <h4 class="font-bold text-neutral-900 text-sm">Identify Subject & Year</h4>
+        <p class="text-xs text-neutral-600">Note the specific subject calculator and year model (e.g., APUSH 2026 Curve).</p>
+      </div>
+      <div class="p-4 rounded-xl border border-neutral-200 bg-white space-y-1.5">
+        <span class="font-bold text-blue-700 text-xs uppercase tracking-wider">Step 2</span>
+        <h4 class="font-bold text-neutral-900 text-sm">Provide Practice Inputs</h4>
+        <p class="text-xs text-neutral-600">Share the exact raw score inputs and the expected composite versus calculated composite.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-neutral-200 bg-white space-y-1.5">
+        <span class="font-bold text-blue-700 text-xs uppercase tracking-wider">Step 3</span>
+        <h4 class="font-bold text-neutral-900 text-sm">Send to Support</h4>
+        <p class="text-xs text-neutral-600">Email our support desk with "Discrepancy Report" or "New Subject Request" in the subject line.</p>
+      </div>
+    </div>
+  </PolicySection>
+
+  <!-- Section 6: Official College Board Links -->
+  <PolicySection
+    id="official-resources"
+    number="06"
+    title="Official College Board Resources"
+    badge="Official Authority"
+  >
+    <p>
+      AP Score Hub is an independent educational tool. For official exam management, score reports, and testing policies, consult the official resources below:
+    </p>
+
+    <ul class="space-y-2.5 text-xs sm:text-sm">
+      <li class="p-3 rounded-lg bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <strong class="text-neutral-900">Official AP Score Release & Reporting:</strong>
+          <span class="text-neutral-600 block sm:inline"> Access your official score report, send scores to universities, and view past exam records.</span>
+        </div>
+        <a
+          href="https://apstudents.collegeboard.org/view-scores"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 font-bold text-blue-700 hover:underline"
+        >
+          College Board My AP →
+        </a>
+      </li>
+
+      <li class="p-3 rounded-lg bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <strong class="text-neutral-900">Course &amp; Exam Descriptions (CED):</strong>
+          <span class="text-neutral-600 block sm:inline"> Official curriculum outlines, exam formats, and published scoring rubrics for all 38 AP subjects.</span>
+        </div>
+        <a
+          href="https://apcentral.collegeboard.org/courses"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 font-bold text-blue-700 hover:underline"
+        >
+          AP Central Courses →
+        </a>
+      </li>
+
+      <li class="p-3 rounded-lg bg-neutral-50 border border-neutral-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <strong class="text-neutral-900">College Credit &amp; Placement Policy Search:</strong>
+          <span class="text-neutral-600 block sm:inline"> Find out what AP score individual colleges and universities require for credit.</span>
+        </div>
+        <a
+          href="https://apstudents.collegeboard.org/getting-credit-placement/search-policies"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 font-bold text-blue-700 hover:underline"
+        >
+          Credit Policy Tool →
+        </a>
+      </li>
+    </ul>
+  </PolicySection>
+
+  <!-- Section 7: Contact Support Desk -->
+  <PolicySection
+    id="contact"
+    number="07"
+    title="Contact Support Desk"
+    badge="Contact"
+  >
+    <p>
+      Have an inquiry that was not covered in our documentation? Contact our support team directly.
+    </p>
+
+    <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/90 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Primary Support Channel</span>
+          <span class="font-mono font-bold text-neutral-900 mt-1 block">[SUPPORT CONTACT EMAIL]</span>
+          <span class="text-neutral-500 text-[11px] mt-0.5 block">Estimated response time: 24–48 business hours</span>
+        </div>
+        <div>
+          <span class="text-neutral-500 font-semibold block uppercase tracking-wider text-[11px]">Platform Operator</span>
+          <span class="font-medium text-neutral-900 mt-1 block">[LEGAL ENTITY / OPERATOR NAME]</span>
+          <span class="text-neutral-500 text-[11px] mt-0.5 block">Operating AP Score Hub (apushcalculator.com)</span>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-neutral-200/80 text-xs text-neutral-600">
+        <p>
+          <strong>Please Note:</strong> We can assist with technical calculator bugs, formula feedback, and feature requests. For official AP exam registration, testing accommodations, fee waivers, or official score reports, please reach out directly to the College Board Student Services.
+        </p>
+      </div>
+    </div>
+  </PolicySection>
+</PolicyLayout>

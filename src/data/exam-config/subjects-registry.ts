@@ -104,13 +104,13 @@ export const apushConfig: SubjectExamConfig = {
   abbreviation: 'APUSH',
   slug: 'apush-score-calculator',
   category: 'History & Social Sciences',
-  heroBadge: 'Calibrated for 2026 & 2027 Exam Formats',
-  metaTitle: 'APUSH Score Calculator – AP U.S. History Score Predictor (2026–2027)',
+  heroBadge: 'apush score calculator 2026 · Official Rubric Standards',
+  metaTitle: 'apush score calculator 2026 — apush exam score calculator',
   metaDescription:
-    'Use our APUSH Score Calculator to estimate your AP U.S. History score from your practice-test results, view your weighted composite, and explore score-improvement scenarios.',
+    'Use our free apush score calculator to calculate apush exam score from practice tests. Calibrated for apush score calculator 2026 with official College Board rubrics.',
   h1: 'APUSH Score Calculator',
   shortDescription:
-    'Estimate your AP U.S. History composite score and AP 1–5 performance using official College Board weightings: 40% MCQ, 20% SAQ, 25% DBQ, and 15% LEQ.',
+    'Estimate your composite score with the most accurate apush score calculator using official College Board weightings: 40% MCQ, 20% SAQ, 25% DBQ, and 15% LEQ.',
   defaultYear: 2026,
   examYears: {
     2026: {
@@ -252,10 +252,10 @@ export const apLangConfig: SubjectExamConfig = {
   abbreviation: 'AP Lang',
   slug: 'ap-lang-score-calculator',
   category: 'English',
-  heroBadge: 'Updated 2026–2027 45 MCQ & 3 Essay Rubric',
-  metaTitle: 'AP Lang Score Calculator – AP English Language Score Predictor',
+  heroBadge: 'ap lang score calculator · 45 MCQ & 3 Essay Rubric',
+  metaTitle: 'ap lang score calculator 2026 – AP English Language Score Predictor',
   metaDescription:
-    'Use our AP Lang Score Calculator to estimate your AP English Language score. Includes 45% Multiple Choice and 55% Free Response (Synthesis, Rhetorical Analysis, Argument) rubrics.',
+    'Use our free ap lang score calculator to estimate your AP English Language score. Includes 45% Multiple Choice and 55% Free Response rubrics.',
   h1: 'AP Lang Score Calculator',
   shortDescription:
     'Estimate your AP English Language score from your multiple-choice practice and 6-point Synthesis, Rhetorical Analysis, and Argument essays.',
@@ -397,10 +397,10 @@ export const apBioConfig: SubjectExamConfig = {
   abbreviation: 'AP Bio',
   slug: 'ap-biology-score-calculator',
   category: 'Sciences',
-  heroBadge: 'Updated 2026–2027 60 MCQ & 40 FRQ Points',
-  metaTitle: 'AP Biology Score Calculator – AP Bio Score Predictor',
+  heroBadge: 'ap bio score calculator · 60 MCQ & 40 FRQ Points',
+  metaTitle: 'ap bio score calculator 2026 – AP Biology Score Predictor',
   metaDescription:
-    'Calculate your estimated AP Biology score from practice-test results. Features College Board 50% Multiple Choice and 50% Free Response weighting with interactive score simulator.',
+    'Calculate your estimated score with our ap bio score calculator. Features official 50% Multiple Choice and 50% Free Response weighting.',
   h1: 'AP Biology Score Calculator',
   shortDescription:
     'Estimate your AP Biology score from your practice multiple-choice (60 questions, 50%) and free-response (6 questions / 40 raw points, 50%) performance.',
@@ -524,10 +524,10 @@ export const apCalcAbConfig: SubjectExamConfig = {
   abbreviation: 'AP Calc AB',
   slug: 'ap-calculus-ab-score-calculator',
   category: 'Math & Computer Science',
-  heroBadge: '108 Composite Scale & 50/50 Section Weighting',
-  metaTitle: 'AP Calculus AB Score Calculator – Estimate Your AP Score',
+  heroBadge: 'ap calc ab score calculator · 108 Composite Scale',
+  metaTitle: 'ap calc ab score calculator 2026 – AP Calculus AB',
   metaDescription:
-    'Use our AP Calculus AB Score Calculator to estimate your AP score from practice tests. Convert your 45 MCQ and 6 Free-Response questions into official composite scores.',
+    'Use our ap calc ab score calculator to estimate your AP score from practice tests. Convert your 45 MCQ and 6 Free-Response questions into official composite scores.',
   h1: 'AP Calculus AB Score Calculator',
   shortDescription:
     'Estimate your AP Calculus AB score using your multiple-choice (45 questions, 50%) and free-response (6 questions / 54 raw points, 50%) results.',
@@ -633,10 +633,10 @@ export const apCalcBcConfig: SubjectExamConfig = {
   abbreviation: 'AP Calc BC',
   slug: 'ap-calculus-bc-score-calculator',
   category: 'Math & Computer Science',
-  heroBadge: 'Includes AB Subscore & 108 Composite Scale',
-  metaTitle: 'AP Calculus BC Score Calculator – Estimate Your AP Score',
+  heroBadge: 'ap calc bc score calculator · Includes AB Subscore',
+  metaTitle: 'ap calc bc score calculator 2026 – AP Calculus BC',
   metaDescription:
-    'Calculate your AP Calculus BC composite and estimated 1–5 score. Covers series, polar, parametric, and vector calculus with realistic College Board cutoffs.',
+    'Use our ap calc bc score calculator to calculate your AP Calculus BC composite and estimated 1–5 score across series, parametric, and vector calculus.',
   h1: 'AP Calculus BC Score Calculator',
   shortDescription:
     'Estimate your AP Calculus BC score using your multiple-choice (45 questions, 50%) and free-response (6 questions / 54 points, 50%) practice results.',
@@ -742,10 +742,10 @@ export const apPsychConfig: SubjectExamConfig = {
   abbreviation: 'AP Psych',
   slug: 'ap-psychology-score-calculator',
   category: 'History & Social Sciences',
-  heroBadge: 'Updated for Redesigned 75 MCQ & Article Analysis Exam',
-  metaTitle: 'AP Psychology Score Calculator – AP Psych Score Predictor',
+  heroBadge: 'AP Psychology Score Calculator · Redesigned 75 MCQ Exam',
+  metaTitle: 'AP Psychology Score Calculator 2026 – AP Psych Predictor',
   metaDescription:
-    'Estimate your AP Psychology score with our calculator configured for the revised exam structure: 75 multiple-choice questions, Article Analysis (AAQ), and Evidence-Based (EBQ) questions.',
+    'Estimate your score with our AP Psychology Score Calculator configured for the revised exam structure: 75 multiple-choice questions and two free-response prompts.',
   h1: 'AP Psychology Score Calculator',
   shortDescription:
     'Estimate your AP Psychology score using the updated College Board exam format: 75 multiple-choice questions (66.7%) and 2 free-response questions (33.3%).',
@@ -869,10 +869,10 @@ export const apChemConfig: SubjectExamConfig = {
   abbreviation: 'AP Chem',
   slug: 'ap-chemistry-score-calculator',
   category: 'Sciences',
-  heroBadge: '60 MCQ & 7 FRQ College Board Weighting',
-  metaTitle: 'AP Chemistry Score Calculator – AP Chem Score Predictor',
+  heroBadge: 'AP Chemistry Score Calculator · 60 MCQ & 7 FRQ Points',
+  metaTitle: 'AP Chemistry Score Calculator 2026 – AP Chem Predictor',
   metaDescription:
-    'Estimate your AP Chemistry score from practice-exam results. Evaluates Section I Multiple Choice (50%) and Section II Free Response (50%) with composite breakdown.',
+    'Use our AP Chemistry Score Calculator to estimate your AP Chemistry score from practice-exam results. Evaluates Section I MCQ (50%) and Section II FRQ (50%).',
   h1: 'AP Chemistry Score Calculator',
   shortDescription:
     'Estimate your AP Chemistry score from your practice multiple-choice (60 questions, 50%) and 7 multi-part free-response questions (46 raw points, 50%).',
@@ -996,10 +996,10 @@ export const apCspConfig: SubjectExamConfig = {
   abbreviation: 'AP CSP',
   slug: 'ap-csp-score-calculator',
   category: 'Math & Computer Science',
-  heroBadge: '70% MCQ & 30% Create Performance Task',
-  metaTitle: 'AP CSP Score Calculator – AP Computer Science Principles Score Predictor',
+  heroBadge: 'ap csp score calculator · 70% MCQ & 30% Create Task',
+  metaTitle: 'ap csp score calculator 2026 – AP Computer Science Principles',
   metaDescription:
-    'Calculate your AP Computer Science Principles score with our AP CSP Score Calculator. Covers 70 Multiple Choice Questions (70%) and Create Task Written Response (30%).',
+    'Calculate your AP score with our ap csp score calculator. Covers 70 Multiple Choice Questions (70%) and Create Task Written Response (30%).',
   h1: 'AP CSP Score Calculator',
   shortDescription:
     'Estimate your AP Computer Science Principles score using your 70 multiple-choice questions (70%) and Create Performance Task written response points (6 points, 30%).',

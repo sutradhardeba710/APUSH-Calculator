@@ -7,13 +7,18 @@ import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
 import FAQ from '../../components/faq/FAQ.astro';
 import { ALL_SUBJECTS } from '../../data/exam-config/subjects-registry';
 
-const pageTitle = 'AP Score Calculators – Estimate Your AP Exam Scores (2026–2027)';
+const pageTitle = 'ap score calculator Directory – Calculate Your AP Exam Scores';
 const pageDescription =
-  'Calculate your estimated AP score for APUSH, AP Lang, AP Biology, AP Calculus, AP Psychology, AP Chemistry, and AP Computer Science Principles with our free, official-weighting calculators.';
+  'Use our free ap score calculator directory to estimate your AP scores for APUSH, AP Lang, AP Bio, Calculus, and more with official 2026 College Board curves.';
 
 const canonicalUrl = 'https://apushcalculator.com/ap-score-calculators/';
 
 const hubFaqs = [
+  {
+    question: 'are ap score calculators accurate',
+    answer:
+      'Yes. Our calculators use the exact section weights and question counts from official College Board Course and Exam Descriptions (CED), combined with historical score cutoffs released from recent exams. While specific equating curves vary slightly each year, our estimates typically fall within ±2 to 2.5 composite points.',
+  },
   {
     question: 'How do these AP score calculators work?',
     answer:
@@ -28,11 +33,6 @@ const hubFaqs = [
     question: 'What is considered a passing score on an AP exam?',
     answer:
       'A score of 3, 4, or 5 is considered a passing score. The American Council on Education (ACE) recommends that colleges award college credit or advanced placement for scores of 3 and above, though some selective universities require a 4 or 5 for subject-specific credit.',
-  },
-  {
-    question: 'Are these AP calculators official College Board tools?',
-    answer:
-      'No. These calculators are independent educational tools designed to help students evaluate their practice test performance and focus their study time. College Board does not release pre-set score curves prior to exam administration.',
   },
   {
     question: 'Can I test hypothetical score improvements?',
@@ -65,6 +65,7 @@ const categories = ['All', 'History & Social Sciences', 'Sciences', 'Math & Comp
   canonicalUrl={canonicalUrl}
 >
   <Header slot="header" activePath="/ap-score-calculators/" />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
 
   <!-- Hero Section -->
   <section class="bg-white border-b border-neutral-200 py-10 sm:py-14">
@@ -168,16 +169,20 @@ const categories = ['All', 'History & Social Sciences', 'Sciences', 'Math & Comp
           ))
         }
       </div>
+
+      <div class="mt-8 p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-center text-xs text-neutral-500">
+        Looking for additional subjects? An AP Environmental Science Score Calculator is currently in testing and planned for our next release.
+      </div>
     </section>
 
-    <!-- Deep SEO Content: How AP Score Calculators Work -->
+    <!-- Deep SEO Content: How to Calculate AP Exam Score -->
     <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-white border border-neutral-200 space-y-8">
       <div class="max-w-3xl">
         <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 tracking-tight">
-          How AP® Score Calculators Work
+          how to calculate ap exam score with official weights
         </h2>
         <p class="text-base text-neutral-600 mt-2 leading-relaxed">
-          Advanced Placement (AP) exams are not graded on a traditional percentage scale where 90% is an A and 70% is passing. Instead, the College Board uses a multi-stage scoring and equating pipeline.
+          Curious about how ap scores are calculated? Advanced Placement (AP) exams are not graded on a traditional percentage scale where 90% is an A and 70% is passing. Instead, the College Board uses a multi-stage scoring and equating pipeline.
         </p>
       </div>
 
@@ -264,8 +269,6 @@ const categories = ['All', 'History & Social Sciences', 'Sciences', 'Math & Comp
 
   <Footer slot="footer" />
 </Layout>
-
-<script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
 
 <script>
   function setupFilters() {
