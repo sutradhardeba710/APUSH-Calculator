@@ -10,9 +10,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test:scoring": "node --experimental-strip-types src/lib/scoring/verify-all-subjects.ts"
+    "test:scoring": "node --experimental-strip-types src/lib/scoring/verify-all-subjects.ts",
+    "deploy": "astro build && wrangler pages deploy dist --project-name apushcalculator --branch main --commit-dirty=true",
+    "deploy:pages": "wrangler pages deploy dist --project-name apushcalculator --branch main --commit-dirty=true"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/outfit": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
@@ -23,6 +26,7 @@
     "esbuild": true
   },
   "devDependencies": {
-    "@types/node": "^26.4.1"
+    "@types/node": "^26.4.1",
+    "wrangler": "^4.129.0"
   }
 }

@@ -70,24 +70,54 @@ export const apushContent: SubjectContent = {
   ],
   faqs: [
     {
+      question: 'Is a 70% a 5 on the AP exam?',
+      answer:
+        'Yes. On many AP exams, including AP U.S. History (APUSH), achieving approximately 70% to 75% of the total composite points earns a score of 5. For APUSH, a composite cutoff of ~74 out of 100 points historically earns a 5. On certain math and science exams like AP Calculus BC, the threshold can be even lower (~60% to 65%). You do not need an 85% or 90% to earn a 5.',
+    },
+    {
       question: 'What percentage is a 5 on APUSH?',
       answer:
-        'Historically, a composite score of approximately 74 out of 100 (~74%) is sufficient to earn a 5 on APUSH. You do not need a 90% or 100%—earning ~42/55 on MCQ, 6/9 on SAQ, 5/7 on DBQ, and 4/6 on LEQ typically places you safely in the 5 tier.',
+        'Historically, a composite score of approximately 74 out of 100 (~74%) is required to earn a 5 on the APUSH exam. Because sections are weighted differently, you can reach this benchmark without getting 74% on each section. For example, earning 42/55 on Multiple-Choice (30.5 composite pts), 6/9 on Short Answers (13.3 composite pts), 5/7 on the DBQ (17.9 composite pts), and 5/6 on the LEQ (12.5 composite pts) totals 74.2 composite points, comfortably securing a 5.',
+    },
+    {
+      question: 'How is AP score calculated?',
+      answer:
+        'AP scores are calculated by converting raw points earned on Section I (Multiple Choice and Short Answer) and Section II (Free Response / Essays) into a weighted composite score according to College Board Course and Exam Description (CED) percentages. Psychometricians and College Board Chief Readers then apply statistical equating to convert that composite total into an AP scaled score from 1 to 5.',
+    },
+    {
+      question: 'How do I figure out my AP score?',
+      answer:
+        'To figure out your AP score from a practice exam: 1) Tally your Section I correct multiple-choice answers (each correct answer is worth 1 raw point; there is no guessing penalty). 2) Grade your free-response responses against official scoring rubrics. 3) Multiply each section’s raw score by its College Board weight factor to find your weighted composite out of 100. 4) Match your composite against historical equating curves, or simply enter your numbers into our free AP score calculator.',
     },
     {
       question: 'how to calculate apush score',
       answer:
-        'To calculate your score, multiply your raw MCQ score by 0.7273, your SAQ score by 2.2222, your DBQ score by 3.5714, and your LEQ score by 2.5000. Sum all four weighted components to obtain your 100-point composite, then map it to the 1–5 AP score scale.',
+        'To calculate your APUSH score, multiply your raw MCQ score (0–55) by 0.7273, your SAQ score (0–9) by 2.2222, your DBQ score (0–7) by 3.5714, and your LEQ score (0–6) by 2.5000. Sum all four weighted sections to determine your composite score out of 100, which maps directly to the official 1–5 AP grade scale.',
     },
     {
       question: 'how to manually calculate apush exam score',
       answer:
-        'To manually calculate apush exam score results, use the formula: Composite = (MCQ × 0.7273) + (SAQ × 2.2222) + (DBQ × 3.5714) + (LEQ × 2.5). A composite of 74–100 converts to a 5, 60–73 to a 4, 47–59 to a 3, 35–46 to a 2, and 0–34 to a 1.',
+        'To manually calculate apush exam score results, use the formula: Composite = (MCQ × 0.7273) + (SAQ × 2.2222) + (DBQ × 3.5714) + (LEQ × 2.5000). A composite of 74–100 converts to a 5, 60–73 to a 4, 47–59 to a 3, 35–46 to a 2, and 0–34 to a 1.',
     },
     {
       question: 'are apush score calculators accurate',
       answer:
-        'Yes. This tool is built as the most accurate apush score calculator by applying official College Board Course and Exam Description (CED) section weightings (40% MCQ, 20% SAQ, 25% DBQ, 15% LEQ) and calibrated historical equating cutoffs within a ±2.5 point margin.',
+        'Yes. This tool is built as the most accurate apush score calculator by applying official College Board Course and Exam Description (CED) section weightings (40% MCQ, 20% SAQ, 25% DBQ, 15% LEQ) and calibrated historical equating cutoffs within a ±2.5 point margin of actual score releases.',
+    },
+    {
+      question: 'What is the APUSH curve and score conversion chart for 2026?',
+      answer:
+        'The 2026 APUSH exam uses psychometric equating rather than a predetermined curving quota. Historical score conversion chart cutoffs for AP U.S. History are: Score 5 (74–100 composite pts, ~10.5%–13% of students), Score 4 (60–73 composite pts, ~15%–16%), Score 3 (47–59 composite pts, ~22%–24%), Score 2 (35–46 composite pts, ~23%–25%), and Score 1 (0–34 composite pts, ~24%–28%).',
+    },
+    {
+      question: 'What is a passing score on the AP US History exam?',
+      answer:
+        'A score of 3 or higher is considered passing ("qualified") by the College Board. Most public colleges, universities, and state systems award college credit or historical elective waivers for scores of 3, 4, or 5. A composite score of 47 out of 100 points is typically the threshold needed to earn a 3.',
+    },
+    {
+      question: 'Is there a penalty for guessing on the APUSH exam?',
+      answer:
+        'No. There is no penalty for guessing or incorrect answers on the APUSH exam. You earn 1 raw point for each correct answer and 0 points for unanswered or incorrect questions. Therefore, never leave any multiple-choice bubble empty—always guess before time expires.',
     },
     {
       question: 'How does this tool compare to albert io apush score calculator or other platforms?',
@@ -95,14 +125,9 @@ export const apushContent: SubjectContent = {
         'Unlike third-party alternatives such as albert io apush score calculator, apush score calculator albert io, albert apush score calculator, knowt apush score calculator, or fiveable apush score calculator, our platform provides an entirely free, privacy-first interface with zero account signups, interactive what-if score simulations, and instant local browser evaluation.',
     },
     {
-      question: 'What is the apush calculator score conversion methodology?',
+      question: 'How many raw points do I need to get a 5 on APUSH?',
       answer:
-        'The apush calculator score conversion process takes your raw scores, applies the exact mathematical multipliers for Section I and Section II, and projects your final AP 1–5 score against recent equating curves.',
-    },
-    {
-      question: 'Can I use this score calculator apush tool for both practice tests and class exams?',
-      answer:
-        'Yes. This apush test score calculator is designed for unit exams, mock finals, and full-length practice tests. As an ap score calculator apush students rely on, it functions as a comprehensive apush ap score calculator and apush ap exam score calculator to accurately evaluate your pacing and score tiers across all sections.',
+        'To reach the ~74 composite score threshold for a 5, students generally need about 70% to 75% of raw points across sections. A typical balanced distribution is 42/55 on Multiple-Choice, 6/9 on SAQ, 5/7 on the DBQ, and 5/6 on the LEQ. Hitting 78+ composite points provides a reliable safety cushion across any exam administration.',
     },
   ],
   relatedTools: [

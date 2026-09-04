@@ -30,6 +30,34 @@ const {
   noindex = false,
   siteName = 'AP Score Hub',
 } = Astro.props;
+
+const globalSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteOrigin}/#website`,
+      name: siteName,
+      url: siteOrigin,
+      description: 'Independent educational AP score calculators and curve estimators based on official College Board exam weightings.',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${siteOrigin}/ap-score-calculators/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteOrigin}/#organization`,
+      name: siteName,
+      url: siteOrigin,
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL(ogImage, siteOrigin).href
+      }
+    }
+  ]
+};
 ---
 
 <!doctype html>
@@ -67,6 +95,7 @@ const {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(ogImage, Astro.site || Astro.url.origin).href} />
 
+    <script type="application/ld+json" set:html={JSON.stringify(globalSchema)} />
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 antialiased relative">

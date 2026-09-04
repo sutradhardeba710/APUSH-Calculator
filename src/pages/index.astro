@@ -11,24 +11,17 @@ const pageTitle = 'ap score calculator – 2026 AP Exam Score Calculator Hub';
 const pageDescription =
   'Use our free ap score calculator to calculate your AP exam scores for APUSH, AP Lang, AP Bio, and Calculus using official College Board weightings and curves.';
 
-const homeSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'AP Score Hub',
-  url: 'https://apushcalculator.com/',
-  description: pageDescription,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://apushcalculator.com/ap-score-calculators/?q={search_term_string}',
-    'query-input': 'required name=search_term_string',
-  },
-};
 
 const homeFaqs = [
   {
     question: 'Is a 70% a 5 on the AP exam?',
     answer:
-      'Yes, on many AP exams earning approximately 70% to 75% of the total composite points earns a score of 5. For instance, on AP U.S. History (APUSH), ~74 out of 100 composite points typically achieves a 5, while on AP Calculus BC, cutoffs around 63% to 65% regularly qualify for a 5.',
+      'Yes, on many AP exams earning approximately 70% to 75% of the total composite points earns a score of 5. For instance, on AP U.S. History (APUSH), ~74 out of 100 composite points typically achieves a 5, while on AP Calculus BC, cutoffs around 60% to 65% regularly qualify for a 5. You do not need a 90% or higher to receive a 5.',
+  },
+  {
+    question: 'What percentage is a 5 on APUSH?',
+    answer:
+      'Historically, a composite score of approximately 74 out of 100 (~74%) is required to earn a 5 on the APUSH exam. Because sections are weighted differently, you do not need 74% on every single section. For example, earning 42/55 on Multiple-Choice, 6/9 on Short Answers, 5/7 on the DBQ, and 5/6 on the LEQ yields 74.2 composite points, qualifying for a 5.',
   },
   {
     question: 'How is AP score calculated?',
@@ -41,14 +34,29 @@ const homeFaqs = [
       'To figure out your AP score from a practice test, score your multiple-choice questions (1 point each with no penalty for wrong answers), evaluate your free-response essays against official scoring rubrics, apply your subject’s specific section multipliers to find your composite, and check against published equating tables.',
   },
   {
-    question: 'are ap score calculators accurate',
+    question: 'How to calculate APUSH score?',
+    answer:
+      'To calculate your APUSH score, multiply your raw MCQ score (0–55) by 0.7273, your SAQ score (0–9) by 2.2222, your DBQ score (0–7) by 3.5714, and your LEQ score (0–6) by 2.5000. Summing all four weighted sections gives your composite score out of 100, which maps to: 74–100 = 5, 60–73 = 4, 47–59 = 3, 35–46 = 2, and 0–34 = 1.',
+  },
+  {
+    question: 'Are AP score calculators accurate?',
     answer:
       'Yes. Our calculators use the exact section weights and question counts from official College Board Course and Exam Descriptions (CED), combined with historical score cutoffs released from recent exams. While specific equating curves vary slightly each year, our estimates typically fall within ±2 to 2.5 composite points.',
   },
   {
+    question: 'What is the APUSH curve and score conversion chart for 2026?',
+    answer:
+      'The 2026 APUSH exam uses psychometric equating rather than a fixed grading curve. Historical composite score thresholds are: Score 5: 74–100 points (~10.5%–13% of students), Score 4: 60–73 points (~15%–16%), Score 3: 47–59 points (~22%–24%), Score 2: 35–46 points (~23%–25%), and Score 1: 0–34 points (~24%–28%).',
+  },
+  {
+    question: 'How does this tool compare to Albert.io, Knowt, or Fiveable?',
+    answer:
+      'Unlike commercial platforms like Albert.io, Knowt, or Fiveable, our calculators are 100% free with no account creation or login required. All calculations run instantly in your browser with zero latency and full privacy, complete with interactive "What-If" score simulators and granular rubric breakdowns.',
+  },
+  {
     question: 'What subjects are supported on the AP Score Calculator Hub?',
     answer:
-      'We currently support dedicated calculators for AP U.S. History (APUSH), AP English Language and Composition (AP Lang), AP Biology, AP Calculus AB, AP Calculus BC, AP Psychology, AP Chemistry, and AP Computer Science Principles (AP CSP).',
+      'We support dedicated calculators for AP U.S. History (APUSH), AP English Language and Composition (AP Lang), AP Biology, AP Calculus AB, AP Calculus BC, AP Psychology, AP Chemistry, and AP Computer Science Principles (AP CSP).',
   },
 ];
 ---
@@ -59,7 +67,6 @@ const homeFaqs = [
   canonicalUrl="https://apushcalculator.com/"
 >
   <Header slot="header" activePath="/" />
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(homeSchema)} />
 
   <!-- Hero Section -->
   <section class="bg-white border-b border-neutral-200 pt-10 pb-14 sm:pt-16 sm:pb-20">
