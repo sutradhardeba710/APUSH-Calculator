@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Master Hub & Portal -->
   <url>
     <loc>https://apushcalculator.com/</loc>
     <lastmod>2026-09-04</lastmod>
@@ -7,22 +8,74 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://apushcalculator.com/apush-score-calculator/</loc>
+    <loc>https://apushcalculator.com/ap-score-calculators/</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+
+  <!-- 8 Core Subject Calculators -->
+  <url>
+    <loc>https://apushcalculator.com/apush-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-lang-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-biology-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-calculus-ab-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-calculus-bc-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-psychology-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-chemistry-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://apushcalculator.com/ap-csp-score-calculator/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- APUSH Supporting Topic Cluster Tools -->
   <url>
     <loc>https://apushcalculator.com/apush-score-predictor/</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://apushcalculator.com/apush-dbq-score-calculator/</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://apushcalculator.com/apush-leq-score-calculator/</loc>

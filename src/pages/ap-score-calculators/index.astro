@@ -1,0 +1,306 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+import { ALL_SUBJECTS } from '../../data/exam-config/subjects-registry';
+
+const pageTitle = 'AP Score Calculators – Estimate Your AP Exam Scores (2026–2027)';
+const pageDescription =
+  'Calculate your estimated AP score for APUSH, AP Lang, AP Biology, AP Calculus, AP Psychology, AP Chemistry, and AP Computer Science Principles with our free, official-weighting calculators.';
+
+const canonicalUrl = 'https://apushcalculator.com/ap-score-calculators/';
+
+const hubFaqs = [
+  {
+    question: 'How do these AP score calculators work?',
+    answer:
+      'Each calculator uses the official College Board exam structure and section weightings specified in the Course and Exam Description (CED). You input your practice exam scores, and our engine calculates your weighted composite score (0–100 or 108 for Calculus) and maps it to the estimated AP 1–5 scale using calibrated historical equating cutoffs.',
+  },
+  {
+    question: 'Why do AP score curves vary from year to year?',
+    answer:
+      'The College Board uses a statistical process called equating. Different exam forms have slightly different questions of varying difficulty. To ensure that an AP score of 4 or 5 represents the same level of college mastery regardless of the specific form or year, the composite point thresholds are adjusted by psychometricians each June.',
+  },
+  {
+    question: 'What is considered a passing score on an AP exam?',
+    answer:
+      'A score of 3, 4, or 5 is considered a passing score. The American Council on Education (ACE) recommends that colleges award college credit or advanced placement for scores of 3 and above, though some selective universities require a 4 or 5 for subject-specific credit.',
+  },
+  {
+    question: 'Are these AP calculators official College Board tools?',
+    answer:
+      'No. These calculators are independent educational tools designed to help students evaluate their practice test performance and focus their study time. College Board does not release pre-set score curves prior to exam administration.',
+  },
+  {
+    question: 'Can I test hypothetical score improvements?',
+    answer:
+      'Yes! Every dedicated subject calculator features a built-in What-If Simulator and Target Score Planner that allows you to see exactly how earning 1 or 2 more points in specific sections will increase your weighted composite and elevate your final AP score tier.',
+  },
+];
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'AP Score Calculator Hub',
+  url: canonicalUrl,
+  applicationCategory: 'EducationalApplication',
+  operatingSystem: 'All',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  description: pageDescription,
+};
+
+const categories = ['All', 'History & Social Sciences', 'Sciences', 'Math & Computer Science', 'English'] as const;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+>
+  <Header slot="header" activePath="/ap-score-calculators/" />
+
+  <!-- Hero Section -->
+  <section class="bg-white border-b border-neutral-200 py-10 sm:py-14">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb items={[{ label: 'AP Score Calculators' }]} />
+
+      <div class="max-w-3xl mx-auto text-center space-y-4 pt-4">
+        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-widest">
+          2026–2027 Calibrated Scoring Curves
+        </p>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading text-neutral-900 tracking-tight leading-tight">
+          AP Score Calculators
+        </h1>
+
+        <p class="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+          Calculate your estimated AP score for APUSH, AP Lang, AP Biology, AP Calculus, AP Psychology, AP Chemistry, and AP Computer Science Principles.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <!-- Official Scoring Notice -->
+    <DisclaimerCard />
+
+    <!-- Subject Directory Section -->
+    <section id="calculators-grid">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900">
+            Dedicated Subject Calculators
+          </h2>
+          <p class="text-sm text-neutral-500 mt-1">
+            Choose an exam to access dedicated scoring logic, exam-year curves, and what-if simulators.
+          </p>
+        </div>
+
+        <!-- Subject Filter Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+          {
+            categories.map((cat, idx) => (
+              <button
+                type="button"
+                data-filter={cat}
+                class={`btn-tactile category-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all duration-150 ${
+                  idx === 0
+                    ? 'bg-blue-700 text-white shadow-xs'
+                    : 'bg-neutral-100 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200'
+                }`}
+              >
+                {cat}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Grid of Subject Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="subject-cards-container">
+        {
+          ALL_SUBJECTS.map((sub) => (
+            <a
+              href={`/${sub.slug}/`}
+              class="interactive-card subject-card group relative p-6 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 flex flex-col justify-between"
+              data-category={sub.category}
+            >
+              <div class="space-y-3">
+                <!-- Category & Abbreviation -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider truncate">
+                    {sub.category}
+                  </span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-bold font-mono text-blue-700 bg-blue-50 border border-blue-100 shrink-0">
+                    {sub.abbreviation}
+                  </span>
+                </div>
+
+                <!-- Single authoritative heading & concise summary -->
+                <div>
+                  <h3 class="text-base font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors duration-150 leading-snug">
+                    {sub.name}
+                  </h3>
+                  <p class="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">
+                    {sub.shortDescription}
+                  </p>
+                </div>
+
+                <!-- Clean Specs Line -->
+                <div class="pt-3 border-t border-neutral-100 text-[11px] text-neutral-400 font-medium tabular-nums">
+                  {sub.examYears[sub.defaultYear].sections.length} sections · {sub.examYears[sub.defaultYear].totalCompositeMax} pts max
+                </div>
+              </div>
+
+              <!-- Action Footer -->
+              <div class="pt-4 mt-4 border-t border-neutral-100 flex items-center gap-1.5 text-xs font-bold text-neutral-700 group-hover:text-blue-700 transition-colors">
+                <span>Calculate Score</span>
+                <span class="group-hover:translate-x-0.5 transition-transform duration-150" aria-hidden="true">→</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Deep SEO Content: How AP Score Calculators Work -->
+    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-white border border-neutral-200 space-y-8">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 tracking-tight">
+          How AP® Score Calculators Work
+        </h2>
+        <p class="text-base text-neutral-600 mt-2 leading-relaxed">
+          Advanced Placement (AP) exams are not graded on a traditional percentage scale where 90% is an A and 70% is passing. Instead, the College Board uses a multi-stage scoring and equating pipeline.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-xs">
+            1
+          </div>
+          <h3 class="text-base font-bold font-heading text-neutral-900">
+            Raw Points Collection
+          </h3>
+          <p class="text-xs text-neutral-600 leading-relaxed">
+            Your multiple-choice bubble sheet is machine-scored (1 point per correct answer, with no penalty for wrong guesses). Your free-response questions, essays, and performance tasks are graded by certified college professors and AP teachers at the annual June AP Reading using published rubrics.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-xs">
+            2
+          </div>
+          <h3 class="text-base font-bold font-heading text-neutral-900">
+            Section Weighting & Composite
+          </h3>
+          <p class="text-xs text-neutral-600 leading-relaxed">
+            Because different sections have different point totals (for example, 55 MCQs vs 7 DBQ points on APUSH), raw scores are multiplied by section multipliers so that each portion contributes its exact prescribed percentage to a unified 100-point (or 108-point) composite.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-neutral-50 border border-neutral-200 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-bold text-xs">
+            3
+          </div>
+          <h3 class="text-base font-bold font-heading text-neutral-900">
+            Equating to the 1–5 AP Scale
+          </h3>
+          <p class="text-xs text-neutral-600 leading-relaxed">
+            Composite score thresholds (cutoffs) for each score tier (5, 4, 3, 2, 1) are set using psychometric equating standards. A composite score of ~72–75% is typically sufficient to earn a 5 in STEM and humanities subjects, while passing (3+) often starts around 40–50%.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Scores Vary & Educational Insights -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="p-8 rounded-2xl bg-white border border-neutral-200 space-y-4">
+        <h3 class="text-xl font-bold font-heading text-neutral-900">
+          Why Practice Scores Vary from the Final AP Exam
+        </h3>
+        <p class="text-sm text-neutral-600 leading-relaxed">
+          When taking practice tests from Barron's, Princeton Review, UWorld, or official College Board released exams, your estimated score may fluctuate due to several factors:
+        </p>
+        <ul class="space-y-2.5 text-xs text-neutral-600 list-disc pl-4">
+          <li>
+            <strong>Form Difficulty Variations:</strong> College Board adjusts the cutoffs for each test administration so that harder exam forms require fewer points for a 5.
+          </li>
+          <li>
+            <strong>Strictness of Essay Grading:</strong> Teacher or self-grading on DBQs and FRQs can differ from official AP Reader standards.
+          </li>
+          <li>
+            <strong>Exam-Day Stamina:</strong> Official exams run 3 to 3.5 hours with strict timed sections, making simulated endurance tests crucial.
+          </li>
+        </ul>
+      </div>
+
+      <div class="p-8 rounded-2xl bg-white border border-neutral-200 space-y-4">
+        <h3 class="text-xl font-bold font-heading text-neutral-900">
+          How to Use Our Target Score Tool
+        </h3>
+        <p class="text-sm text-neutral-600 leading-relaxed">
+          Unlike generic form calculators, every calculator on our platform calculates <em>marginal leverage</em>—revealing which section gives you the fastest path to the next score tier.
+        </p>
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs text-neutral-700 space-y-1.5">
+          <p class="font-bold text-neutral-900">Example Improvement Leverage:</p>
+          <p class="leading-relaxed">
+            On APUSH, gaining 1 DBQ point adds <strong>+3.57 composite points</strong>, whereas 1 MCQ question adds <strong>+0.73 composite points</strong>. Prioritizing document citation and thesis precision often moves a student from a 3 to a 4 faster than drilling dozens of additional multiple-choice sets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section with Schema -->
+    <FAQ items={hubFaqs} />
+  </main>
+
+  <Footer slot="footer" />
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+
+<script>
+  function setupFilters() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.category-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.subject-card');
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-filter');
+        if (!cat) return;
+
+        filterBtns.forEach((b) => {
+          b.classList.remove('bg-blue-700', 'text-white', 'shadow-xs');
+          b.classList.add('bg-neutral-100', 'text-neutral-600');
+        });
+        btn.classList.add('bg-blue-700', 'text-white', 'shadow-xs');
+        btn.classList.remove('bg-neutral-100', 'text-neutral-600');
+
+        cards.forEach((card) => {
+          const cardCat = card.getAttribute('data-category');
+          if (cat === 'All' || cardCat === cat) {
+            card.classList.remove('hidden');
+            card.classList.add('animate-fade-in');
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('animate-fade-in');
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFilters);
+  } else {
+    setupFilters();
+  }
+</script>

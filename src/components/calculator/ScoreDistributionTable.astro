@@ -1,0 +1,203 @@
+---
+import type { ScoreDistributionYear } from '../../data/exam-config/subject-types';
+
+interface Props {
+  distributions: ScoreDistributionYear[];
+  subjectName: string;
+}
+
+const { distributions, subjectName } = Astro.props;
+const defaultYearData = distributions[0] || {
+  year: 2024,
+  distribution: { 5: 15, 4: 20, 3: 25, 2: 20, 1: 20 },
+  passRate3Plus: 60,
+};
+---
+
+<div class="bg-white rounded-2xl border border-neutral-200/90 shadow-xs p-6 sm:p-8 my-8">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+    <div>
+      <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100 mb-1.5">
+        Official College Board Data
+      </div>
+      <h2 class="text-2xl font-bold font-heading text-neutral-900">
+        {subjectName} Historical Score Distributions
+      </h2>
+      <p class="text-sm text-neutral-500 mt-1">
+        Official percentage of students scoring 1 through 5 over recent testing years.
+      </p>
+    </div>
+
+    <!-- Year Selector Buttons -->
+    <div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-xl self-start sm:self-auto flex-wrap">
+      {
+        distributions.map((d, index) => (
+          <button
+            type="button"
+            data-dist-year={d.year}
+            class={`btn-tactile dist-year-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-150 ${
+              index === 0
+                ? 'bg-white text-blue-700 shadow-xs'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/60'
+            }`}
+          >
+            {d.year}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Distribution Cards for each year -->
+  {
+    distributions.map((d, index) => {
+      const isFirst = index === 0;
+      return (
+        <div
+          id={`dist-year-panel-${d.year}`}
+          class={`dist-panel pt-6 space-y-5 transition-opacity duration-200 ${isFirst ? 'block animate-fade-in' : 'hidden'}`}
+        >
+          <!-- Summary Banner -->
+          <div class="flex flex-wrap items-center justify-between gap-4 p-4.5 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/80 border border-blue-100 shadow-2xs">
+            <div>
+              <span class="text-xs font-semibold text-blue-800 uppercase tracking-wider">Overall Pass Rate (3+)</span>
+              <div class="text-2xl sm:text-3xl font-extrabold text-blue-900 font-heading tabular-nums">
+                {d.passRate3Plus}%
+              </div>
+            </div>
+            {d.totalTestTakers && (
+              <div class="text-right">
+                <span class="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Total Test Takers</span>
+                <div class="text-lg font-bold text-neutral-800 font-heading tabular-nums">
+                  {d.totalTestTakers.toLocaleString()}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Visual Distribution Bars -->
+          <div class="space-y-3 pt-2">
+            {([5, 4, 3, 2, 1] as const).map((score) => {
+              const pct = d.distribution[score] || 0;
+              const colorMap: Record<number, { bar: string; text: string; bg: string }> = {
+                5: { bar: 'bg-emerald-500', text: 'text-emerald-700', bg: 'bg-emerald-50' },
+                4: { bar: 'bg-blue-500', text: 'text-blue-700', bg: 'bg-blue-50' },
+                3: { bar: 'bg-sky-500', text: 'text-sky-700', bg: 'bg-sky-50' },
+                2: { bar: 'bg-amber-500', text: 'text-amber-700', bg: 'bg-amber-50' },
+                1: { bar: 'bg-rose-500', text: 'text-rose-700', bg: 'bg-rose-50' },
+              };
+              const colors = colorMap[score];
+              return (
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between text-xs font-semibold">
+                    <span class="flex items-center gap-2">
+                      <span class={`w-5 h-5 rounded-md flex items-center justify-center font-bold ${colors.bg} ${colors.text}`}>
+                        {score}
+                      </span>
+                      <span class="text-neutral-700">Score of {score}</span>
+                    </span>
+                    <span class={`font-bold tabular-nums ${colors.text}`}>{pct}%</span>
+                  </div>
+                  <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                    <div
+                      class={`dist-bar-fill h-full rounded-full transition-all duration-500 ease-out ${colors.bar}`}
+                      data-target-width={`${Math.min(100, pct)}%`}
+                      style={`width: ${Math.min(100, pct)}%`}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <!-- Accessible Data Table for Screen Readers & SEO -->
+          <div class="overflow-x-auto pt-4">
+            <table class="w-full text-left text-xs text-neutral-600 border border-neutral-200/90 rounded-xl overflow-hidden shadow-2xs">
+              <thead class="bg-neutral-50/90 text-neutral-800 font-bold border-b border-neutral-200 uppercase tracking-wider">
+                <tr>
+                  <th scope="col" class="py-2.5 px-3">AP Score</th>
+                  <th scope="col" class="py-2.5 px-3">Qualification Tier</th>
+                  <th scope="col" class="py-2.5 px-3 text-right">Percentage ({d.year})</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-neutral-200">
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="py-2.5 px-3 font-bold text-emerald-700">5</td>
+                  <td class="py-2.5 px-3">Extremely well qualified</td>
+                  <td class="py-2.5 px-3 text-right font-semibold tabular-nums">{d.distribution[5]}%</td>
+                </tr>
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="py-2.5 px-3 font-bold text-blue-700">4</td>
+                  <td class="py-2.5 px-3">Well qualified</td>
+                  <td class="py-2.5 px-3 text-right font-semibold tabular-nums">{d.distribution[4]}%</td>
+                </tr>
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="py-2.5 px-3 font-bold text-sky-700">3</td>
+                  <td class="py-2.5 px-3">Qualified (Passing)</td>
+                  <td class="py-2.5 px-3 text-right font-semibold tabular-nums">{d.distribution[3]}%</td>
+                </tr>
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="py-2.5 px-3 font-bold text-amber-700">2</td>
+                  <td class="py-2.5 px-3">Possibly qualified</td>
+                  <td class="py-2.5 px-3 text-right font-semibold tabular-nums">{d.distribution[2]}%</td>
+                </tr>
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="py-2.5 px-3 font-bold text-rose-700">1</td>
+                  <td class="py-2.5 px-3">No recommendation</td>
+                  <td class="py-2.5 px-3 text-right font-semibold tabular-nums">{d.distribution[1]}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
+
+<script>
+  function setupDistributionTabs() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.dist-year-btn');
+    const panels = document.querySelectorAll<HTMLElement>('.dist-panel');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const year = btn.getAttribute('data-dist-year');
+        if (!year) return;
+
+        buttons.forEach((b) => {
+          b.classList.remove('bg-white', 'text-blue-700', 'shadow-xs');
+          b.classList.add('text-neutral-600');
+        });
+        btn.classList.add('bg-white', 'text-blue-700', 'shadow-xs');
+        btn.classList.remove('text-neutral-600');
+
+        panels.forEach((p) => {
+          if (p.id === `dist-year-panel-${year}`) {
+            p.classList.remove('hidden');
+            p.classList.add('block', 'animate-fade-in');
+
+            // Animate bars on reveal
+            const bars = p.querySelectorAll<HTMLElement>('.dist-bar-fill');
+            bars.forEach((bar) => {
+              const target = bar.getAttribute('data-target-width') || '0%';
+              bar.style.width = '0%';
+              requestAnimationFrame(() => {
+                bar.style.width = target;
+              });
+            });
+          } else {
+            p.classList.add('hidden');
+            p.classList.remove('block', 'animate-fade-in');
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupDistributionTabs);
+  } else {
+    setupDistributionTabs();
+  }
+</script>

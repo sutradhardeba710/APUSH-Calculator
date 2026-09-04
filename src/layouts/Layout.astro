@@ -15,6 +15,7 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
+  siteName?: string;
 }
 
 const {
@@ -24,9 +25,8 @@ const {
   ogImage = '/images/og-apush-calculator.png',
   ogType = 'website',
   noindex = false,
+  siteName = 'AP Score Hub',
 } = Astro.props;
-
-const siteName = 'APUSH Score Calculator';
 ---
 
 <!doctype html>
@@ -66,11 +66,88 @@ const siteName = 'APUSH Score Calculator';
 
     <slot name="head" />
   </head>
-  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 antialiased">
+  <body class="min-h-screen flex flex-col bg-neutral-50 text-neutral-800 antialiased relative">
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
     <slot name="header" />
     <main id="main-content" class="flex-1">
       <slot />
     </main>
     <slot name="footer" />
+
+    <!-- Accessible Smooth Scroll to Top Button -->
+    <button
+      type="button"
+      id="scroll-to-top-btn"
+      class="fixed bottom-6 right-6 z-30 w-11 h-11 rounded-full bg-neutral-900 text-white shadow-lg hover:bg-blue-700 active:scale-90 flex items-center justify-center transition-all duration-200 opacity-0 pointer-events-none translate-y-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      aria-label="Scroll back to top of page"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Global Lightweight Motion & Accessibility Controller -->
+    <script>
+      function initLayoutEnhancements() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // 1. Scroll-reveal with IntersectionObserver
+        const reveals = document.querySelectorAll<HTMLElement>('.reveal-on-scroll');
+        if (reveals.length > 0) {
+          if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            reveals.forEach((el) => el.classList.add('is-revealed'));
+          } else {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                  }
+                });
+              },
+              {
+                threshold: 0.08,
+                rootMargin: '0px 0px -20px 0px',
+              }
+            );
+            reveals.forEach((el) => observer.observe(el));
+          }
+        }
+
+        // 2. Scroll to top button handling
+        const topBtn = document.getElementById('scroll-to-top-btn');
+        if (topBtn) {
+          function onScroll() {
+            if (window.scrollY > 350) {
+              topBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+              topBtn.classList.add('opacity-90', 'pointer-events-auto', 'translate-y-0');
+            } else {
+              topBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+              topBtn.classList.remove('opacity-90', 'pointer-events-auto', 'translate-y-0');
+            }
+          }
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+
+          topBtn.addEventListener('click', () => {
+            window.scrollTo({
+              top: 0,
+              behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            });
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+              mainContent.focus({ preventScroll: true });
+            }
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLayoutEnhancements);
+      } else {
+        initLayoutEnhancements();
+      }
+    </script>
   </body>
 </html>

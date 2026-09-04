@@ -48,10 +48,9 @@ const schema = {
     <Breadcrumb items={[{ label: 'APUSH Score Predictor' }]} />
 
     <div class="mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 mb-3">
-        <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-        Statistical Confidence & Probability Forecaster
-      </div>
+      <p class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-2">
+        Statistical Probability Forecaster
+      </p>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
         AP U.S. History Score Predictor
       </h1>
@@ -66,7 +65,7 @@ const schema = {
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       <!-- Input Panel (5 cols) -->
       <div class="lg:col-span-5 space-y-4">
-        <div class="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-sm space-y-5">
+        <div class="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200 space-y-5">
           <h2 class="text-lg font-bold font-heading text-neutral-900 border-b border-neutral-100 pb-3">
             Enter Practice Exam Performance
           </h2>
@@ -83,7 +82,8 @@ const schema = {
               min="0"
               max="55"
               value="42"
-              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+              class="w-full calc-score-range cursor-pointer pred-slider"
+              style="background: linear-gradient(to right, #1d4ed8 0%, #1d4ed8 76.4%, #e5e7eb 76.4%, #e5e7eb 100%);"
             />
           </div>
 
@@ -99,7 +99,8 @@ const schema = {
               min="0"
               max="9"
               value="6"
-              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+              class="w-full calc-score-range cursor-pointer pred-slider"
+              style="background: linear-gradient(to right, #1d4ed8 0%, #1d4ed8 66.7%, #e5e7eb 66.7%, #e5e7eb 100%);"
             />
           </div>
 
@@ -115,7 +116,8 @@ const schema = {
               min="0"
               max="7"
               value="5"
-              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+              class="w-full calc-score-range cursor-pointer pred-slider"
+              style="background: linear-gradient(to right, #1d4ed8 0%, #1d4ed8 71.4%, #e5e7eb 71.4%, #e5e7eb 100%);"
             />
           </div>
 
@@ -131,7 +133,8 @@ const schema = {
               min="0"
               max="6"
               value="4"
-              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+              class="w-full calc-score-range cursor-pointer pred-slider"
+              style="background: linear-gradient(to right, #1d4ed8 0%, #1d4ed8 66.7%, #e5e7eb 66.7%, #e5e7eb 100%);"
             />
           </div>
         </div>
@@ -140,10 +143,10 @@ const schema = {
       <!-- Results & Probability Panel (7 cols) -->
       <div class="lg:col-span-7 space-y-6">
         <!-- Range card -->
-        <div class="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200/90 shadow-md">
+        <div class="p-6 sm:p-7 rounded-xl bg-white border border-neutral-200">
           <div class="flex items-start justify-between gap-4 mb-6">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Projected Score Range</span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400">Projected Score Range</span>
               <h2 class="text-xl font-bold font-heading text-neutral-900 mt-0.5">Statistical Outcome Model</h2>
             </div>
             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
@@ -155,19 +158,19 @@ const schema = {
           <div class="grid grid-cols-3 gap-3 mb-6 text-center">
             <div class="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
               <span class="text-[11px] font-semibold text-neutral-500 uppercase block">Low Estimate</span>
-              <span id="pred-low-score" class="font-heading font-black text-3xl text-neutral-800 mt-1 block">3</span>
+              <span id="pred-low-score" class="font-heading font-black text-3xl text-neutral-800 mt-1 block tabular-nums">3</span>
               <span class="text-[10px] text-neutral-400">Strict readers</span>
             </div>
 
-            <div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 shadow-2xs">
+            <div class="p-3.5 rounded-xl bg-indigo-50/50 border border-indigo-200">
               <span class="text-[11px] font-bold text-indigo-700 uppercase block">Most Likely</span>
-              <span id="pred-likely-score" class="font-heading font-black text-4xl text-indigo-900 mt-1 block">4</span>
+              <span id="pred-likely-score" class="font-heading font-black text-4xl text-indigo-900 mt-1 block tabular-nums">4</span>
               <span class="text-[10px] text-indigo-600 font-medium">Expected median</span>
             </div>
 
             <div class="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
               <span class="text-[11px] font-semibold text-neutral-500 uppercase block">High Estimate</span>
-              <span id="pred-high-score" class="font-heading font-black text-3xl text-emerald-700 mt-1 block">5</span>
+              <span id="pred-high-score" class="font-heading font-black text-3xl text-emerald-700 mt-1 block tabular-nums">5</span>
               <span class="text-[10px] text-neutral-400">Favorable curve</span>
             </div>
           </div>
@@ -181,10 +184,10 @@ const schema = {
                 <span class="text-emerald-800 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Score 5
                 </span>
-                <span id="prob-val-5" class="font-bold text-neutral-900">28%</span>
+                <span id="prob-val-5" class="font-bold text-neutral-900 tabular-nums">28%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div id="prob-bar-5" class="h-full bg-emerald-500 rounded-full transition-all" style="width: 28%;"></div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                <div id="prob-bar-5" class="h-full bg-emerald-500 rounded-full transition-all duration-300 ease-out" style="width: 28%;"></div>
               </div>
             </div>
 
@@ -194,10 +197,10 @@ const schema = {
                 <span class="text-blue-800 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Score 4
                 </span>
-                <span id="prob-val-4" class="font-bold text-neutral-900">62%</span>
+                <span id="prob-val-4" class="font-bold text-neutral-900 tabular-nums">62%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div id="prob-bar-4" class="h-full bg-blue-500 rounded-full transition-all" style="width: 62%;"></div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                <div id="prob-bar-4" class="h-full bg-blue-500 rounded-full transition-all duration-300 ease-out" style="width: 62%;"></div>
               </div>
             </div>
 
@@ -207,10 +210,10 @@ const schema = {
                 <span class="text-sky-800 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Score 3
                 </span>
-                <span id="prob-val-3" class="font-bold text-neutral-900">10%</span>
+                <span id="prob-val-3" class="font-bold text-neutral-900 tabular-nums">10%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div id="prob-bar-3" class="h-full bg-sky-500 rounded-full transition-all" style="width: 10%;"></div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                <div id="prob-bar-3" class="h-full bg-sky-500 rounded-full transition-all duration-300 ease-out" style="width: 10%;"></div>
               </div>
             </div>
 
@@ -220,10 +223,10 @@ const schema = {
                 <span class="text-amber-800 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Score 2
                 </span>
-                <span id="prob-val-2" class="font-bold text-neutral-900">0%</span>
+                <span id="prob-val-2" class="font-bold text-neutral-900 tabular-nums">0%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div id="prob-bar-2" class="h-full bg-amber-500 rounded-full transition-all" style="width: 0%;"></div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                <div id="prob-bar-2" class="h-full bg-amber-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
               </div>
             </div>
 
@@ -233,16 +236,16 @@ const schema = {
                 <span class="text-rose-800 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Score 1
                 </span>
-                <span id="prob-val-1" class="font-bold text-neutral-900">0%</span>
+                <span id="prob-val-1" class="font-bold text-neutral-900 tabular-nums">0%</span>
               </div>
-              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
-                <div id="prob-bar-1" class="h-full bg-rose-500 rounded-full transition-all" style="width: 0%;"></div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden p-0.5">
+                <div id="prob-bar-1" class="h-full bg-rose-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
               </div>
             </div>
           </div>
 
           <!-- Strategy Takeaway -->
-          <div class="mt-6 p-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-950">
+          <div class="mt-6 p-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-950 transition-colors">
             <span class="font-bold block mb-1">Target Strategy:</span>
             <p id="pred-strategy-text" class="leading-relaxed">
               You are in solid 4 territory with an achievable path to a 5. Improving your DBQ by 1 point or MCQ by 3 questions will elevate your chance of a 5 above 55%.
@@ -265,11 +268,31 @@ const schema = {
   import { predictApushScore } from '../../lib/scoring/prediction';
   import { examConfig2026 } from '../../data/exam-config/2026';
 
+  let lastLikelyScore: number | null = null;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function updateSliderTrack(slider: HTMLInputElement) {
+    const val = Number(slider.value) || 0;
+    const max = Number(slider.max) || 100;
+    const pct = max > 0 ? (val / max) * 100 : 0;
+    slider.style.background = `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`;
+  }
+
   function updatePrediction() {
-    const mcq = parseInt((document.getElementById('pred-mcq') as HTMLInputElement).value, 10) || 0;
-    const saq = parseInt((document.getElementById('pred-saq') as HTMLInputElement).value, 10) || 0;
-    const dbq = parseInt((document.getElementById('pred-dbq') as HTMLInputElement).value, 10) || 0;
-    const leq = parseInt((document.getElementById('pred-leq') as HTMLInputElement).value, 10) || 0;
+    const mcqEl = document.getElementById('pred-mcq') as HTMLInputElement;
+    const saqEl = document.getElementById('pred-saq') as HTMLInputElement;
+    const dbqEl = document.getElementById('pred-dbq') as HTMLInputElement;
+    const leqEl = document.getElementById('pred-leq') as HTMLInputElement;
+
+    const mcq = parseInt(mcqEl?.value || '0', 10) || 0;
+    const saq = parseInt(saqEl?.value || '0', 10) || 0;
+    const dbq = parseInt(dbqEl?.value || '0', 10) || 0;
+    const leq = parseInt(leqEl?.value || '0', 10) || 0;
+
+    if (mcqEl) updateSliderTrack(mcqEl);
+    if (saqEl) updateSliderTrack(saqEl);
+    if (dbqEl) updateSliderTrack(dbqEl);
+    if (leqEl) updateSliderTrack(leqEl);
 
     const mcqVal = document.getElementById('pred-mcq-val');
     const saqVal = document.getElementById('pred-saq-val');
@@ -289,7 +312,15 @@ const schema = {
     const strategyEl = document.getElementById('pred-strategy-text');
 
     if (lowEl) lowEl.textContent = pred.projectedRange.low.toString();
-    if (likelyEl) likelyEl.textContent = pred.projectedRange.likely.toString();
+    if (likelyEl) {
+      likelyEl.textContent = pred.projectedRange.likely.toString();
+      if (lastLikelyScore !== null && lastLikelyScore !== pred.projectedRange.likely && !prefersReduced) {
+        likelyEl.classList.remove('animate-score-pop');
+        void likelyEl.offsetWidth;
+        likelyEl.classList.add('animate-score-pop');
+      }
+      lastLikelyScore = pred.projectedRange.likely;
+    }
     if (highEl) highEl.textContent = pred.projectedRange.high.toString();
     if (strategyEl) strategyEl.textContent = pred.summaryRecommendation;
 
@@ -302,10 +333,16 @@ const schema = {
     });
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function setupPredictor() {
     document.querySelectorAll('.pred-slider').forEach((slider) => {
       slider.addEventListener('input', updatePrediction);
     });
     updatePrediction();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPredictor);
+  } else {
+    setupPredictor();
+  }
 </script>

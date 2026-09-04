@@ -48,10 +48,9 @@ const schema = {
     <Breadcrumb items={[{ label: 'Score Distributions & Curves' }]} />
 
     <div class="mb-8">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
-        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+      <p class="text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-2">
         Official College Board Score Reports (2021–2024)
-      </div>
+      </p>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
         AP U.S. History Score Distributions & Curves
       </h1>
@@ -64,27 +63,27 @@ const schema = {
 
     <!-- High-level Metric Highlights -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
-        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Average Pass Rate</span>
-        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block">48.0%</span>
+      <div class="p-4 rounded-xl bg-white border border-neutral-200">
+        <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">Average Pass Rate</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block tabular-nums">48.0%</span>
         <span class="text-[10px] text-emerald-700 font-medium">Scores 3, 4, or 5</span>
       </div>
 
-      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
-        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">5 Score Rate</span>
-        <span class="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-1 block">10.7%</span>
+      <div class="p-4 rounded-xl bg-white border border-neutral-200">
+        <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">5 Score Rate</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-1 block tabular-nums">10.7%</span>
         <span class="text-[10px] text-neutral-500">~50,500 students</span>
       </div>
 
-      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
-        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Annual Test Takers</span>
-        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block">470k+</span>
+      <div class="p-4 rounded-xl bg-white border border-neutral-200">
+        <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">Annual Test Takers</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block tabular-nums">470k+</span>
         <span class="text-[10px] text-neutral-500">Nationwide cohort</span>
       </div>
 
-      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
-        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Mean Score</span>
-        <span class="font-heading font-black text-2xl sm:text-3xl text-blue-700 mt-1 block">2.82</span>
+      <div class="p-4 rounded-xl bg-white border border-neutral-200">
+        <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">Mean Score</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block tabular-nums">2.82</span>
         <span class="text-[10px] text-neutral-500">Out of 5.0</span>
       </div>
     </div>
@@ -93,17 +92,17 @@ const schema = {
     <div class="space-y-8">
       {
         scoreDistributions.map((dist) => (
-          <div class="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200/90 shadow-xs">
+          <div class="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200">
             <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-neutral-100">
               <div>
                 <h2 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
                   {dist.year} AP U.S. History Exam Results
                 </h2>
-                <p class="text-xs text-neutral-500 mt-0.5">
+                <p class="text-xs text-neutral-500 mt-0.5 tabular-nums">
                   Total Students: {dist.totalTestTakers.toLocaleString()} · Mean Score: {dist.meanScore} · Pass Rate: {dist.passRate}%
                 </p>
               </div>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 tabular-nums">
                 {dist.passRate}% Passing
               </span>
             </div>
@@ -114,10 +113,10 @@ const schema = {
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1">
                   <span class="text-emerald-800 font-bold">Score 5 (Extremely Well Qualified)</span>
-                  <span class="text-neutral-900 font-bold">{dist.scores[5].percentage}% ({dist.scores[5].count.toLocaleString()} students)</span>
+                  <span class="text-neutral-900 font-bold tabular-nums">{dist.scores[5].percentage}% ({dist.scores[5].count.toLocaleString()} students)</span>
                 </div>
                 <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-emerald-500 rounded-full" style={`width: ${dist.scores[5].percentage}%;`}></div>
+                  <div class="h-full bg-emerald-500 rounded-full transition-all duration-700 ease-out" style={`width: ${dist.scores[5].percentage}%;`}></div>
                 </div>
               </div>
 
@@ -125,10 +124,10 @@ const schema = {
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1">
                   <span class="text-blue-800 font-bold">Score 4 (Well Qualified)</span>
-                  <span class="text-neutral-900 font-bold">{dist.scores[4].percentage}% ({dist.scores[4].count.toLocaleString()} students)</span>
+                  <span class="text-neutral-900 font-bold tabular-nums">{dist.scores[4].percentage}% ({dist.scores[4].count.toLocaleString()} students)</span>
                 </div>
                 <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-blue-500 rounded-full" style={`width: ${dist.scores[4].percentage}%;`}></div>
+                  <div class="h-full bg-blue-500 rounded-full transition-all duration-700 ease-out" style={`width: ${dist.scores[4].percentage}%;`}></div>
                 </div>
               </div>
 
@@ -136,10 +135,10 @@ const schema = {
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1">
                   <span class="text-sky-800 font-bold">Score 3 (Qualified / Passing)</span>
-                  <span class="text-neutral-900 font-bold">{dist.scores[3].percentage}% ({dist.scores[3].count.toLocaleString()} students)</span>
+                  <span class="text-neutral-900 font-bold tabular-nums">{dist.scores[3].percentage}% ({dist.scores[3].count.toLocaleString()} students)</span>
                 </div>
                 <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-sky-500 rounded-full" style={`width: ${dist.scores[3].percentage}%;`}></div>
+                  <div class="h-full bg-sky-500 rounded-full transition-all duration-700 ease-out" style={`width: ${dist.scores[3].percentage}%;`}></div>
                 </div>
               </div>
 
@@ -147,10 +146,10 @@ const schema = {
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1">
                   <span class="text-amber-800 font-bold">Score 2 (Possibly Qualified)</span>
-                  <span class="text-neutral-900 font-bold">{dist.scores[2].percentage}% ({dist.scores[2].count.toLocaleString()} students)</span>
+                  <span class="text-neutral-900 font-bold tabular-nums">{dist.scores[2].percentage}% ({dist.scores[2].count.toLocaleString()} students)</span>
                 </div>
                 <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-amber-500 rounded-full" style={`width: ${dist.scores[2].percentage}%;`}></div>
+                  <div class="h-full bg-amber-500 rounded-full transition-all duration-700 ease-out" style={`width: ${dist.scores[2].percentage}%;`}></div>
                 </div>
               </div>
 
@@ -158,10 +157,10 @@ const schema = {
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-1">
                   <span class="text-rose-800 font-bold">Score 1 (No Recommendation)</span>
-                  <span class="text-neutral-900 font-bold">{dist.scores[1].percentage}% ({dist.scores[1].count.toLocaleString()} students)</span>
+                  <span class="text-neutral-900 font-bold tabular-nums">{dist.scores[1].percentage}% ({dist.scores[1].count.toLocaleString()} students)</span>
                 </div>
                 <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-rose-500 rounded-full" style={`width: ${dist.scores[1].percentage}%;`}></div>
+                  <div class="h-full bg-rose-500 rounded-full transition-all duration-700 ease-out" style={`width: ${dist.scores[1].percentage}%;`}></div>
                 </div>
               </div>
             </div>

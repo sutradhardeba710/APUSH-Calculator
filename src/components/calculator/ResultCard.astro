@@ -3,17 +3,17 @@
 
 <div
   id="result-display-card"
-  class="relative overflow-hidden rounded-2xl bg-white border border-neutral-200/90 shadow-md p-6 sm:p-8 flex flex-col justify-between transition-all"
+  class="relative overflow-hidden rounded-xl bg-white border border-neutral-200 shadow-sm p-6 sm:p-8 flex flex-col justify-between transition-all"
   aria-live="polite"
   aria-atomic="true"
 >
   <!-- Card Top Accent Bar -->
-  <div id="score-accent-bar" class="absolute top-0 left-0 right-0 h-2 bg-blue-600 transition-colors"></div>
+  <div id="score-accent-bar" class="absolute top-0 left-0 right-0 h-1.5 bg-blue-600 transition-colors"></div>
 
   <!-- Header -->
   <div class="flex items-start justify-between gap-4">
     <div>
-      <span class="text-xs font-bold tracking-wider uppercase text-neutral-500">Estimated AP® Score</span>
+      <span class="text-xs font-semibold tracking-wider uppercase text-neutral-400">Estimated AP® Score</span>
       <h2 id="result-status-title" class="text-lg font-bold font-heading text-neutral-900 mt-0.5">
         Well Qualified
       </h2>
@@ -22,42 +22,42 @@
     <!-- Status badge -->
     <span
       id="qualification-badge"
-      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 shadow-2xs"
+      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200"
     >
-      <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
       <span id="qualification-text">Score 4</span>
     </span>
   </div>
 
-  <!-- Big Hero Score Display -->
+  <!-- Big Score Display -->
   <div class="my-6 sm:my-8 flex items-baseline justify-center gap-3">
     <span
       id="hero-score-number"
-      class="font-heading font-black text-7xl sm:text-8xl md:text-9xl text-neutral-900 tracking-tight transition-all"
+      class="font-heading font-black text-6xl sm:text-7xl md:text-8xl text-neutral-900 tracking-tight transition-all"
     >
       4
     </span>
     <div class="flex flex-col text-neutral-500 text-sm">
       <span class="font-semibold uppercase text-xs tracking-wider">Out of 5</span>
-      <span id="pass-fail-indicator" class="text-emerald-700 font-bold text-xs mt-0.5">
+      <span id="pass-fail-indicator" class="text-emerald-700 font-semibold text-xs mt-0.5">
         Passing (College Credit)
       </span>
     </div>
   </div>
 
   <!-- Composite Metrics Grid -->
-  <div class="grid grid-cols-2 gap-3 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 mb-6">
+  <div class="grid grid-cols-2 gap-3 p-3 rounded-lg bg-neutral-50 border border-neutral-200 mb-6">
     <div>
       <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wide block">Composite Score</span>
       <span class="text-lg sm:text-xl font-heading font-extrabold text-neutral-900">
         <span id="composite-score-val">69.5</span>
-        <span class="text-xs font-medium text-neutral-500">/ 100</span>
+        <span class="text-xs font-medium text-neutral-400">/ 100</span>
       </span>
     </div>
 
     <div>
       <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wide block">College Credit</span>
-      <span id="credit-likelihood-val" class="text-sm sm:text-base font-bold text-blue-800">
+      <span id="credit-likelihood-val" class="text-sm sm:text-base font-bold text-neutral-800">
         Very Likely
       </span>
     </div>
@@ -66,10 +66,10 @@
   <!-- Distance to Next Score Notification Banner -->
   <div
     id="next-tier-banner"
-    class="p-3 rounded-lg bg-blue-50/70 border border-blue-200/70 text-blue-950 text-xs flex items-center justify-between gap-2"
+    class="p-3 rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-800 text-xs flex items-center justify-between gap-2"
   >
     <div class="flex items-center gap-2">
-      <svg class="w-4 h-4 text-blue-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 text-neutral-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
       </svg>
       <span>

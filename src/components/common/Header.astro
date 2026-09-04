@@ -5,49 +5,51 @@ interface Props {
 
 const { activePath = '' } = Astro.props;
 
-const navLinks = [
-  { href: '/apush-score-calculator/', label: 'Calculator', description: 'Full exam score calculator' },
-  { href: '/apush-score-predictor/', label: 'Predictor', description: 'Score probabilities & ranges' },
-  { href: '/apush-dbq-score-calculator/', label: 'DBQ', description: '7-point rubric calculator' },
-  { href: '/apush-leq-score-calculator/', label: 'LEQ', description: '6-point rubric calculator' },
-  { href: '/apush-saq-score-calculator/', label: 'SAQ', description: '9-point short answer calculator' },
-  { href: '/apush-score-distribution/', label: 'Distributions', description: 'Historical curves & pass rates' },
+const mainNavLinks = [
+  { href: '/ap-score-calculators/', label: 'All Calculators', badge: 'Hub' },
+  { href: '/apush-score-calculator/', label: 'APUSH' },
+  { href: '/ap-lang-score-calculator/', label: 'AP Lang' },
+  { href: '/ap-biology-score-calculator/', label: 'AP Bio' },
+  { href: '/ap-calculus-ab-score-calculator/', label: 'Calc AB' },
+  { href: '/ap-calculus-bc-score-calculator/', label: 'Calc BC' },
+  { href: '/ap-psychology-score-calculator/', label: 'Psych' },
+  { href: '/ap-chemistry-score-calculator/', label: 'Chem' },
+  { href: '/ap-csp-score-calculator/', label: 'CSP' },
 ];
 ---
 
-<header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur border-b border-neutral-200/80 transition-colors">
+<header id="site-header" class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all duration-200">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a
         href="/"
-        class="flex items-center gap-2.5 font-heading text-lg font-bold text-neutral-900 hover:text-blue-700 transition-colors focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-md"
-        aria-label="APUSH Score Calculator Home"
+        class="group flex items-center gap-2.5 font-heading text-lg font-bold text-neutral-900 hover:text-blue-700 transition-colors focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 rounded-lg p-1 -m-1"
+        aria-label="AP Score Calculator Hub Home"
       >
-        <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-700 text-white font-black text-sm tracking-wider shadow-sm">
+        <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-700 text-white font-black text-sm tracking-wider shadow-xs group-hover:scale-105 transition-transform duration-200">
           AP
         </span>
         <span class="flex flex-col">
-          <span class="leading-tight text-neutral-900 font-extrabold">APUSH Calculator</span>
-          <span class="text-[10px] text-neutral-500 font-medium tracking-wide uppercase">Score & Curve Estimator</span>
+          <span class="leading-tight text-neutral-900 font-extrabold text-base sm:text-lg group-hover:text-blue-700 transition-colors">AP Score Hub</span>
+          <span class="text-[10px] text-neutral-500 font-medium tracking-wide uppercase">Score & Curve Estimators</span>
         </span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-1" aria-label="Main Navigation">
+      <nav class="hidden xl:flex items-center space-x-1" aria-label="Main Navigation">
         {
-          navLinks.map((link) => {
-            const isActive = activePath.startsWith(link.href);
+          mainNavLinks.map((link) => {
+            const isActive = activePath === link.href;
             return (
               <a
                 href={link.href}
-                class={`px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+                class={`px-2.5 py-1.5 text-xs font-semibold rounded-lg transition-all duration-150 active:scale-[0.98] ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700 font-semibold shadow-xs'
+                    ? 'bg-blue-50 text-blue-700 shadow-2xs font-bold border border-blue-100/80'
                     : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
-                title={link.description}
               >
                 {link.label}
               </a>
@@ -58,70 +60,147 @@ const navLinks = [
 
       <!-- Right Action / Mobile menu button -->
       <div class="flex items-center gap-2">
-        <a
-          href="/apush-score-calculator/"
-          class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-sm transition-all focus-visible:outline-2 focus-visible:outline-blue-600"
-        >
-          Calculate Score
-        </a>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-neutral-100 text-neutral-600 border border-neutral-200">
+          2026–2027 Updated
+        </span>
 
-        <!-- Mobile menu toggle -->
+        <!-- Mobile menu toggle button with animated icon -->
         <button
           type="button"
           id="mobile-menu-button"
-          class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+          class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 transition-colors active:scale-95"
           aria-controls="mobile-menu"
           aria-expanded="false"
           aria-label="Toggle navigation menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <div class="w-6 h-6 flex flex-col justify-center items-center gap-1.5 relative">
+            <span id="burger-bar-1" class="w-5 h-0.5 bg-neutral-700 rounded-full transition-all duration-250 transform origin-center"></span>
+            <span id="burger-bar-2" class="w-5 h-0.5 bg-neutral-700 rounded-full transition-all duration-200"></span>
+            <span id="burger-bar-3" class="w-5 h-0.5 bg-neutral-700 rounded-full transition-all duration-250 transform origin-center"></span>
+          </div>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Mobile menu dropdown -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-200 bg-white px-4 pt-2 pb-4 shadow-lg space-y-1">
-    {
-      navLinks.map((link) => {
-        const isActive = activePath.startsWith(link.href);
-        return (
-          <a
-            href={link.href}
-            class={`block px-3 py-2.5 rounded-lg text-base font-medium ${
-              isActive
-                ? 'bg-blue-50 text-blue-700 font-semibold'
-                : 'text-neutral-700 hover:bg-neutral-100'
-            }`}
-            aria-current={isActive ? 'page' : undefined}
-          >
-            <div class="flex flex-col">
-              <span>{link.label}</span>
-              <span class="text-xs text-neutral-500 font-normal">{link.description}</span>
-            </div>
-          </a>
-        );
-      })
-    }
+  <!-- Mobile menu dropdown with smooth transition container -->
+  <div
+    id="mobile-menu"
+    class="xl:hidden border-t border-neutral-200/90 bg-white/98 backdrop-blur-lg px-4 pt-2 pb-5 shadow-xl space-y-1 max-h-0 opacity-0 overflow-hidden transition-all duration-250 ease-out"
+    aria-hidden="true"
+  >
+    <div class="text-[11px] font-bold text-neutral-400 uppercase tracking-wider px-3 py-1.5">AP Score Calculators</div>
+    <div class="grid grid-cols-2 gap-1 sm:block sm:space-y-1">
+      {
+        mainNavLinks.map((link) => {
+          const isActive = activePath === link.href;
+          return (
+            <a
+              href={link.href}
+              class={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 active:scale-[0.98] ${
+                isActive
+                  ? 'bg-blue-50 text-blue-700 font-bold border border-blue-100'
+                  : 'text-neutral-700 hover:bg-neutral-100'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </div>
+    <div class="pt-3 mt-2 border-t border-neutral-100">
+      <a
+        href="/ap-score-calculators/"
+        class="w-full flex items-center justify-center px-4 py-2.5 text-xs font-bold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-sm transition-all"
+      >
+        View Complete Calculator Directory →
+      </a>
+    </div>
   </div>
 </header>
 
 <script>
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerIcon = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
+  function setupHeaderInteractions() {
+    const header = document.getElementById('site-header');
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('burger-bar-1');
+    const bar2 = document.getElementById('burger-bar-2');
+    const bar3 = document.getElementById('burger-bar-3');
 
-  if (menuButton && mobileMenu && hamburgerIcon && closeIcon) {
-    menuButton.addEventListener('click', () => {
-      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-      menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
-      mobileMenu.classList.toggle('hidden');
-      hamburgerIcon.classList.toggle('hidden');
-      closeIcon.classList.toggle('hidden');
+    // Header elevation on scroll
+    function handleScroll() {
+      if (!header) return;
+      if (window.scrollY > 10) {
+        header.classList.add('shadow-sm', 'border-neutral-200');
+        header.classList.remove('border-neutral-200/80');
+      } else {
+        header.classList.remove('shadow-sm');
+        header.classList.add('border-neutral-200/80');
+      }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Mobile menu toggle
+    if (!button || !menu || !bar1 || !bar2 || !bar3) return;
+
+    function openMenu() {
+      button?.setAttribute('aria-expanded', 'true');
+      menu?.setAttribute('aria-hidden', 'false');
+      menu?.classList.remove('max-h-0', 'opacity-0');
+      menu?.classList.add('max-h-[85vh]', 'opacity-100', 'overflow-y-auto');
+
+      // Morph hamburger to X
+      bar1?.classList.add('translate-y-2', 'rotate-45');
+      bar2?.classList.add('opacity-0', 'scale-x-0');
+      bar3?.classList.add('-translate-y-2', '-rotate-45');
+    }
+
+    function closeMenu() {
+      button?.setAttribute('aria-expanded', 'false');
+      menu?.setAttribute('aria-hidden', 'true');
+      menu?.classList.add('max-h-0', 'opacity-0');
+      menu?.classList.remove('max-h-[85vh]', 'opacity-100', 'overflow-y-auto');
+
+      // Morph X to hamburger
+      bar1?.classList.remove('translate-y-2', 'rotate-45');
+      bar2?.classList.remove('opacity-0', 'scale-x-0');
+      bar3?.classList.remove('-translate-y-2', '-rotate-45');
+    }
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node | null;
+      if (button.getAttribute('aria-expanded') === 'true' && target && !menu.contains(target) && !button.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        button.focus();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHeaderInteractions);
+  } else {
+    setupHeaderInteractions();
   }
 </script>

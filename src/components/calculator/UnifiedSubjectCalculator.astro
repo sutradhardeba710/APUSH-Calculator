@@ -1,0 +1,1073 @@
+---
+import type { SubjectExamConfig } from '../../data/exam-config/subject-types';
+import { getExamYearConfig, calculateSubjectScore } from '../../lib/scoring/engine';
+
+interface Props {
+  config: SubjectExamConfig;
+  initialYear?: number;
+}
+
+const { config, initialYear } = Astro.props;
+const activeYear = initialYear || config.defaultYear;
+const yearConfig = getExamYearConfig(config, activeYear);
+const initialScores = yearConfig.defaultScores;
+const initialResult = calculateSubjectScore(config, activeYear, initialScores);
+
+const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-bc';
+---
+
+<div class="unified-calculator-wrapper space-y-8" data-subject-id={config.id}>
+  <!-- Top Bar: Year Selector & Presets -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white border border-neutral-200">
+    <!-- Year Selector -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Exam Year:</span>
+      <div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-lg">
+        {
+          Object.values(config.examYears).map((y) => (
+            <button
+              type="button"
+              data-calc-year={y.year}
+              class={`year-toggle-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 active:scale-95 ${
+                y.year === activeYear
+                  ? 'bg-white text-blue-700 shadow-xs'
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              {y.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Quick Score Presets -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Presets:</span>
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <button
+          type="button"
+          data-preset="5"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 hover:bg-emerald-100 active:scale-95 border border-emerald-200 transition-all duration-150"
+        >
+          Score 5
+        </button>
+        <button
+          type="button"
+          data-preset="4"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-800 hover:bg-blue-100 active:scale-95 border border-blue-200 transition-all duration-150"
+        >
+          Score 4
+        </button>
+        <button
+          type="button"
+          data-preset="3"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-50 text-sky-800 hover:bg-sky-100 active:scale-95 border border-sky-200 transition-all duration-150"
+        >
+          Passing 3
+        </button>
+        <button
+          type="button"
+          id="btn-reset-calc"
+          class="px-2.5 py-1 rounded-md text-xs font-medium text-neutral-500 hover:text-neutral-800 hover:bg-neutral-100 active:scale-95 transition-all duration-150"
+          title="Reset to default practice test scores"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main 2-Column Responsive Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Left Column: Dynamic Inputs -->
+    <div class="lg:col-span-6 space-y-4">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="text-lg font-bold font-heading text-neutral-900">
+          Enter Practice Test Scores
+        </h2>
+        <span class="text-xs text-neutral-500">Instant local calculation</span>
+      </div>
+
+      <form id="subject-calc-form" class="space-y-4" onsubmit="return false;">
+        {
+          yearConfig.sections.map((sec) => {
+            const defaultVal = initialScores[sec.id] || 0;
+            const pct = Math.round((defaultVal / sec.maxScore) * 100);
+            return (
+              <div
+                class="section-input-card p-5 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all duration-150 space-y-3"
+                data-section-id={sec.id}
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <label
+                        for={`input-${sec.id}`}
+                        class="text-sm font-bold text-neutral-900 font-heading"
+                      >
+                        {sec.name}
+                      </label>
+                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                        {sec.weightPercent}% weight
+                      </span>
+                    </div>
+                    <p class="text-xs text-neutral-500 mt-1 leading-relaxed">
+                      {sec.description}
+                    </p>
+                  </div>
+                  <span class="text-xs font-medium text-neutral-400 shrink-0">
+                    {sec.timeLimitMinutes} min
+                  </span>
+                </div>
+
+                <!-- Number Box + Slider Container -->
+                <div class="space-y-2 pt-1">
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-medium text-neutral-600">Points:</span>
+                      <input
+                        type="number"
+                        id={`input-${sec.id}`}
+                        name={sec.id}
+                        min="0"
+                        max={sec.maxScore}
+                        step={sec.step || 1}
+                        value={defaultVal}
+                        class="calc-score-input w-20 px-3 py-1.5 rounded-lg border border-neutral-300 font-heading text-base font-bold text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-center tabular-nums transition-all"
+                        aria-describedby={`desc-${sec.id}`}
+                      />
+                      <span class="text-sm font-medium text-neutral-400 tabular-nums">/ {sec.maxScore}</span>
+                    </div>
+
+                    <span
+                      id={`pct-badge-${sec.id}`}
+                      class="text-xs font-semibold text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded border border-neutral-200 tabular-nums"
+                    >
+                      {pct}%
+                    </span>
+                  </div>
+
+                  <!-- Range Slider -->
+                  <input
+                    type="range"
+                    id={`range-${sec.id}`}
+                    min="0"
+                    max={sec.maxScore}
+                    step={sec.step || 1}
+                    value={defaultVal}
+                    class="calc-score-range w-full cursor-pointer"
+                    style={`background: linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%);`}
+                    aria-label={`${sec.name} score slider`}
+                  />
+
+                  <div id={`error-${sec.id}`} class="text-[11px] font-semibold text-rose-600 hidden"></div>
+                </div>
+              </div>
+            );
+          })
+        }
+
+        <!-- Calculate Button -->
+        <button
+          type="button"
+          id="btn-calculate-now"
+          class="w-full py-3 px-6 rounded-lg font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 active:scale-[0.98] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 flex items-center justify-center gap-2"
+        >
+          <svg id="calc-btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+          </svg>
+          <span id="calc-btn-text">Recalculate Score Estimate</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Column: Sticky Results, Breakdown & What-If -->
+    <div class="lg:col-span-6 space-y-6 lg:sticky lg:top-20">
+      <!-- Live Result Announcement for Screen Readers -->
+      <div id="calc-aria-announcer" class="sr-only" aria-live="polite"></div>
+
+      <!-- Result Card -->
+      <div
+        id="calc-result-card"
+        class="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200 shadow-sm relative overflow-hidden space-y-6 transition-all duration-200"
+      >
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            Estimated AP® Score
+          </span>
+          <span
+            id="credit-badge"
+            class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 transition-colors duration-200"
+          >
+            {initialResult.cutoff.collegeCreditLikelihood} Credit
+          </span>
+        </div>
+
+        <!-- Big Score Display -->
+        <div class="flex items-baseline gap-4">
+          <div
+            id="ap-score-badge"
+            class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-blue-700 text-white flex items-center justify-center font-black font-heading text-4xl sm:text-5xl tabular-nums transition-all duration-200"
+          >
+            {initialResult.estimatedApScore}
+          </div>
+          <div>
+            <h3 id="ap-score-title" class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 leading-tight transition-colors duration-200">
+              {initialResult.cutoff.title}
+            </h3>
+            <p id="ap-score-desc" class="text-xs sm:text-sm text-neutral-500 mt-1 leading-relaxed">
+              {initialResult.cutoff.description}
+            </p>
+          </div>
+        </div>
+
+        <!-- Score Metrics Grid -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div class="p-3.5 rounded-lg bg-neutral-50 border border-neutral-200">
+            <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">
+              Weighted Composite
+            </span>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span id="composite-score-val" class="text-2xl font-extrabold font-heading text-neutral-900 tabular-nums">
+                {initialResult.compositeScore}
+              </span>
+              <span class="text-xs font-medium text-neutral-400">/ 100</span>
+            </div>
+            {
+              isCalculus && (
+                <div class="text-[10px] font-semibold text-neutral-500 mt-0.5">
+                  Raw scale: <span id="raw-calc-108" class="font-bold text-neutral-800 tabular-nums">{Math.round(initialResult.compositeScore * 1.08 * 10) / 10}</span> / 108
+                </div>
+              )
+            }
+          </div>
+
+          <div class="p-3.5 rounded-lg bg-neutral-50 border border-neutral-200">
+            <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">
+              Likely Score Range
+            </span>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span id="confidence-range-val" class="text-2xl font-extrabold font-heading text-neutral-800 tabular-nums">
+                {initialResult.confidenceRange.minScore}–{initialResult.confidenceRange.maxScore}
+              </span>
+              <span class="text-[10px] font-medium text-neutral-400 tabular-nums">
+                (±{yearConfig.confidenceInterval.margin} pts)
+              </span>
+            </div>
+            <span class="text-[10px] text-neutral-400 block mt-0.5">Equating variance</span>
+          </div>
+        </div>
+
+        <!-- Next Score Milestone Tracker -->
+        <div id="next-score-milestone" class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs transition-all duration-200">
+          {
+            initialResult.nextScore ? (
+              <div class="space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2 text-neutral-800 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                    <span>Next Milestone: Score of <strong class="font-bold text-neutral-900">{initialResult.nextScore}</strong></span>
+                  </div>
+                  <span class="text-xs font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded border border-neutral-200 tabular-nums">
+                    +{initialResult.pointsToNextScore} pts needed
+                  </span>
+                </div>
+                <div class="w-full bg-neutral-200 rounded-full h-1.5 overflow-hidden">
+                  <div
+                    id="milestone-progress-bar"
+                    class="bg-blue-600 h-1.5 rounded-full transition-all duration-300 ease-out"
+                    style={`width: ${Math.min(95, Math.max(8, Math.round(((initialResult.compositeScore - (yearConfig.cutoffs[initialResult.estimatedApScore]?.minComposite || 0)) / ((yearConfig.cutoffs[initialResult.nextScore]?.minComposite || 100) - (yearConfig.cutoffs[initialResult.estimatedApScore]?.minComposite || 0))) * 100)))}%`}
+                  ></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-neutral-500 font-medium tabular-nums">
+                  <span>Current: {initialResult.compositeScore.toFixed(1)}</span>
+                  <span>Target {initialResult.nextScore} Cutoff: {yearConfig.cutoffs[initialResult.nextScore]?.minComposite}</span>
+                </div>
+              </div>
+            ) : (
+              <div class="flex items-center gap-2 text-emerald-800 font-semibold">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                <span>Outstanding! You are scoring in the highest AP score tier (Score of 5).</span>
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Score Breakdown Table / Card -->
+      <div class="p-6 rounded-xl bg-white border border-neutral-200 space-y-4">
+        <h3 class="text-base font-bold font-heading text-neutral-900">
+          Section Weight & Score Breakdown
+        </h3>
+
+        <!-- Desktop Table & Mobile Cards -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-neutral-200 text-neutral-500 font-semibold uppercase tracking-wider">
+                <th scope="col" class="pb-2.5">Section</th>
+                <th scope="col" class="pb-2.5 text-center">Raw Score</th>
+                <th scope="col" class="pb-2.5 text-center">Accuracy</th>
+                <th scope="col" class="pb-2.5 text-center">Weight</th>
+                <th scope="col" class="pb-2.5 text-right">Composite Pts</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-tbody" class="divide-y divide-neutral-100 text-neutral-700">
+              {
+                initialResult.sections.map((sec) => (
+                  <tr class="hover:bg-neutral-50 transition-colors">
+                    <td class="py-2.5 font-bold text-neutral-900">{sec.shortName}</td>
+                    <td class="py-2.5 text-center tabular-nums">
+                      <span id={`breakdown-raw-${sec.id}`}>{sec.rawScore}</span> / {sec.maxScore}
+                    </td>
+                    <td class="py-2.5 text-center tabular-nums">
+                      <div class="flex flex-col items-center">
+                        <span class="font-medium" id={`breakdown-pct-${sec.id}`}>{sec.percentage}%</span>
+                        <div class="w-14 h-1.5 bg-neutral-100 rounded-full overflow-hidden mt-1">
+                          <div
+                            id={`breakdown-bar-${sec.id}`}
+                            class="h-full bg-blue-600 rounded-full transition-all duration-300"
+                            style={`width: ${Math.min(100, sec.percentage)}%`}
+                          ></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="py-2.5 text-center text-neutral-500 tabular-nums">{sec.weightPercent}%</td>
+                    <td class="py-2.5 text-right font-bold text-neutral-900 tabular-nums">
+                      <span id={`breakdown-contrib-${sec.id}`}>{sec.weightedContribution.toFixed(2)}</span>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+            <tfoot>
+              <tr class="border-t-2 border-neutral-200 font-bold text-neutral-900">
+                <td class="pt-3 uppercase tracking-wider">Total</td>
+                <td class="pt-3 text-center">-</td>
+                <td class="pt-3 text-center">-</td>
+                <td class="pt-3 text-center">100%</td>
+                <td class="pt-3 text-right text-neutral-900 font-black text-sm tabular-nums" id="breakdown-total-composite">
+                  {initialResult.compositeScore.toFixed(2)}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Share & Link Controls -->
+        <div class="pt-2 flex items-center justify-between gap-3 border-t border-neutral-100">
+          <button
+            type="button"
+            id="btn-copy-share-link"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200 active:scale-95 transition-all duration-150"
+          >
+            <svg id="share-icon-svg" class="w-3.5 h-3.5 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+            </svg>
+            <span id="share-link-text">Share Score Link</span>
+          </button>
+
+          <span class="text-[11px] text-neutral-400">URL saves current scores</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive What-If Simulator Module -->
+  <div class="p-6 sm:p-8 rounded-2xl bg-neutral-900 text-white space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-800 pb-4">
+      <div>
+        <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">
+          What-If Score Simulator
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-400">
+          See how marginal point adjustments in specific sections change your composite and AP score.
+        </p>
+      </div>
+
+      <div class="text-right shrink-0">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider block">Simulated Score</span>
+        <div class="flex items-baseline gap-2 mt-0.5">
+          <span id="sim-score-badge" class="text-3xl font-black font-heading text-emerald-400 tabular-nums transition-all duration-200">
+            {initialResult.estimatedApScore}
+          </span>
+          <span id="sim-composite-text" class="text-sm font-bold text-neutral-300 tabular-nums">
+            ({initialResult.compositeScore} composite)
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Stepper Controls Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        yearConfig.sections.map((sec) => (
+          <div class="p-4 rounded-xl bg-neutral-800/80 border border-neutral-700 space-y-2 hover:border-neutral-600 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-neutral-200">{sec.shortName}</span>
+              <span class="text-[11px] font-semibold text-neutral-400 tabular-nums">
+                +{(sec.weightPercent / sec.maxScore).toFixed(2)} pts/raw
+              </span>
+            </div>
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <button
+                type="button"
+                data-sim-sec={sec.id}
+                data-sim-delta="-1"
+                class="sim-btn w-8 h-8 rounded-lg bg-neutral-700 hover:bg-neutral-600 active:scale-95 text-white font-bold text-xs flex items-center justify-center transition-all duration-150"
+                title={`Subtract 1 from ${sec.shortName}`}
+              >
+                -1
+              </button>
+              <span id={`sim-display-${sec.id}`} class="text-sm font-bold text-white tabular-nums">
+                {initialScores[sec.id] || 0}
+              </span>
+              <button
+                type="button"
+                data-sim-sec={sec.id}
+                data-sim-delta="1"
+                class="sim-btn w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-xs flex items-center justify-center transition-all duration-150"
+                title={`Add 1 to ${sec.shortName}`}
+              >
+                +1
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div id="sim-feedback-msg" class="text-xs text-neutral-400 text-center min-h-[1.5rem] transition-all duration-200">
+      Click +1 or -1 above to test score sensitivity across sections.
+    </div>
+  </div>
+
+  <!-- Target Score Improvement Planner -->
+  <div class="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
+      <div>
+        <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
+          Target Score Improvement Tool
+        </h3>
+        <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+          Select your goal AP score to discover the highest-leverage section improvements.
+        </p>
+      </div>
+
+      <!-- Target Score Selector Buttons -->
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Goal:</span>
+        <div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-lg">
+          <button
+            type="button"
+            data-target="5"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-bold bg-white text-emerald-700 shadow-xs active:scale-95 transition-all duration-150"
+          >
+            Target 5
+          </button>
+          <button
+            type="button"
+            data-target="4"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 hover:text-neutral-900 active:scale-95 transition-all duration-150"
+          >
+            Target 4
+          </button>
+          <button
+            type="button"
+            data-target="3"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 hover:text-neutral-900 active:scale-95 transition-all duration-150"
+          >
+            Target 3
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations Output Banner -->
+    <div id="target-recommendation-box" class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1 transition-all duration-200">
+      <span class="text-xs font-semibold text-neutral-900 block">
+        Optimal Improvement Strategy
+      </span>
+      <p id="target-rec-text" class="text-sm text-neutral-600 leading-relaxed">
+        Calculating the most efficient paths to your goal...
+      </p>
+    </div>
+
+    <!-- Paths Grid -->
+    <div id="target-paths-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Embedded Script for Real-Time Client Execution -->
+<script define:vars={{ config, initialYear: activeYear, initialScores }}>
+  (function () {
+    let currentYear = initialYear;
+    let scores = { ...initialScores };
+    let targetScore = 5;
+    let prevComposite = null;
+    let prevApScore = null;
+    let compositeAnimFrame = null;
+
+    const wrapper = document.querySelector(`.unified-calculator-wrapper[data-subject-id="${config.id}"]`);
+    if (!wrapper) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function getActiveYearConfig() {
+      return config.examYears[currentYear] || Object.values(config.examYears)[0];
+    }
+
+    // Number count-up animation for smooth metric changes
+    function animateNumber(el, startVal, endVal, duration = 240, decimals = 2) {
+      if (!el) return;
+      if (prefersReducedMotion || Math.abs(startVal - endVal) < 0.01) {
+        el.textContent = endVal.toFixed(decimals);
+        return;
+      }
+      if (compositeAnimFrame) cancelAnimationFrame(compositeAnimFrame);
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        // easeOutQuad curve
+        const ease = 1 - (1 - progress) * (1 - progress);
+        const cur = startVal + (endVal - startVal) * ease;
+        el.textContent = cur.toFixed(decimals);
+
+        if (progress < 1) {
+          compositeAnimFrame = requestAnimationFrame(step);
+        } else {
+          el.textContent = endVal.toFixed(decimals);
+        }
+      }
+      compositeAnimFrame = requestAnimationFrame(step);
+    }
+
+    // Parse URL query params
+    function parseUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const yr = parseInt(params.get('year') || '', 10);
+      if (yr && config.examYears[yr]) {
+        currentYear = yr;
+      }
+
+      const activeCfg = getActiveYearConfig();
+      for (const sec of activeCfg.sections) {
+        const val = params.get(sec.id);
+        if (val !== null && !isNaN(Number(val))) {
+          scores[sec.id] = Math.max(0, Math.min(sec.maxScore, Number(val)));
+        }
+      }
+    }
+
+    function updateUrlParams() {
+      const params = new URLSearchParams();
+      params.set('year', currentYear.toString());
+      for (const [key, val] of Object.entries(scores)) {
+        params.set(key, val.toString());
+      }
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    function calculateScore() {
+      const activeCfg = getActiveYearConfig();
+      let composite = 0;
+      const sectionResults = [];
+
+      for (const sec of activeCfg.sections) {
+        let val = Number(scores[sec.id]);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > sec.maxScore) val = sec.maxScore;
+        scores[sec.id] = val;
+
+        const percentage = sec.maxScore > 0 ? (val / sec.maxScore) * 100 : 0;
+        const multiplier = sec.maxScore > 0 ? sec.weightPercent / sec.maxScore : 0;
+        const contrib = val * multiplier;
+        composite += contrib;
+
+        sectionResults.push({
+          id: sec.id,
+          name: sec.name,
+          shortName: sec.shortName,
+          rawScore: val,
+          maxScore: sec.maxScore,
+          percentage: Math.round(percentage * 10) / 10,
+          weightPercent: sec.weightPercent,
+          contribution: contrib,
+        });
+      }
+
+      composite = Math.round(composite * 100) / 100;
+      composite = Math.min(100, Math.max(0, composite));
+
+      const cutoffs = activeCfg.cutoffs;
+      let apScore = 1;
+      if (composite >= cutoffs[5].minComposite) apScore = 5;
+      else if (composite >= cutoffs[4].minComposite) apScore = 4;
+      else if (composite >= cutoffs[3].minComposite) apScore = 3;
+      else if (composite >= cutoffs[2].minComposite) apScore = 2;
+      else apScore = 1;
+
+      const cutoff = cutoffs[apScore];
+      const margin = activeCfg.confidenceInterval.margin;
+      const minComp = Math.max(0, Math.round((composite - margin) * 10) / 10);
+      const maxComp = Math.min(100, Math.round((composite + margin) * 10) / 10);
+
+      const getScore = (c) => {
+        if (c >= cutoffs[5].minComposite) return 5;
+        if (c >= cutoffs[4].minComposite) return 4;
+        if (c >= cutoffs[3].minComposite) return 3;
+        if (c >= cutoffs[2].minComposite) return 2;
+        return 1;
+      };
+
+      const minScore = getScore(minComp);
+      const maxScore = getScore(maxComp);
+
+      const nextScore = apScore < 5 ? apScore + 1 : null;
+      const pointsToNext = nextScore
+        ? Math.max(0, Math.round((cutoffs[nextScore].minComposite - composite) * 10) / 10)
+        : null;
+
+      return {
+        composite,
+        apScore,
+        cutoff,
+        minScore,
+        maxScore,
+        nextScore,
+        pointsToNext,
+        sectionResults,
+      };
+    }
+
+    function updateSliderTrack(rangeInput, val, max) {
+      if (!rangeInput) return;
+      const pct = max > 0 ? (val / max) * 100 : 0;
+      rangeInput.style.background = `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`;
+    }
+
+    function updateUI(isManualTrigger = false) {
+      const res = calculateScore();
+      const activeCfg = getActiveYearConfig();
+
+      // Update Result Card
+      const scoreBadge = wrapper.querySelector('#ap-score-badge');
+      const scoreTitle = wrapper.querySelector('#ap-score-title');
+      const scoreDesc = wrapper.querySelector('#ap-score-desc');
+      const creditBadge = wrapper.querySelector('#credit-badge');
+      const compositeVal = wrapper.querySelector('#composite-score-val');
+      const rangeVal = wrapper.querySelector('#confidence-range-val');
+      const milestoneBox = wrapper.querySelector('#next-score-milestone');
+      const raw108 = wrapper.querySelector('#raw-calc-108');
+
+      // Check if AP score tier changed or manual click
+      const scoreChanged = prevApScore !== null && prevApScore !== res.apScore;
+      if (scoreBadge) {
+        scoreBadge.textContent = res.apScore.toString();
+        if ((scoreChanged || isManualTrigger) && !prefersReducedMotion) {
+          scoreBadge.classList.remove('animate-score-pop');
+          void scoreBadge.offsetWidth; // trigger reflow
+          scoreBadge.classList.add('animate-score-pop');
+        }
+      }
+
+      if (scoreTitle) scoreTitle.textContent = res.cutoff.title;
+      if (scoreDesc) scoreDesc.textContent = res.cutoff.description;
+      if (creditBadge) creditBadge.textContent = `${res.cutoff.collegeCreditLikelihood} Credit`;
+
+      // Smooth count-up on composite score
+      if (compositeVal) {
+        const start = prevComposite !== null ? prevComposite : res.composite;
+        animateNumber(compositeVal, start, res.composite, 220, 2);
+      }
+
+      if (rangeVal) rangeVal.textContent = `${res.minScore}–${res.maxScore}`;
+      if (raw108) raw108.textContent = (Math.round(res.composite * 1.08 * 10) / 10).toFixed(1);
+
+      // Color coding for score badge with smooth styling
+      const colorMap = {
+        5: 'bg-emerald-600 shadow-emerald-500/20',
+        4: 'bg-blue-600 shadow-blue-500/20',
+        3: 'bg-sky-600 shadow-sky-500/20',
+        2: 'bg-amber-600 shadow-amber-500/20',
+        1: 'bg-rose-600 shadow-rose-500/20',
+      };
+      if (scoreBadge) {
+        scoreBadge.className = `w-24 h-24 sm:w-28 sm:h-28 rounded-2xl ${colorMap[res.apScore] || 'bg-blue-600 shadow-blue-500/20'} text-white flex items-center justify-center font-black font-heading text-5xl sm:text-6xl shadow-lg tabular-nums transition-all duration-300 transform`;
+      }
+
+      if (milestoneBox) {
+        if (res.nextScore) {
+          const curCutoff = activeCfg.cutoffs[res.apScore]?.minComposite || 0;
+          const nxtCutoff = activeCfg.cutoffs[res.nextScore]?.minComposite || 100;
+          const rangeSpan = Math.max(1, nxtCutoff - curCutoff);
+          const earnedSpan = Math.max(0, res.composite - curCutoff);
+          const pctProgress = Math.min(95, Math.max(8, Math.round((earnedSpan / rangeSpan) * 100)));
+
+          milestoneBox.innerHTML = `
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2 text-neutral-800 font-medium">
+                  <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                  <span>Next Milestone: Score of <strong class="font-bold text-neutral-900">${res.nextScore}</strong></span>
+                </div>
+                <span class="text-xs font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded border border-neutral-200 tabular-nums">
+                  +${res.pointsToNext} pts needed
+                </span>
+              </div>
+              <div class="w-full bg-neutral-200 rounded-full h-1.5 overflow-hidden">
+                <div
+                  id="milestone-progress-bar"
+                  class="bg-blue-600 h-1.5 rounded-full transition-all duration-300 ease-out"
+                  style="width: ${pctProgress}%"
+                ></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-neutral-500 font-medium tabular-nums">
+                <span>Current: ${res.composite.toFixed(1)}</span>
+                <span>Target ${res.nextScore} Cutoff: ${nxtCutoff}</span>
+              </div>
+            </div>
+          `;
+        } else {
+          milestoneBox.innerHTML = `
+            <div class="flex items-center gap-2 text-emerald-800 font-semibold">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <span>Outstanding! You are scoring in the highest AP score tier (Score of 5).</span>
+            </div>
+          `;
+        }
+      }
+
+      // Update Breakdown Table & Input sliders
+      for (const sec of res.sectionResults) {
+        const rawEl = wrapper.querySelector(`#breakdown-raw-${sec.id}`);
+        const pctEl = wrapper.querySelector(`#breakdown-pct-${sec.id}`);
+        const contribEl = wrapper.querySelector(`#breakdown-contrib-${sec.id}`);
+        const pctBadge = wrapper.querySelector(`#pct-badge-${sec.id}`);
+        const simDisplay = wrapper.querySelector(`#sim-display-${sec.id}`);
+        const barEl = wrapper.querySelector(`#breakdown-bar-${sec.id}`);
+
+        if (rawEl) rawEl.textContent = sec.rawScore.toString();
+        if (pctEl) pctEl.textContent = `${sec.percentage.toFixed(1)}%`;
+        if (contribEl) contribEl.textContent = sec.contribution.toFixed(2);
+        if (barEl) barEl.style.width = `${Math.min(100, sec.percentage)}%`;
+
+        if (pctBadge) {
+          pctBadge.textContent = `${sec.percentage.toFixed(1)}%`;
+          pctBadge.className =
+            'text-xs font-bold px-2.5 py-1 rounded-lg border tabular-nums transition-colors duration-150 ' +
+            (sec.percentage >= 80
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : sec.percentage >= 60
+              ? 'bg-blue-50 text-blue-700 border-blue-200'
+              : sec.percentage >= 40
+              ? 'bg-amber-50 text-amber-700 border-amber-200'
+              : 'bg-rose-50 text-rose-700 border-rose-200');
+        }
+
+        if (simDisplay) simDisplay.textContent = sec.rawScore.toString();
+
+        const numInput = wrapper.querySelector(`#input-${sec.id}`);
+        const rangeInput = wrapper.querySelector(`#range-${sec.id}`);
+        if (numInput && document.activeElement !== numInput) numInput.value = sec.rawScore;
+        if (rangeInput && document.activeElement !== rangeInput) rangeInput.value = sec.rawScore;
+
+        // Stepper button disabled states when hitting limits
+        const minusBtn = wrapper.querySelector(`.sim-btn[data-sim-sec="${sec.id}"][data-sim-delta="-1"]`);
+        const plusBtn = wrapper.querySelector(`.sim-btn[data-sim-sec="${sec.id}"][data-sim-delta="1"]`);
+        if (minusBtn) {
+          minusBtn.disabled = sec.rawScore <= 0;
+          minusBtn.classList.toggle('opacity-30', sec.rawScore <= 0);
+          minusBtn.classList.toggle('cursor-not-allowed', sec.rawScore <= 0);
+        }
+        if (plusBtn) {
+          plusBtn.disabled = sec.rawScore >= sec.maxScore;
+          plusBtn.classList.toggle('opacity-30', sec.rawScore >= sec.maxScore);
+          plusBtn.classList.toggle('cursor-not-allowed', sec.rawScore >= sec.maxScore);
+        }
+
+        // Update slider progress fill
+        updateSliderTrack(rangeInput, sec.rawScore, sec.maxScore);
+      }
+
+      const totalCompEl = wrapper.querySelector('#breakdown-total-composite');
+      if (totalCompEl) totalCompEl.textContent = res.composite.toFixed(2);
+
+      // Screen reader announcement
+      const announcer = wrapper.querySelector('#calc-aria-announcer');
+      if (announcer) {
+        announcer.textContent = `Estimated AP score updated to ${res.apScore} with composite score of ${res.composite}`;
+      }
+
+      // Update Target Score Strategy
+      updateTargetScoreUI(res);
+
+      prevComposite = res.composite;
+      prevApScore = res.apScore;
+    }
+
+    function updateTargetScoreUI(currentRes) {
+      const activeCfg = getActiveYearConfig();
+      const targetCutoff = activeCfg.cutoffs[targetScore].minComposite;
+      const deficit = Math.round((targetCutoff - currentRes.composite) * 10) / 10;
+      const recText = wrapper.querySelector('#target-rec-text');
+      const pathsGrid = wrapper.querySelector('#target-paths-grid');
+
+      if (deficit <= 0) {
+        if (recText) {
+          recText.textContent = `You are already scoring at or above your target score of ${targetScore}! Focus on maintaining pacing and consistency during practice exams.`;
+        }
+        if (pathsGrid) pathsGrid.innerHTML = '';
+        return;
+      }
+
+      const options = activeCfg.sections.map((sec) => {
+        const curRaw = scores[sec.id] || 0;
+        const room = Math.max(0, sec.maxScore - curRaw);
+        const gainPerPt = sec.maxScore > 0 ? sec.weightPercent / sec.maxScore : 0;
+        const rawNeeded = gainPerPt > 0 ? Math.ceil(deficit / gainPerPt) : 999;
+        const feasible = rawNeeded <= room;
+        return {
+          id: sec.id,
+          name: sec.name,
+          shortName: sec.shortName,
+          curRaw,
+          maxRaw: sec.maxScore,
+          room,
+          gainPerPt,
+          rawNeeded,
+          feasible,
+        };
+      });
+
+      options.sort((a, b) => b.gainPerPt - a.gainPerPt);
+
+      const feasible = options.find((o) => o.feasible && o.room > 0);
+      if (recText) {
+        if (feasible) {
+          recText.textContent = `Fastest single-section route to a ${targetScore}: Earn +${feasible.rawNeeded} more raw point${feasible.rawNeeded > 1 ? 's' : ''} on the ${feasible.shortName}. Each raw point in this section adds +${feasible.gainPerPt.toFixed(2)} to your composite.`;
+        } else {
+          recText.textContent = `To reach a ${targetScore}, you need ${deficit.toFixed(1)} composite points across multiple sections. Combine incremental gains on your weakest areas.`;
+        }
+      }
+
+      if (pathsGrid) {
+        pathsGrid.innerHTML = options
+          .map(
+            (o) => `
+          <div class="p-4 rounded-xl border ${o.feasible ? 'border-blue-300 bg-blue-50/30' : 'border-neutral-200 bg-neutral-50'}">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-neutral-800">${o.shortName}</span>
+              ${o.feasible ? '<span class="w-2 h-2 rounded-full bg-blue-600"></span>' : ''}
+            </div>
+            <div class="mt-1 text-sm font-bold tabular-nums ${o.feasible ? 'text-blue-700' : 'text-neutral-500'}">
+              ${o.feasible ? `+${o.rawNeeded} points needed` : 'Requires other sections'}
+            </div>
+            <span class="text-[11px] text-neutral-500 block mt-0.5 tabular-nums">
+              Room: +${o.room} | Gain: +${o.gainPerPt.toFixed(2)} pts/raw
+            </span>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // Attach Event Handlers
+    function bindEvents() {
+      const form = wrapper.querySelector('#subject-calc-form');
+      if (form) {
+        form.addEventListener('input', (e) => {
+          const target = e.target;
+          if (!target) return;
+          const id = target.name || target.id.replace('range-', '').replace('input-', '');
+          if (id && scores[id] !== undefined) {
+            const valNum = Number(target.value);
+            const activeCfg = getActiveYearConfig();
+            const sec = activeCfg.sections.find((s) => s.id === id);
+            const errorEl = wrapper.querySelector(`#error-${id}`);
+            const numInput = wrapper.querySelector(`#input-${id}`);
+
+            if (sec && (isNaN(valNum) || valNum < 0 || valNum > sec.maxScore)) {
+              if (errorEl) {
+                errorEl.textContent = `Score must be between 0 and ${sec.maxScore}`;
+                errorEl.classList.remove('hidden');
+              }
+              if (numInput) {
+                numInput.classList.add('border-rose-500', 'ring-2', 'ring-rose-500/30');
+              }
+            } else {
+              if (errorEl) {
+                errorEl.textContent = '';
+                errorEl.classList.add('hidden');
+              }
+              if (numInput) {
+                numInput.classList.remove('border-rose-500', 'ring-2', 'ring-rose-500/30');
+              }
+            }
+
+            scores[id] = Math.max(0, Math.min(sec ? sec.maxScore : 100, isNaN(valNum) ? 0 : valNum));
+            updateUI(false);
+            updateUrlParams();
+          }
+        });
+      }
+
+      // Year toggles
+      const yearBtns = wrapper.querySelectorAll('.year-toggle-btn');
+      yearBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const yr = parseInt(btn.getAttribute('data-calc-year') || '', 10);
+          if (yr && config.examYears[yr]) {
+            currentYear = yr;
+            yearBtns.forEach((b) => {
+              b.classList.remove('bg-white', 'text-blue-700', 'shadow-xs');
+              b.classList.add('text-neutral-600');
+            });
+            btn.classList.add('bg-white', 'text-blue-700', 'shadow-xs');
+            btn.classList.remove('text-neutral-600');
+            updateUI(false);
+            updateUrlParams();
+          }
+        });
+      });
+
+      // Presets
+      const presetBtns = wrapper.querySelectorAll('.preset-btn');
+      presetBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const presetLevel = btn.getAttribute('data-preset');
+          const activeCfg = getActiveYearConfig();
+          const pKey = `score${presetLevel}`;
+          const presetScores = activeCfg.presets[pKey];
+          if (presetScores) {
+            scores = { ...presetScores };
+            updateUI(true);
+            updateUrlParams();
+          }
+        });
+      });
+
+      // Reset
+      const resetBtn = wrapper.querySelector('#btn-reset-calc');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          const activeCfg = getActiveYearConfig();
+          scores = { ...activeCfg.defaultScores };
+          updateUI(true);
+          updateUrlParams();
+        });
+      }
+
+      // Calculate Button with micro-interaction
+      const calcBtn = wrapper.querySelector('#btn-calculate-now');
+      const calcBtnText = wrapper.querySelector('#calc-btn-text');
+      const calcBtnIcon = wrapper.querySelector('#calc-btn-icon');
+      if (calcBtn) {
+        calcBtn.addEventListener('click', () => {
+          calcBtn.classList.add('scale-[0.98]', 'bg-blue-800');
+          if (calcBtnIcon) calcBtnIcon.classList.add('rotate-45');
+          if (calcBtnText) calcBtnText.textContent = 'Calculating...';
+
+          setTimeout(() => {
+            calcBtn.classList.remove('scale-[0.98]', 'bg-blue-800');
+            if (calcBtnIcon) calcBtnIcon.classList.remove('rotate-45');
+            if (calcBtnText) calcBtnText.textContent = 'Score Calculated ✓';
+            updateUI(true);
+            updateUrlParams();
+
+            setTimeout(() => {
+              if (calcBtnText) calcBtnText.textContent = 'Recalculate Score Estimate';
+            }, 1000);
+          }, 140);
+        });
+      }
+
+      // What-If Steppers
+      const simBtns = wrapper.querySelectorAll('.sim-btn');
+      simBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const secId = btn.getAttribute('data-sim-sec');
+          const delta = parseInt(btn.getAttribute('data-sim-delta') || '0', 10);
+          const activeCfg = getActiveYearConfig();
+          const sec = activeCfg.sections.find((s) => s.id === secId);
+          if (secId && sec) {
+            const cur = scores[secId] || 0;
+            const updated = Math.max(0, Math.min(sec.maxScore, cur + delta));
+            scores[secId] = updated;
+            updateUI(false);
+            updateUrlParams();
+
+            const simScoreBadge = wrapper.querySelector('#sim-score-badge');
+            const simCompText = wrapper.querySelector('#sim-composite-text');
+            const simMsg = wrapper.querySelector('#sim-feedback-msg');
+            const res = calculateScore();
+
+            if (simScoreBadge) {
+              simScoreBadge.textContent = res.apScore.toString();
+              if (!prefersReducedMotion) {
+                simScoreBadge.classList.remove('animate-score-pop');
+                void simScoreBadge.offsetWidth;
+                simScoreBadge.classList.add('animate-score-pop');
+              }
+            }
+            if (simCompText) simCompText.textContent = `(${res.composite.toFixed(2)} composite)`;
+            if (simMsg) {
+              simMsg.innerHTML = `<span class="text-blue-300 font-semibold">${sec.shortName} adjusted to ${updated}/${sec.maxScore}. Composite updated to ${res.composite.toFixed(2)}.</span>`;
+            }
+          }
+        });
+      });
+
+      // Target Score Buttons
+      const targetBtns = wrapper.querySelectorAll('.target-score-btn');
+      targetBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tgt = parseInt(btn.getAttribute('data-target') || '5', 10);
+          targetScore = tgt;
+          targetBtns.forEach((b) => {
+            b.classList.remove('bg-white', 'text-emerald-700', 'shadow-xs');
+            b.classList.add('text-neutral-600');
+          });
+          btn.classList.add('bg-white', 'text-emerald-700', 'shadow-xs');
+          btn.classList.remove('text-neutral-600');
+          const res = calculateScore();
+          updateTargetScoreUI(res);
+        });
+      });
+
+      // Copy Share Link with checkmark animation
+      const shareBtn = wrapper.querySelector('#btn-copy-share-link');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            const shareText = wrapper.querySelector('#share-link-text');
+            const shareIcon = wrapper.querySelector('#share-icon-svg');
+            if (shareText) shareText.textContent = 'Link Copied!';
+            if (shareIcon) {
+              shareIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>`;
+              shareIcon.classList.add('text-emerald-600');
+            }
+            setTimeout(() => {
+              if (shareText) shareText.textContent = 'Share Score Link';
+              if (shareIcon) {
+                shareIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>`;
+                shareIcon.classList.remove('text-emerald-600');
+              }
+            }, 2500);
+          });
+        });
+      }
+    }
+
+    parseUrlParams();
+    bindEvents();
+    updateUI(false);
+  })();
+</script>
