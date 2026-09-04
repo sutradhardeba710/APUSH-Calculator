@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable selector-based dark mode variant in Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ===== APUSH Score Calculator Design System ===== */
 
 @theme {
@@ -107,6 +110,40 @@ body {
   background-color: var(--color-neutral-50);
   line-height: 1.6;
   margin: 0;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Dark Mode Base Overrides */
+html.dark {
+  color-scheme: dark;
+  --color-surface: oklch(0.18 0.025 260);
+  --color-surface-raised: oklch(0.22 0.03 260);
+  --color-surface-overlay: oklch(0.15 0.02 260);
+
+  /* Remap neutral scale in dark mode so all opacity variants (/80, /90, etc.) work cleanly */
+  --color-neutral-50: oklch(0.13 0.02 260);
+  --color-neutral-100: oklch(0.18 0.025 260);
+  --color-neutral-200: oklch(0.24 0.025 260);
+  --color-neutral-300: oklch(0.32 0.025 260);
+  --color-neutral-400: oklch(0.50 0.015 250);
+  --color-neutral-500: oklch(0.65 0.015 250);
+  --color-neutral-600: oklch(0.75 0.015 250);
+  --color-neutral-700: oklch(0.85 0.015 250);
+  --color-neutral-800: oklch(0.92 0.01 250);
+  --color-neutral-900: oklch(0.98 0.005 250);
+  --color-neutral-950: oklch(1.00 0.00 0);
+
+  /* Remap primary blues in dark mode for crisp readability */
+  --color-primary-50: oklch(0.22 0.06 250);
+  --color-primary-100: oklch(0.28 0.08 250);
+  --color-primary-700: oklch(0.75 0.16 250);
+  --color-primary-800: oklch(0.82 0.14 250);
+  --color-primary-900: oklch(0.90 0.10 250);
+}
+
+html.dark body {
+  background-color: #090d16;
+  color: #cbd5e1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -114,6 +151,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.25;
   color: var(--color-neutral-900);
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #f8fafc;
 }
 
 /* ===== Focus Styles ===== */
@@ -254,6 +300,16 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+html.dark ::-webkit-scrollbar-track {
+  background: #090d16;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #243354;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
 /* ===== Tactile Range Slider Styles ===== */
 
 input[type="range"].calc-score-range,
@@ -346,14 +402,129 @@ input[type="range"].score-range-slider::-moz-range-progress {
   background-color: #1d4ed8;
 }
 
+/* Dark mode range slider */
+html.dark input[type="range"].calc-score-range,
+html.dark input[type="range"].score-range-slider {
+  background: #1e293b;
+}
+
+html.dark input[type="range"].calc-score-range::-webkit-slider-thumb,
+html.dark input[type="range"].score-range-slider::-webkit-slider-thumb {
+  background-color: #f8fafc;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+html.dark input[type="range"].calc-score-range:hover::-webkit-slider-thumb,
+html.dark input[type="range"].score-range-slider:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.8);
+}
+
+html.dark input[type="range"].calc-score-range::-moz-range-thumb,
+html.dark input[type="range"].score-range-slider::-moz-range-thumb {
+  background-color: #f8fafc;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+html.dark input[type="range"].calc-score-range::-moz-range-progress,
+html.dark input[type="range"].score-range-slider::-moz-range-progress {
+  background-color: #3b82f6;
+}
+
 /* ===== Card & Interactive Polish ===== */
 
 .interactive-card {
-  transition: box-shadow 200ms var(--ease-spring), border-color 200ms ease;
+  transition: box-shadow 200ms var(--ease-spring), border-color 200ms ease, background-color 200ms ease;
 }
 
 .interactive-card:hover {
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.10), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+html.dark .interactive-card:hover {
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.4), 0 0 14px rgba(59, 130, 246, 0.18);
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+/* ===== Dark Mode Utility Mappings for Seamless Theme Application ===== */
+
+html.dark .bg-white {
+  background-color: #131b2e;
+}
+
+html.dark .bg-neutral-50 {
+  background-color: #0b0f19;
+}
+
+html.dark .bg-neutral-100 {
+  background-color: #1a233a;
+}
+
+html.dark .border-neutral-100 {
+  border-color: #1e293b;
+}
+
+html.dark .border-neutral-200,
+html.dark .border-neutral-200\/80,
+html.dark .border-neutral-200\/90 {
+  border-color: #243354;
+}
+
+html.dark .border-neutral-300 {
+  border-color: #2e3f66;
+}
+
+html.dark .text-neutral-900 {
+  color: #f8fafc;
+}
+
+html.dark .text-neutral-800 {
+  color: #e2e8f0;
+}
+
+html.dark .text-neutral-700 {
+  color: #cbd5e1;
+}
+
+html.dark .text-neutral-600 {
+  color: #94a3b8;
+}
+
+html.dark .text-neutral-500 {
+  color: #64748b;
+}
+
+html.dark .hover\:bg-neutral-50:hover {
+  background-color: #162036;
+}
+
+html.dark .hover\:bg-neutral-100:hover {
+  background-color: #1e293b;
+}
+
+/* Dark mode inputs & stepper buttons */
+html.dark input[type="number"],
+html.dark input[type="text"] {
+  background-color: #1a233a;
+  color: #f8fafc;
+  border-color: #2e3f66;
+}
+
+html.dark input[type="number"]:focus,
+html.dark input[type="text"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Dark mode details / accordion */
+html.dark details {
+  background-color: #131b2e;
+  border-color: #243354;
+}
+
+html.dark details[open] {
+  border-color: #334a75;
 }
 
 /* ===== Reduced Motion ===== */

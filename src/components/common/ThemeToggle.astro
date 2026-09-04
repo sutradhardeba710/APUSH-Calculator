@@ -1,0 +1,132 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+  showLabel?: boolean;
+}
+
+const {
+  id = 'theme-toggle',
+  className = '',
+  showLabel = false,
+} = Astro.props;
+---
+
+<button
+  type="button"
+  id={id}
+  class={`theme-toggle-btn group relative inline-flex items-center justify-center p-2 rounded-lg text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 border border-neutral-200/60 dark:border-neutral-700/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 transition-all duration-200 active:scale-90 ${className}`}
+  aria-label="Toggle dark mode"
+  title="Toggle dark/light mode"
+>
+  <!-- Sun Icon (Active in Dark Mode -> Click to switch to Light) -->
+  <svg
+    class="theme-sun-icon w-5 h-5 transition-all duration-300 transform scale-0 rotate-90 hidden dark:block dark:scale-100 dark:rotate-0 text-amber-400"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" stroke-width="2" stroke="currentColor"></circle>
+    <path stroke-linecap="round" stroke-width="2" d="M12 2v2"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M12 20v2"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M4.93 4.93l1.41 1.41"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M17.66 17.66l1.41 1.41"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M2 12h2"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M20 12h2"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M6.34 17.66l-1.41 1.41"></path>
+    <path stroke-linecap="round" stroke-width="2" d="M19.07 4.93l-1.41 1.41"></path>
+  </svg>
+
+  <!-- Moon Icon (Active in Light Mode -> Click to switch to Dark) -->
+  <svg
+    class="theme-moon-icon w-5 h-5 transition-all duration-300 transform scale-100 rotate-0 block dark:hidden dark:scale-0 dark:-rotate-90 text-neutral-700"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    ></path>
+  </svg>
+
+  {showLabel && (
+    <span class="theme-label-text ml-2 text-xs font-semibold select-none">
+      <span class="dark:hidden">Dark Mode</span>
+      <span class="hidden dark:inline">Light Mode</span>
+    </span>
+  )}
+</button>
+
+<script>
+  function setupThemeToggleListeners() {
+    function updateAriaLabels() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+      document.querySelectorAll('.theme-toggle-btn').forEach((btn) => {
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', label);
+      });
+    }
+
+    function toggleTheme() {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      const newTheme = isCurrentlyDark ? 'light' : 'dark';
+
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      try {
+        localStorage.setItem('theme', newTheme);
+      } catch (_) {}
+
+      updateAriaLabels();
+
+      window.dispatchEvent(
+        new CustomEvent('ap-theme-changed', {
+          detail: { theme: newTheme, isDark: newTheme === 'dark' },
+        })
+      );
+    }
+
+    // Attach click listener to all buttons on the page
+    document.querySelectorAll('.theme-toggle-btn').forEach((btn) => {
+      // Remove any previously attached listeners by cloning
+      btn.replaceWith(btn.cloneNode(true));
+    });
+
+    document.querySelectorAll('.theme-toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleTheme();
+      });
+    });
+
+    // Listen to storage changes across tabs
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        if (e.newValue === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        updateAriaLabels();
+      }
+    });
+
+    updateAriaLabels();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupThemeToggleListeners);
+  } else {
+    setupThemeToggleListeners();
+  }
+</script>

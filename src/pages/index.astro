@@ -68,18 +68,18 @@ const homeFaqs = [
   <Header slot="header" activePath="/" />
 
   <!-- Hero Section -->
-  <section class="bg-white border-b border-neutral-200 pt-10 pb-14 sm:pt-16 sm:pb-20">
+  <section class="bg-white dark:bg-[#070b12] border-b border-neutral-200 dark:border-neutral-800 pt-10 pb-14 sm:pt-16 sm:pb-20 transition-colors duration-200">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center space-y-5">
-        <p class="text-xs font-semibold text-neutral-500 uppercase tracking-widest">
+        <p class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">
           2026 &amp; 2027 College Board Standards
         </p>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading text-neutral-900 tracking-tight leading-tight">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading text-neutral-900 dark:text-white tracking-tight leading-tight">
           AP® Score Calculator Hub
         </h1>
 
-        <p class="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto leading-relaxed">
           Estimate your AP exam scores from practice test results using our free ap score calculator with official College Board weightings, interactive what-if simulators, and historical curves.
         </p>
 
@@ -94,7 +94,7 @@ const homeFaqs = [
           </a>
           <a
             href="/apush-score-calculator/"
-            class="btn-tactile px-6 py-3 rounded-lg font-bold text-sm text-neutral-700 bg-white hover:bg-neutral-50 border border-neutral-300 shadow-sm transition-all duration-150"
+            class="btn-tactile px-6 py-3 rounded-lg font-bold text-sm text-neutral-700 dark:text-neutral-200 bg-white dark:bg-[#131b2e] hover:bg-neutral-50 dark:hover:bg-[#1a233a] border border-neutral-300 dark:border-[#243354] shadow-sm transition-all duration-150"
           >
             apush score calculator free
           </a>
@@ -108,10 +108,10 @@ const homeFaqs = [
     <!-- 8 Subject Calculators Grid -->
     <section class="reveal-on-scroll">
       <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 dark:text-white tracking-tight">
           Select Your AP Exam
         </h2>
-        <p class="text-sm text-neutral-500">
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
           Each calculator uses subject-specific scoring rules, official exam structures, and historical distributions.
         </p>
       </div>
@@ -121,37 +121,37 @@ const homeFaqs = [
           ALL_SUBJECTS.map((sub) => (
             <a
               href={`/${sub.slug}/`}
-              class="interactive-card group relative p-6 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 flex flex-col justify-between"
+              class="interactive-card group relative p-6 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500/60 flex flex-col justify-between"
             >
               <div class="space-y-3">
                 <!-- Category & Abbreviation -->
                 <div class="flex items-center justify-between gap-2">
-                  <span class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider truncate">
+                  <span class="text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider truncate">
                     {sub.category}
                   </span>
-                  <span class="px-2 py-0.5 rounded text-[11px] font-bold font-mono text-blue-700 bg-blue-50 border border-blue-100 shrink-0">
+                  <span class="px-2 py-0.5 rounded text-[11px] font-bold font-mono text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/60 shrink-0">
                     {sub.abbreviation}
                   </span>
                 </div>
 
                 <!-- Title & Description -->
                 <div>
-                  <h3 class="text-base font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors duration-150 leading-snug">
+                  <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors duration-150 leading-snug">
                     {sub.name}
                   </h3>
-                  <p class="text-xs text-neutral-500 mt-1.5 leading-relaxed line-clamp-2">
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1.5 leading-relaxed line-clamp-2">
                     {sub.shortDescription}
                   </p>
                 </div>
 
                 <!-- Specs Line -->
-                <div class="pt-3 border-t border-neutral-100 text-[11px] text-neutral-400 font-medium tabular-nums">
+                <div class="pt-3 border-t border-neutral-100 dark:border-[#243354] text-[11px] text-neutral-400 dark:text-neutral-500 font-medium tabular-nums">
                   {sub.examYears[sub.defaultYear].sections.length} sections · {sub.examYears[sub.defaultYear].totalCompositeMax} pts max
                 </div>
               </div>
 
               <!-- Action Footer -->
-              <div class="pt-4 mt-4 border-t border-neutral-100 flex items-center gap-1.5 text-xs font-bold text-neutral-700 group-hover:text-blue-700 transition-colors">
+              <div class="pt-4 mt-4 border-t border-neutral-100 dark:border-[#243354] flex items-center gap-1.5 text-xs font-bold text-neutral-700 dark:text-neutral-300 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
                 <span>Calculate Score</span>
                 <span class="group-hover:translate-x-0.5 transition-transform duration-150" aria-hidden="true">→</span>
               </div>
@@ -163,7 +163,7 @@ const homeFaqs = [
       <div class="mt-8 text-center">
         <a
           href="/ap-score-calculators/"
-          class="group inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 hover:underline"
+          class="group inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 dark:text-blue-400 hover:underline"
         >
           <span>Browse the complete AP Score Calculator Hub directory</span>
           <span class="group-hover:translate-x-1 transition-transform duration-150" aria-hidden="true">→</span>
@@ -172,12 +172,12 @@ const homeFaqs = [
     </section>
 
     <!-- APUSH Deep-Dive Cluster Section -->
-    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-neutral-50 border border-neutral-200 space-y-6">
+    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-neutral-50 dark:bg-[#0f172a] border border-neutral-200 dark:border-[#243354] space-y-6">
       <div class="max-w-2xl">
-        <h2 class="text-2xl font-bold font-heading text-neutral-900">
+        <h2 class="text-2xl font-bold font-heading text-neutral-900 dark:text-white">
           Specialized APUSH Rubric Tools
         </h2>
-        <p class="text-sm text-neutral-500 mt-1">
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
           In addition to the composite calculator, master specific APUSH essay rubrics and curve analysis with our dedicated tools.
         </p>
       </div>
@@ -185,79 +185,79 @@ const homeFaqs = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <a
           href="/apush-dbq-score-calculator/"
-          class="interactive-card group p-5 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 space-y-2"
+          class="interactive-card group p-5 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500/60 space-y-2"
         >
-          <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">7-Point Rubric</span>
-          <h3 class="text-sm font-bold text-neutral-900 group-hover:text-blue-700 transition-colors">APUSH DBQ Rubric Calculator</h3>
-          <p class="text-xs text-neutral-500">Calculate thesis, context, document citations, and HIPP sourcing.</p>
+          <span class="text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded">7-Point Rubric</span>
+          <h3 class="text-sm font-bold text-neutral-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">APUSH DBQ Rubric Calculator</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Calculate thesis, context, document citations, and HIPP sourcing.</p>
         </a>
 
         <a
           href="/apush-leq-score-calculator/"
-          class="interactive-card group p-5 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 space-y-2"
+          class="interactive-card group p-5 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500/60 space-y-2"
         >
-          <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">6-Point Rubric</span>
-          <h3 class="text-sm font-bold text-neutral-900 group-hover:text-blue-700 transition-colors">APUSH LEQ Rubric Calculator</h3>
-          <p class="text-xs text-neutral-500">Master thesis, context, historical evidence, and complex reasoning.</p>
+          <span class="text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded">6-Point Rubric</span>
+          <h3 class="text-sm font-bold text-neutral-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">APUSH LEQ Rubric Calculator</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Master thesis, context, historical evidence, and complex reasoning.</p>
         </a>
 
         <a
           href="/apush-score-predictor/"
-          class="interactive-card group p-5 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 space-y-2"
+          class="interactive-card group p-5 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500/60 space-y-2"
         >
-          <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Score Predictor</span>
-          <h3 class="text-sm font-bold text-neutral-900 group-hover:text-blue-700 transition-colors">APUSH Score Predictor</h3>
-          <p class="text-xs text-neutral-500">Analyze your statistical probabilities of scoring 3, 4, or 5.</p>
+          <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded">Score Predictor</span>
+          <h3 class="text-sm font-bold text-neutral-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">APUSH Score Predictor</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Analyze your statistical probabilities of scoring 3, 4, or 5.</p>
         </a>
       </div>
     </section>
 
     <!-- Platform Features -->
     <section class="reveal-on-scroll grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-white border border-neutral-200 space-y-2.5">
-        <div class="w-9 h-9 rounded-lg bg-neutral-100 text-neutral-800 flex items-center justify-center">
+      <div class="p-6 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-2.5">
+        <div class="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-[#1a233a] text-neutral-800 dark:text-neutral-200 flex items-center justify-center">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </div>
-        <h3 class="text-base font-bold font-heading text-neutral-900">Instant Local Calculations</h3>
-        <p class="text-xs text-neutral-500 leading-relaxed">
+        <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white">Instant Local Calculations</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
           Zero server delay. Composite scores, section breakdowns, and percentiles calculate instantly in your browser as you type or adjust sliders.
         </p>
       </div>
 
-      <div class="p-6 rounded-xl bg-white border border-neutral-200 space-y-2.5">
-        <div class="w-9 h-9 rounded-lg bg-neutral-100 text-neutral-800 flex items-center justify-center">
+      <div class="p-6 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-2.5">
+        <div class="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-[#1a233a] text-neutral-800 dark:text-neutral-200 flex items-center justify-center">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
         </div>
-        <h3 class="text-base font-bold font-heading text-neutral-900">Official College Board Weights</h3>
-        <p class="text-xs text-neutral-500 leading-relaxed">
+        <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white">Official College Board Weights</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
           Calibrated directly from official Course and Exam Descriptions (CED). Every subject honors exact question counts, time limits, and rubric weightings.
         </p>
       </div>
 
-      <div class="p-6 rounded-xl bg-white border border-neutral-200 space-y-2.5">
-        <div class="w-9 h-9 rounded-lg bg-neutral-100 text-neutral-800 flex items-center justify-center">
+      <div class="p-6 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-2.5">
+        <div class="w-9 h-9 rounded-lg bg-neutral-100 dark:bg-[#1a233a] text-neutral-800 dark:text-neutral-200 flex items-center justify-center">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
           </svg>
         </div>
-        <h3 class="text-base font-bold font-heading text-neutral-900">What-If & Target Score Tools</h3>
-        <p class="text-xs text-neutral-500 leading-relaxed">
+        <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white">What-If & Target Score Tools</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
           Simulate how gaining 1 or 2 more points on a specific essay or multiple-choice section impacts your score, optimizing your study strategy.
         </p>
       </div>
     </section>
 
     <!-- Scoring Methodology Section -->
-    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-white border border-neutral-200 space-y-4">
+    <section class="reveal-on-scroll p-8 sm:p-10 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-4">
       <div class="max-w-3xl">
-        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-neutral-900 dark:text-white tracking-tight">
           how to calculate ap score with official weights
         </h2>
-        <p class="text-sm sm:text-base text-neutral-600 mt-2 leading-relaxed">
+        <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 leading-relaxed">
           Wondering how are ap scores calculated across different exams? Each official AP exam uses dedicated section multipliers specified in the Course and Exam Description (CED). Raw multiple-choice scores and free-response rubric points are multiplied and summed into a standardized composite, which psychometricians then map to the 1–5 AP scale using equating thresholds.
         </p>
       </div>

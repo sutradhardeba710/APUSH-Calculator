@@ -69,24 +69,24 @@ const breadcrumbItems = [
       <Breadcrumb items={breadcrumbItems} />
 
       <!-- Policy Header & Switcher Banner -->
-      <header class="mb-10 p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-xs space-y-6">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-neutral-100 pb-6">
+      <header class="mb-10 p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] shadow-xs space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-neutral-100 dark:border-[#243354] pb-6">
           <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
-              <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/60">
+              <span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"></span>
               AP Score Hub Official Documentation
             </div>
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-neutral-900 tracking-tight">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-neutral-900 dark:text-white tracking-tight">
               {pageHeading}
             </h1>
-            <p class="text-sm sm:text-base text-neutral-600 max-w-3xl leading-relaxed">
+            <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 max-w-3xl leading-relaxed">
               {pageSubtitle}
             </p>
           </div>
 
-          <div class="shrink-0 flex md:flex-col items-start md:items-end gap-1 text-xs text-neutral-500 font-medium">
+          <div class="shrink-0 flex md:flex-col items-start md:items-end gap-1 text-xs text-neutral-500 dark:text-neutral-400 font-medium">
             <span>Last Updated</span>
-            <span class="font-bold text-neutral-800 bg-neutral-100 px-2.5 py-1 rounded-md border border-neutral-200">
+            <span class="font-bold text-neutral-800 dark:text-neutral-200 bg-neutral-100 dark:bg-[#1a233a] px-2.5 py-1 rounded-md border border-neutral-200 dark:border-[#2e3f66]">
               {lastUpdated}
             </span>
           </div>
@@ -102,7 +102,7 @@ const breadcrumbItems = [
                 class={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 ${
                   isActive
                     ? 'bg-blue-700 text-white shadow-xs'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200/80 hover:text-neutral-900'
+                    : 'bg-neutral-100 dark:bg-[#1a233a] text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/80 dark:hover:bg-[#243354] hover:text-neutral-900 dark:hover:text-white'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -115,17 +115,17 @@ const breadcrumbItems = [
 
       <!-- Key Summary Box (In Plain English) -->
       {keySummary && (
-        <aside class="mb-10 p-6 rounded-2xl bg-gradient-to-br from-blue-50/70 via-indigo-50/40 to-blue-50/50 border border-blue-200/80 shadow-2xs space-y-3" aria-label="Key Summary">
-          <div class="flex items-center gap-2 text-blue-900 font-bold text-sm sm:text-base font-heading">
-            <svg class="w-5 h-5 text-blue-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <aside class="mb-10 p-6 rounded-2xl bg-gradient-to-br from-blue-50/70 via-indigo-50/40 to-blue-50/50 dark:from-[#162238] dark:via-[#131b2e] dark:to-[#0f172a] border border-blue-200/80 dark:border-[#243354] shadow-2xs space-y-3" aria-label="Key Summary">
+          <div class="flex items-center gap-2 text-blue-900 dark:text-blue-300 font-bold text-sm sm:text-base font-heading">
+            <svg class="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <h3>{keySummary.title}</h3>
           </div>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-neutral-700">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
             {keySummary.points.map((pt) => (
               <li class="flex items-start gap-2">
-                <span class="text-blue-600 font-bold shrink-0 mt-0.5">✓</span>
+                <span class="text-blue-600 dark:text-blue-400 font-bold shrink-0 mt-0.5">✓</span>
                 <span>{pt}</span>
               </li>
             ))}
@@ -134,13 +134,13 @@ const breadcrumbItems = [
       )}
 
       <!-- Mobile Quick Jump Bar -->
-      <div class="lg:hidden mb-8 p-4 rounded-xl bg-white border border-neutral-200">
-        <label for="mobile-toc-select" class="block text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2">
+      <div class="lg:hidden mb-8 p-4 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354]">
+        <label for="mobile-toc-select" class="block text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
           Jump to Section
         </label>
         <select
           id="mobile-toc-select"
-          class="w-full text-xs font-medium bg-neutral-50 border border-neutral-300 rounded-lg p-2.5 text-neutral-800 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+          class="w-full text-xs font-medium bg-neutral-50 dark:bg-[#1a233a] border border-neutral-300 dark:border-[#2e3f66] rounded-lg p-2.5 text-neutral-800 dark:text-neutral-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
           onchange="if (this.value) window.location.hash = this.value;"
         >
           <option value="">Select a section...</option>
@@ -160,15 +160,15 @@ const breadcrumbItems = [
         <!-- Desktop Sticky Sidebar -->
         <aside class="hidden lg:block lg:col-span-4 sticky top-24 space-y-6">
           <!-- Table of Contents -->
-          <div class="p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+          <div class="p-6 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] shadow-2xs space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               On This Page
             </h2>
             <nav aria-label="Table of contents" class="space-y-1">
               {tocItems.map((item) => (
                 <a
                   href={`#${item.id}`}
-                  class="block px-2.5 py-1.5 rounded-lg text-xs font-medium text-neutral-600 hover:text-blue-700 hover:bg-blue-50/70 transition-colors"
+                  class="block px-2.5 py-1.5 rounded-lg text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50/70 dark:hover:bg-blue-950/50 transition-colors"
                 >
                   {item.label}
                 </a>
@@ -177,17 +177,17 @@ const breadcrumbItems = [
           </div>
 
           <!-- Document Transparency & Help Card -->
-          <div class="p-6 rounded-2xl bg-white border border-neutral-200 shadow-2xs space-y-3">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+          <div class="p-6 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] shadow-2xs space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               Need Clarification?
             </h3>
-            <p class="text-xs text-neutral-600 leading-relaxed">
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
               Have questions about our calculations, privacy practices, or rubrics? We are here to help AP educators and students.
             </p>
             <div class="pt-2">
               <a
                 href="/support/"
-                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-neutral-900 hover:bg-blue-700 text-white transition-colors"
+                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-neutral-900 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white transition-colors"
               >
                 <span>Visit Support Center</span>
                 <span aria-hidden="true">→</span>
@@ -196,8 +196,8 @@ const breadcrumbItems = [
           </div>
 
           <!-- Trademark Reminder Card -->
-          <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-[11px] text-neutral-500 space-y-2">
-            <p class="font-bold text-neutral-700">College Board Notice</p>
+          <div class="p-5 rounded-2xl bg-neutral-50 dark:bg-[#162036] border border-neutral-200/80 dark:border-[#243354] text-[11px] text-neutral-500 dark:text-neutral-400 space-y-2">
+            <p class="font-bold text-neutral-700 dark:text-neutral-200">College Board Notice</p>
             <p class="leading-relaxed">
               AP® and Advanced Placement® are registered trademarks of the College Board, which was not involved in the production of, and does not endorse, this website.
             </p>

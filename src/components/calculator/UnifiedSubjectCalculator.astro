@@ -18,11 +18,11 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
 
 <div class="unified-calculator-wrapper space-y-8" data-subject-id={config.id}>
   <!-- Top Bar: Year Selector & Presets -->
-  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white border border-neutral-200">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354]">
     <!-- Year Selector -->
     <div class="flex items-center gap-2 flex-wrap">
-      <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Exam Year:</span>
-      <div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-lg">
+      <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Exam Year:</span>
+      <div class="flex items-center gap-1.5 bg-neutral-100 dark:bg-[#1a233a] p-1 rounded-lg">
         {
           Object.values(config.examYears).map((y) => (
             <button
@@ -30,8 +30,8 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
               data-calc-year={y.year}
               class={`year-toggle-btn px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 active:scale-95 ${
                 y.year === activeYear
-                  ? 'bg-white text-blue-700 shadow-xs'
-                  : 'text-neutral-600 hover:text-neutral-900'
+                  ? 'bg-white dark:bg-[#243354] text-blue-700 dark:text-blue-300 shadow-xs'
+                  : 'text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               {y.label}
@@ -43,33 +43,33 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
 
     <!-- Quick Score Presets -->
     <div class="flex items-center gap-2 flex-wrap">
-      <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Presets:</span>
+      <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Presets:</span>
       <div class="flex items-center gap-1.5 flex-wrap">
         <button
           type="button"
           data-preset="5"
-          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 hover:bg-emerald-100 active:scale-95 border border-emerald-200 transition-all duration-150"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 active:scale-95 border border-emerald-200 dark:border-emerald-800/60 transition-all duration-150"
         >
           Score 5
         </button>
         <button
           type="button"
           data-preset="4"
-          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-800 hover:bg-blue-100 active:scale-95 border border-blue-200 transition-all duration-150"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 dark:bg-blue-950/50 text-blue-800 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 active:scale-95 border border-blue-200 dark:border-blue-800/60 transition-all duration-150"
         >
           Score 4
         </button>
         <button
           type="button"
           data-preset="3"
-          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-50 text-sky-800 hover:bg-sky-100 active:scale-95 border border-sky-200 transition-all duration-150"
+          class="preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-50 dark:bg-sky-950/50 text-sky-800 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 active:scale-95 border border-sky-200 dark:border-sky-800/60 transition-all duration-150"
         >
           Passing 3
         </button>
         <button
           type="button"
           id="btn-reset-calc"
-          class="px-2.5 py-1 rounded-md text-xs font-medium text-neutral-500 hover:text-neutral-800 hover:bg-neutral-100 active:scale-95 transition-all duration-150"
+          class="px-2.5 py-1 rounded-md text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 active:scale-95 transition-all duration-150"
           title="Reset to default practice test scores"
         >
           Reset
@@ -83,10 +83,10 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
     <!-- Left Column: Dynamic Inputs -->
     <div class="lg:col-span-6 space-y-4">
       <div class="flex items-center justify-between px-1">
-        <h2 class="text-lg font-bold font-heading text-neutral-900">
+        <h2 class="text-lg font-bold font-heading text-neutral-900 dark:text-white">
           Enter Practice Test Scores
         </h2>
-        <span class="text-xs text-neutral-500">Official scoring model</span>
+        <span class="text-xs text-neutral-500 dark:text-neutral-400">Official scoring model</span>
       </div>
 
       <form id="subject-calc-form" class="space-y-4" onsubmit="return false;">
@@ -96,7 +96,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             const pct = Math.round((defaultVal / sec.maxScore) * 100);
             return (
               <div
-                class="section-input-card p-5 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all duration-150 space-y-3"
+                class="section-input-card p-5 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-150 space-y-3"
                 data-section-id={sec.id}
               >
                 <div class="flex items-start justify-between gap-2">
@@ -104,19 +104,19 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                     <div class="flex items-center gap-2 flex-wrap">
                       <label
                         for={`input-${sec.id}`}
-                        class="text-sm font-bold text-neutral-900 font-heading"
+                        class="text-sm font-bold text-neutral-900 dark:text-white font-heading"
                       >
                         {sec.name}
                       </label>
-                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/50">
                         {sec.weightPercent}% weight
                       </span>
                     </div>
-                    <p class="text-xs text-neutral-500 mt-1 leading-relaxed">
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
                       {sec.description}
                     </p>
                   </div>
-                  <span class="text-xs font-medium text-neutral-400 shrink-0">
+                  <span class="text-xs font-medium text-neutral-400 dark:text-neutral-400 shrink-0">
                     {sec.timeLimitMinutes} min
                   </span>
                 </div>
@@ -125,7 +125,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                 <div class="space-y-2 pt-1">
                   <div class="flex items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
-                      <span class="text-xs font-medium text-neutral-600">Points:</span>
+                      <span class="text-xs font-medium text-neutral-600 dark:text-neutral-300">Points:</span>
                       <input
                         type="number"
                         id={`input-${sec.id}`}
@@ -134,7 +134,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                         max={sec.maxScore}
                         step={sec.step || 1}
                         value={defaultVal}
-                        class="calc-score-input w-20 px-3 py-1.5 rounded-lg border border-neutral-300 font-heading text-base font-bold text-neutral-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-center tabular-nums transition-all"
+                        class="calc-score-input w-20 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-[#2e3f66] bg-white dark:bg-[#1a233a] font-heading text-base font-bold text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-center tabular-nums transition-all"
                         aria-describedby={`desc-${sec.id}`}
                       />
                       <span class="text-sm font-medium text-neutral-400 tabular-nums">/ {sec.maxScore}</span>
@@ -142,7 +142,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
 
                     <span
                       id={`pct-badge-${sec.id}`}
-                      class="text-xs font-semibold text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded border border-neutral-200 tabular-nums"
+                      class="text-xs font-semibold text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-[#1a233a] px-2.5 py-1 rounded border border-neutral-200 dark:border-[#2e3f66] tabular-nums"
                     >
                       {pct}%
                     </span>
@@ -161,7 +161,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                     aria-label={`${sec.name} score slider`}
                   />
 
-                  <div id={`error-${sec.id}`} class="text-[11px] font-semibold text-rose-600 hidden"></div>
+                  <div id={`error-${sec.id}`} class="text-[11px] font-semibold text-rose-600 dark:text-rose-400 hidden"></div>
                 </div>
               </div>
             );
@@ -190,15 +190,15 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
       <!-- Result Card -->
       <div
         id="calc-result-card"
-        class="p-6 sm:p-8 rounded-xl bg-white border border-neutral-200 shadow-sm relative overflow-hidden space-y-6 transition-all duration-200"
+        class="p-6 sm:p-8 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] shadow-sm relative overflow-hidden space-y-6 transition-all duration-200"
       >
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-400">
             Estimated AP® Score
           </span>
           <span
             id="credit-badge"
-            class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 transition-colors duration-200"
+            class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/50 transition-colors duration-200"
           >
             {initialResult.cutoff.collegeCreditLikelihood} Credit
           </span>
@@ -213,10 +213,10 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             {initialResult.estimatedApScore}
           </div>
           <div>
-            <h3 id="ap-score-title" class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 leading-tight transition-colors duration-200">
+            <h3 id="ap-score-title" class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 dark:text-white leading-tight transition-colors duration-200">
               {initialResult.cutoff.title}
             </h3>
-            <p id="ap-score-desc" class="text-xs sm:text-sm text-neutral-500 mt-1 leading-relaxed">
+            <p id="ap-score-desc" class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
               {initialResult.cutoff.description}
             </p>
           </div>
@@ -224,69 +224,69 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
 
         <!-- Score Metrics Grid -->
         <div class="grid grid-cols-2 gap-3 pt-2">
-          <div class="p-3.5 rounded-lg bg-neutral-50 border border-neutral-200">
-            <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">
+          <div class="p-3.5 rounded-lg bg-neutral-50 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354]">
+            <span class="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
               Weighted Composite
             </span>
             <div class="flex items-baseline gap-1 mt-0.5">
-              <span id="composite-score-val" class="text-2xl font-extrabold font-heading text-neutral-900 tabular-nums">
+              <span id="composite-score-val" class="text-2xl font-extrabold font-heading text-neutral-900 dark:text-white tabular-nums">
                 {initialResult.compositeScore}
               </span>
-              <span class="text-xs font-medium text-neutral-400">/ 100</span>
+              <span class="text-xs font-medium text-neutral-400 dark:text-neutral-400">/ 100</span>
             </div>
             {
               isCalculus && (
-                <div class="text-[10px] font-semibold text-neutral-500 mt-0.5">
-                  Raw scale: <span id="raw-calc-108" class="font-bold text-neutral-800 tabular-nums">{Math.round(initialResult.compositeScore * 1.08 * 10) / 10}</span> / 108
+                <div class="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 mt-0.5">
+                  Raw scale: <span id="raw-calc-108" class="font-bold text-neutral-800 dark:text-neutral-200 tabular-nums">{Math.round(initialResult.compositeScore * 1.08 * 10) / 10}</span> / 108
                 </div>
               )
             }
           </div>
 
-          <div class="p-3.5 rounded-lg bg-neutral-50 border border-neutral-200">
-            <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider block">
+          <div class="p-3.5 rounded-lg bg-neutral-50 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354]">
+            <span class="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block">
               Likely Score Range
             </span>
             <div class="flex items-baseline gap-1 mt-0.5">
-              <span id="confidence-range-val" class="text-2xl font-extrabold font-heading text-neutral-800 tabular-nums">
+              <span id="confidence-range-val" class="text-2xl font-extrabold font-heading text-neutral-800 dark:text-neutral-200 tabular-nums">
                 {initialResult.confidenceRange.minScore}–{initialResult.confidenceRange.maxScore}
               </span>
-              <span class="text-[10px] font-medium text-neutral-400 tabular-nums">
+              <span class="text-[10px] font-medium text-neutral-400 dark:text-neutral-400 tabular-nums">
                 (±{yearConfig.confidenceInterval.margin} pts)
               </span>
             </div>
-            <span class="text-[10px] text-neutral-400 block mt-0.5">Equating variance</span>
+            <span class="text-[10px] text-neutral-400 dark:text-neutral-400 block mt-0.5">Equating variance</span>
           </div>
         </div>
 
         <!-- Next Score Milestone Tracker -->
-        <div id="next-score-milestone" class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs transition-all duration-200">
+        <div id="next-score-milestone" class="p-4 rounded-xl bg-neutral-50 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] text-xs transition-all duration-200">
           {
             initialResult.nextScore ? (
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-2 text-neutral-800 font-medium">
+                  <div class="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-medium">
                     <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                    <span>Next Milestone: Score of <strong class="font-bold text-neutral-900">{initialResult.nextScore}</strong></span>
+                    <span>Next Milestone: Score of <strong class="font-bold text-neutral-900 dark:text-white">{initialResult.nextScore}</strong></span>
                   </div>
-                  <span class="text-xs font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded border border-neutral-200 tabular-nums">
+                  <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-200 bg-white dark:bg-[#1a233a] px-2 py-0.5 rounded border border-neutral-200 dark:border-[#2e3f66] tabular-nums">
                     +{initialResult.pointsToNextScore} pts needed
                   </span>
                 </div>
-                <div class="w-full bg-neutral-200 rounded-full h-1.5 overflow-hidden">
+                <div class="w-full bg-neutral-200 dark:bg-[#243354] rounded-full h-1.5 overflow-hidden">
                   <div
                     id="milestone-progress-bar"
                     class="bg-blue-600 h-1.5 rounded-full transition-all duration-300 ease-out"
                     style={`width: ${Math.min(95, Math.max(8, Math.round(((initialResult.compositeScore - (yearConfig.cutoffs[initialResult.estimatedApScore]?.minComposite || 0)) / ((yearConfig.cutoffs[initialResult.nextScore]?.minComposite || 100) - (yearConfig.cutoffs[initialResult.estimatedApScore]?.minComposite || 0))) * 100)))}%`}
                   ></div>
                 </div>
-                <div class="flex items-center justify-between text-[11px] text-neutral-500 font-medium tabular-nums">
+                <div class="flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400 font-medium tabular-nums">
                   <span>Current: {initialResult.compositeScore.toFixed(1)}</span>
                   <span>Target {initialResult.nextScore} Cutoff: {yearConfig.cutoffs[initialResult.nextScore]?.minComposite}</span>
                 </div>
               </div>
             ) : (
-              <div class="flex items-center gap-2 text-emerald-800 font-semibold">
+              <div class="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-semibold">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
                 <span>Outstanding! You are scoring in the highest AP score tier (Score of 5).</span>
               </div>
@@ -296,8 +296,8 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
       </div>
 
       <!-- Score Breakdown Table / Card -->
-      <div class="p-6 rounded-xl bg-white border border-neutral-200 space-y-4">
-        <h3 class="text-base font-bold font-heading text-neutral-900">
+      <div class="p-6 rounded-xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-4">
+        <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white">
           Section Weight & Score Breakdown
         </h3>
 
@@ -305,7 +305,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="border-b border-neutral-200 text-neutral-500 font-semibold uppercase tracking-wider">
+              <tr class="border-b border-neutral-200 dark:border-[#243354] text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider">
                 <th scope="col" class="pb-2.5">Section</th>
                 <th scope="col" class="pb-2.5 text-center">Raw Score</th>
                 <th scope="col" class="pb-2.5 text-center">Accuracy</th>
@@ -313,18 +313,18 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                 <th scope="col" class="pb-2.5 text-right">Composite Pts</th>
               </tr>
             </thead>
-            <tbody id="breakdown-tbody" class="divide-y divide-neutral-100 text-neutral-700">
+            <tbody id="breakdown-tbody" class="divide-y divide-neutral-100 dark:divide-[#243354] text-neutral-700 dark:text-neutral-300">
               {
                 initialResult.sections.map((sec) => (
-                  <tr class="hover:bg-neutral-50 transition-colors">
-                    <td class="py-2.5 font-bold text-neutral-900">{sec.shortName}</td>
+                  <tr class="hover:bg-neutral-50 dark:hover:bg-[#1a233a]/60 transition-colors">
+                    <td class="py-2.5 font-bold text-neutral-900 dark:text-white">{sec.shortName}</td>
                     <td class="py-2.5 text-center tabular-nums">
                       <span id={`breakdown-raw-${sec.id}`}>{sec.rawScore}</span> / {sec.maxScore}
                     </td>
                     <td class="py-2.5 text-center tabular-nums">
                       <div class="flex flex-col items-center">
                         <span class="font-medium" id={`breakdown-pct-${sec.id}`}>{sec.percentage}%</span>
-                        <div class="w-14 h-1.5 bg-neutral-100 rounded-full overflow-hidden mt-1">
+                        <div class="w-14 h-1.5 bg-neutral-100 dark:bg-[#243354] rounded-full overflow-hidden mt-1">
                           <div
                             id={`breakdown-bar-${sec.id}`}
                             class="h-full bg-blue-600 rounded-full transition-all duration-300"
@@ -333,8 +333,8 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
                         </div>
                       </div>
                     </td>
-                    <td class="py-2.5 text-center text-neutral-500 tabular-nums">{sec.weightPercent}%</td>
-                    <td class="py-2.5 text-right font-bold text-neutral-900 tabular-nums">
+                    <td class="py-2.5 text-center text-neutral-500 dark:text-neutral-400 tabular-nums">{sec.weightPercent}%</td>
+                    <td class="py-2.5 text-right font-bold text-neutral-900 dark:text-white tabular-nums">
                       <span id={`breakdown-contrib-${sec.id}`}>{sec.weightedContribution.toFixed(2)}</span>
                     </td>
                   </tr>
@@ -342,12 +342,12 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
               }
             </tbody>
             <tfoot>
-              <tr class="border-t-2 border-neutral-200 font-bold text-neutral-900">
+              <tr class="border-t-2 border-neutral-200 dark:border-[#243354] font-bold text-neutral-900 dark:text-white">
                 <td class="pt-3 uppercase tracking-wider">Total</td>
                 <td class="pt-3 text-center">-</td>
                 <td class="pt-3 text-center">-</td>
                 <td class="pt-3 text-center">100%</td>
-                <td class="pt-3 text-right text-neutral-900 font-black text-sm tabular-nums" id="breakdown-total-composite">
+                <td class="pt-3 text-right text-neutral-900 dark:text-white font-black text-sm tabular-nums" id="breakdown-total-composite">
                   {initialResult.compositeScore.toFixed(2)}
                 </td>
               </tr>
@@ -356,11 +356,11 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         </div>
 
         <!-- Share & Link Controls -->
-        <div class="pt-2 flex items-center justify-between gap-3 border-t border-neutral-100">
+        <div class="pt-2 flex items-center justify-between gap-3 border-t border-neutral-100 dark:border-[#243354]">
           <button
             type="button"
             id="btn-copy-share-link"
-            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200 active:scale-95 transition-all duration-150"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-[#243354] hover:bg-neutral-200 dark:hover:bg-[#2e3f66] active:scale-95 transition-all duration-150"
           >
             <svg id="share-icon-svg" class="w-3.5 h-3.5 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
@@ -368,35 +368,35 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             <span id="share-link-text">Share Score Link</span>
           </button>
 
-          <span class="text-[11px] text-neutral-400">URL saves current scores</span>
+          <span class="text-[11px] text-neutral-400 dark:text-neutral-400">URL saves current scores</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Interactive What-If Simulator Module -->
-  <div class="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
+  <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] shadow-sm space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 dark:border-[#243354] pb-4">
       <div class="flex items-start gap-3">
-        <span class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 shrink-0 mt-0.5">
+        <span class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/60 flex items-center justify-center text-blue-700 dark:text-blue-300 shrink-0 mt-0.5">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </span>
         <div>
-          <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
+          <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 dark:text-white">
             What-If Score Simulator
           </h3>
-          <p class="text-xs sm:text-sm text-neutral-500 mt-0.5">
+          <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
             Test how marginal point adjustments in specific sections change your composite and AP score.
           </p>
         </div>
       </div>
 
-      <div class="flex items-center gap-3 bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-2.5 shrink-0 self-start sm:self-auto">
+      <div class="flex items-center gap-3 bg-neutral-50 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] rounded-xl px-4 py-2.5 shrink-0 self-start sm:self-auto">
         <div class="text-right">
-          <span class="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">Simulated Score</span>
-          <span id="sim-composite-text" class="text-xs font-semibold text-neutral-600 tabular-nums">
+          <span class="text-[10px] font-bold text-neutral-400 dark:text-neutral-400 uppercase tracking-wider block">Simulated Score</span>
+          <span id="sim-composite-text" class="text-xs font-semibold text-neutral-600 dark:text-neutral-300 tabular-nums">
             {initialResult.compositeScore} composite
           </span>
         </div>
@@ -413,28 +413,28 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {
         yearConfig.sections.map((sec) => (
-          <div class="p-4 rounded-xl bg-neutral-50/80 border border-neutral-200 space-y-3 hover:border-neutral-300 transition-colors">
+          <div class="p-4 rounded-xl bg-neutral-50/80 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] space-y-3 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-neutral-900 font-heading">{sec.shortName}</span>
-              <span class="text-[11px] font-semibold text-blue-700 bg-blue-50/80 px-2 py-0.5 rounded border border-blue-100 tabular-nums">
+              <span class="text-xs font-bold text-neutral-900 dark:text-white font-heading">{sec.shortName}</span>
+              <span class="text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-50/80 dark:bg-blue-950/60 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-800/60 tabular-nums">
                 +{(sec.weightPercent / sec.maxScore).toFixed(2)} pts/raw
               </span>
             </div>
-            <div class="flex items-center justify-between gap-2 bg-white border border-neutral-200 rounded-lg p-1.5 shadow-xs">
+            <div class="flex items-center justify-between gap-2 bg-white dark:bg-[#1a233a] border border-neutral-200 dark:border-[#2e3f66] rounded-lg p-1.5 shadow-xs">
               <button
                 type="button"
                 data-sim-sec={sec.id}
                 data-sim-delta="-1"
-                class="sim-btn w-8 h-8 rounded-md bg-neutral-100 hover:bg-neutral-200 active:scale-95 text-neutral-700 font-bold text-xs flex items-center justify-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600/30 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                class="sim-btn w-8 h-8 rounded-md bg-neutral-100 dark:bg-[#243354] hover:bg-neutral-200 dark:hover:bg-[#2e3f66] active:scale-95 text-neutral-700 dark:text-neutral-200 font-bold text-xs flex items-center justify-center transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-600/30 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                 title={`Subtract 1 from ${sec.shortName}`}
               >
                 -1
               </button>
               <div class="text-center px-1">
-                <span id={`sim-display-${sec.id}`} class="text-base font-extrabold font-heading text-neutral-900 tabular-nums">
+                <span id={`sim-display-${sec.id}`} class="text-base font-extrabold font-heading text-neutral-900 dark:text-white tabular-nums">
                   {initialScores[sec.id] || 0}
                 </span>
-                <span class="text-[10px] text-neutral-400 block font-medium tabular-nums">/ {sec.maxScore}</span>
+                <span class="text-[10px] text-neutral-400 dark:text-neutral-400 block font-medium tabular-nums">/ {sec.maxScore}</span>
               </div>
               <button
                 type="button"
@@ -451,45 +451,45 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
       }
     </div>
 
-    <div id="sim-feedback-msg" class="text-xs text-neutral-600 bg-neutral-50 border border-neutral-200/80 rounded-xl p-3 text-center min-h-[2.75rem] flex items-center justify-center transition-all duration-200">
+    <div id="sim-feedback-msg" class="text-xs text-neutral-600 dark:text-neutral-300 bg-neutral-50 dark:bg-[#162036] border border-neutral-200/80 dark:border-[#243354] rounded-xl p-3 text-center min-h-[2.75rem] flex items-center justify-center transition-all duration-200">
       Click +1 or -1 above to test score sensitivity across sections.
     </div>
   </div>
 
   <!-- Target Score Improvement Planner -->
-  <div class="p-6 sm:p-8 rounded-2xl bg-white border border-neutral-200 space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
+  <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#131b2e] border border-neutral-200 dark:border-[#243354] space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 dark:border-[#243354] pb-4">
       <div>
-        <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
+        <h3 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900 dark:text-white">
           Target Score Improvement Tool
         </h3>
-        <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
           Select your goal AP score to discover the highest-leverage section improvements.
         </p>
       </div>
 
       <!-- Target Score Selector Buttons -->
       <div class="flex items-center gap-2">
-        <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Goal:</span>
-        <div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-lg">
+        <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Goal:</span>
+        <div class="flex items-center gap-1.5 bg-neutral-100 dark:bg-[#162036] p-1 rounded-lg border dark:border-[#243354]">
           <button
             type="button"
             data-target="5"
-            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-bold bg-white text-emerald-700 shadow-xs active:scale-95 transition-all duration-150"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-[#1a233a] text-emerald-700 dark:text-emerald-400 shadow-xs active:scale-95 transition-all duration-150"
           >
             Target 5
           </button>
           <button
             type="button"
             data-target="4"
-            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 hover:text-neutral-900 active:scale-95 transition-all duration-150"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white active:scale-95 transition-all duration-150"
           >
             Target 4
           </button>
           <button
             type="button"
             data-target="3"
-            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 hover:text-neutral-900 active:scale-95 transition-all duration-150"
+            class="target-score-btn px-3.5 py-1.5 rounded-md text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white active:scale-95 transition-all duration-150"
           >
             Target 3
           </button>
@@ -498,11 +498,11 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
     </div>
 
     <!-- Recommendations Output Banner -->
-    <div id="target-recommendation-box" class="p-4 rounded-xl bg-neutral-50 border border-neutral-200 space-y-1 transition-all duration-200">
-      <span class="text-xs font-semibold text-neutral-900 block">
+    <div id="target-recommendation-box" class="p-4 rounded-xl bg-neutral-50 dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] space-y-1 transition-all duration-200">
+      <span class="text-xs font-semibold text-neutral-900 dark:text-white block">
         Optimal Improvement Strategy
       </span>
-      <p id="target-rec-text" class="text-sm text-neutral-600 leading-relaxed">
+      <p id="target-rec-text" class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
         Calculating the most efficient paths to your goal...
       </p>
     </div>
@@ -662,7 +662,9 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
     function updateSliderTrack(rangeInput, val, max) {
       if (!rangeInput) return;
       const pct = max > 0 ? (val / max) * 100 : 0;
-      rangeInput.style.background = `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`;
+      const isDark = document.documentElement.classList.contains('dark');
+      const trackBg = isDark ? '#243354' : '#e5e7eb';
+      rangeInput.style.background = `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${pct}%, ${trackBg} ${pct}%, ${trackBg} 100%)`;
     }
 
     function updateUI(isManualTrigger = false) {
@@ -743,22 +745,22 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           milestoneBox.innerHTML = `
             <div class="space-y-2">
               <div class="flex items-center justify-between gap-2">
-                <div class="flex items-center gap-2 text-neutral-800 font-medium">
+                <div class="flex items-center gap-2 text-neutral-800 dark:text-neutral-200 font-medium">
                   <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                  <span>Next Milestone: Score of <strong class="font-bold text-neutral-900">${res.nextScore}</strong></span>
+                  <span>Next Milestone: Score of <strong class="font-bold text-neutral-900 dark:text-white">${res.nextScore}</strong></span>
                 </div>
-                <span class="text-xs font-semibold text-neutral-700 bg-white px-2 py-0.5 rounded border border-neutral-200 tabular-nums">
+                <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-200 bg-white dark:bg-[#1a233a] px-2 py-0.5 rounded border border-neutral-200 dark:border-[#2e3f66] tabular-nums">
                   +${res.pointsToNext} pts needed
                 </span>
               </div>
-              <div class="w-full bg-neutral-200 rounded-full h-1.5 overflow-hidden">
+              <div class="w-full bg-neutral-200 dark:bg-[#243354] rounded-full h-1.5 overflow-hidden">
                 <div
                   id="milestone-progress-bar"
                   class="bg-blue-600 h-1.5 rounded-full transition-all duration-300 ease-out"
                   style="width: ${pctProgress}%"
                 ></div>
               </div>
-              <div class="flex items-center justify-between text-[11px] text-neutral-500 font-medium tabular-nums">
+              <div class="flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400 font-medium tabular-nums">
                 <span>Current: ${res.composite.toFixed(1)}</span>
                 <span>Target ${res.nextScore} Cutoff: ${nxtCutoff}</span>
               </div>
@@ -766,7 +768,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           `;
         } else {
           milestoneBox.innerHTML = `
-            <div class="flex items-center gap-2 text-emerald-800 font-semibold">
+            <div class="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-semibold">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
               <span>Outstanding! You are scoring in the highest AP score tier (Score of 5).</span>
             </div>
@@ -793,12 +795,12 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           pctBadge.className =
             'text-xs font-bold px-2.5 py-1 rounded-lg border tabular-nums transition-colors duration-150 ' +
             (sec.percentage >= 80
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
               : sec.percentage >= 60
-              ? 'bg-blue-50 text-blue-700 border-blue-200'
+              ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/60'
               : sec.percentage >= 40
-              ? 'bg-amber-50 text-amber-700 border-amber-200'
-              : 'bg-rose-50 text-rose-700 border-rose-200');
+              ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+              : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60');
         }
 
         if (simDisplay) simDisplay.textContent = sec.rawScore.toString();
@@ -891,15 +893,15 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         pathsGrid.innerHTML = options
           .map(
             (o) => `
-          <div class="p-4 rounded-xl border ${o.feasible ? 'border-blue-300 bg-blue-50/30' : 'border-neutral-200 bg-neutral-50'}">
+          <div class="p-4 rounded-xl border ${o.feasible ? 'border-blue-300 dark:border-blue-700/60 bg-blue-50/30 dark:bg-blue-950/40' : 'border-neutral-200 dark:border-[#243354] bg-neutral-50 dark:bg-[#162036]'}">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-neutral-800">${o.shortName}</span>
-              ${o.feasible ? '<span class="w-2 h-2 rounded-full bg-blue-600"></span>' : ''}
+              <span class="text-xs font-bold text-neutral-800 dark:text-neutral-200">${o.shortName}</span>
+              ${o.feasible ? '<span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"></span>' : ''}
             </div>
-            <div class="mt-1 text-sm font-bold tabular-nums ${o.feasible ? 'text-blue-700' : 'text-neutral-500'}">
+            <div class="mt-1 text-sm font-bold tabular-nums ${o.feasible ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-500 dark:text-neutral-400'}">
               ${o.feasible ? `+${o.rawNeeded} points needed` : 'Requires other sections'}
             </div>
-            <span class="text-[11px] text-neutral-500 block mt-0.5 tabular-nums">
+            <span class="text-[11px] text-neutral-500 dark:text-neutral-400 block mt-0.5 tabular-nums">
               Room: +${o.room} | Gain: +${o.gainPerPt.toFixed(2)} pts/raw
             </span>
           </div>
@@ -963,12 +965,12 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
               pctBadge.className =
                 'text-xs font-bold px-2.5 py-1 rounded-lg border tabular-nums transition-colors duration-150 ' +
                 (pct >= 80
-                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
                   : pct >= 60
-                  ? 'bg-blue-50 text-blue-700 border-blue-200'
+                  ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/60'
                   : pct >= 40
-                  ? 'bg-amber-50 text-amber-700 border-amber-200'
-                  : 'bg-rose-50 text-rose-700 border-rose-200');
+                  ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                  : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/60');
             }
 
             // Update button label so user knows to click Calculate
@@ -997,11 +999,11 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           if (yr && config.examYears[yr]) {
             currentYear = yr;
             yearBtns.forEach((b) => {
-              b.classList.remove('bg-white', 'text-blue-700', 'shadow-xs');
-              b.classList.add('text-neutral-600');
+              b.classList.remove('bg-white', 'dark:bg-[#243354]', 'text-blue-700', 'dark:text-blue-300', 'shadow-xs');
+              b.classList.add('text-neutral-600', 'dark:text-neutral-300');
             });
-            btn.classList.add('bg-white', 'text-blue-700', 'shadow-xs');
-            btn.classList.remove('text-neutral-600');
+            btn.classList.add('bg-white', 'dark:bg-[#243354]', 'text-blue-700', 'dark:text-blue-300', 'shadow-xs');
+            btn.classList.remove('text-neutral-600', 'dark:text-neutral-300');
             updateUI(false);
             updateUrlParams();
           }
@@ -1105,7 +1107,7 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
             }
             if (simCompText) simCompText.textContent = `${res.composite.toFixed(2)} composite`;
             if (simMsg) {
-              simMsg.innerHTML = `<span class="text-blue-900 font-medium"><strong>${sec.shortName}</strong> adjusted to <strong>${updated}/${sec.maxScore}</strong>. Composite updated to <strong>${res.composite.toFixed(2)}</strong> (AP Score: <strong>${res.apScore}</strong>).</span>`;
+              simMsg.innerHTML = `<span class="text-blue-900 dark:text-blue-300 font-medium"><strong>${sec.shortName}</strong> adjusted to <strong>${updated}/${sec.maxScore}</strong>. Composite updated to <strong>${res.composite.toFixed(2)}</strong> (AP Score: <strong>${res.apScore}</strong>).</span>`;
             }
           }
         });
@@ -1118,11 +1120,11 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
           const tgt = parseInt(btn.getAttribute('data-target') || '5', 10);
           targetScore = tgt;
           targetBtns.forEach((b) => {
-            b.classList.remove('bg-white', 'text-emerald-700', 'shadow-xs');
-            b.classList.add('text-neutral-600');
+            b.classList.remove('bg-white', 'dark:bg-[#1a233a]', 'text-emerald-700', 'dark:text-emerald-400', 'shadow-xs');
+            b.classList.add('text-neutral-600', 'dark:text-neutral-400');
           });
-          btn.classList.add('bg-white', 'text-emerald-700', 'shadow-xs');
-          btn.classList.remove('text-neutral-600');
+          btn.classList.add('bg-white', 'dark:bg-[#1a233a]', 'text-emerald-700', 'dark:text-emerald-400', 'shadow-xs');
+          btn.classList.remove('text-neutral-600', 'dark:text-neutral-400');
           const res = calculateScore();
           updateTargetScoreUI(res);
         });
@@ -1151,6 +1153,17 @@ const isCalculus = config.id === 'ap-calculus-ab' || config.id === 'ap-calculus-
         });
       }
     }
+
+    // Re-render slider tracks when dark/light mode toggles
+    window.addEventListener('ap-theme-changed', () => {
+      const activeCfg = getActiveYearConfig();
+      for (const sec of activeCfg.sections) {
+        const rangeInput = wrapper.querySelector(`#range-${sec.id}`);
+        if (rangeInput) {
+          updateSliderTrack(rangeInput, scores[sec.id] || 0, sec.maxScore);
+        }
+      }
+    });
 
     parseUrlParams();
     bindEvents();

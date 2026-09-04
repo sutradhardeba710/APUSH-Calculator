@@ -1,7 +1,7 @@
 ---
 ---
 
-<div id="what-if-simulator" class="mt-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-50/50 via-white to-neutral-50 border border-blue-200/80 shadow-sm">
+<div id="what-if-simulator" class="mt-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-blue-50/50 via-white to-neutral-50 dark:from-[#162238] dark:via-[#131b2e] dark:to-[#0f172a] border border-blue-200/80 dark:border-[#243354] shadow-sm">
   <div class="flex items-start justify-between gap-4 mb-4">
     <div>
       <div class="flex items-center gap-2">
@@ -10,9 +10,9 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </span>
-        <h3 class="text-base font-bold font-heading text-neutral-900">What-If Score Simulator</h3>
+        <h3 class="text-base font-bold font-heading text-neutral-900 dark:text-white">What-If Score Simulator</h3>
       </div>
-      <p class="text-xs text-neutral-600 mt-1">
+      <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
         Instantly simulate how targeted score changes impact your final AP grade.
       </p>
     </div>
@@ -20,7 +20,7 @@
     <button
       type="button"
       id="what-if-reset-btn"
-      class="text-xs font-semibold text-neutral-500 hover:text-neutral-800 underline"
+      class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-white underline"
     >
       Reset Simulator
     </button>
@@ -31,52 +31,52 @@
     <button
       type="button"
       data-scenario="dbq-plus-2"
-      class="scenario-btn text-left p-3 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 hover:bg-blue-50/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600"
+      class="scenario-btn text-left p-3 rounded-xl bg-white dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600 cursor-pointer"
     >
-      <span class="font-bold text-neutral-900 block">+2 on DBQ</span>
-      <span class="text-neutral-500 text-[11px]">e.g. Thesis + Outside Ev. (+7.14 comp)</span>
+      <span class="font-bold text-neutral-900 dark:text-white block">+2 on DBQ</span>
+      <span class="text-neutral-500 dark:text-neutral-400 text-[11px]">e.g. Thesis + Outside Ev. (+7.14 comp)</span>
     </button>
 
     <button
       type="button"
       data-scenario="mcq-plus-5"
-      class="scenario-btn text-left p-3 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 hover:bg-blue-50/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600"
+      class="scenario-btn text-left p-3 rounded-xl bg-white dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600 cursor-pointer"
     >
-      <span class="font-bold text-neutral-900 block">+5 on MCQ</span>
-      <span class="text-neutral-500 text-[11px]">e.g. Period 4-6 review (+3.64 comp)</span>
+      <span class="font-bold text-neutral-900 dark:text-white block">+5 on MCQ</span>
+      <span class="text-neutral-500 dark:text-neutral-400 text-[11px]">e.g. Period 4-6 review (+3.64 comp)</span>
     </button>
 
     <button
       type="button"
       data-scenario="saq-plus-3"
-      class="scenario-btn text-left p-3 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 hover:bg-blue-50/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600"
+      class="scenario-btn text-left p-3 rounded-xl bg-white dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600 cursor-pointer"
     >
-      <span class="font-bold text-neutral-900 block">Ace SAQs (9/9)</span>
-      <span class="text-neutral-500 text-[11px]">Full 20% Section Credit</span>
+      <span class="font-bold text-neutral-900 dark:text-white block">Ace SAQs (9/9)</span>
+      <span class="text-neutral-500 dark:text-neutral-400 text-[11px]">Full 20% Section Credit</span>
     </button>
 
     <button
       type="button"
       data-scenario="leq-plus-2"
-      class="scenario-btn text-left p-3 rounded-xl bg-white border border-neutral-200 hover:border-blue-400 hover:bg-blue-50/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600"
+      class="scenario-btn text-left p-3 rounded-xl bg-white dark:bg-[#162036] border border-neutral-200 dark:border-[#243354] hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 transition-all text-xs focus-visible:outline-2 focus-visible:outline-blue-600 cursor-pointer"
     >
-      <span class="font-bold text-neutral-900 block">+2 on LEQ</span>
-      <span class="text-neutral-500 text-[11px]">Context + Evidence (+5.0 comp)</span>
+      <span class="font-bold text-neutral-900 dark:text-white block">+2 on LEQ</span>
+      <span class="text-neutral-500 dark:text-neutral-400 text-[11px]">Context + Evidence (+5.0 comp)</span>
     </button>
   </div>
 
   <!-- Dynamic Simulated Outcome Panel -->
-  <div id="simulated-result-box" class="p-4 rounded-xl bg-white border border-blue-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+  <div id="simulated-result-box" class="p-4 rounded-xl bg-white dark:bg-[#131b2e] border border-blue-200 dark:border-blue-800/60 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-4 text-center sm:text-left">
       <div class="flex flex-col items-center">
-        <span class="text-[10px] uppercase font-bold text-neutral-400">Simulated Score</span>
-        <span id="sim-score-num" class="font-heading font-black text-3xl sm:text-4xl text-blue-700">4</span>
+        <span class="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-400">Simulated Score</span>
+        <span id="sim-score-num" class="font-heading font-black text-3xl sm:text-4xl text-blue-700 dark:text-blue-400">4</span>
       </div>
       <div>
-        <span id="sim-composite-text" class="text-sm font-bold text-neutral-900 block">
+        <span id="sim-composite-text" class="text-sm font-bold text-neutral-900 dark:text-white block">
           Composite: 74.5 (+5.0 pts)
         </span>
-        <span id="sim-impact-msg" class="text-xs text-emerald-700 font-medium">
+        <span id="sim-impact-msg" class="text-xs text-emerald-700 dark:text-emerald-300 font-medium">
           🎉 This change pushes your score into the 5 cutoff range!
         </span>
       </div>
@@ -85,7 +85,7 @@
     <button
       type="button"
       id="apply-sim-to-calc"
-      class="px-4 py-2 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-xs transition-colors shrink-0"
+      class="px-4 py-2 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-xs transition-colors shrink-0 cursor-pointer"
     >
       Apply Changes to Calculator
     </button>
