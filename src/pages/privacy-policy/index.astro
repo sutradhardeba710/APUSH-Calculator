@@ -2,6 +2,7 @@
 import PolicyLayout from '../../components/legal/PolicyLayout.astro';
 import PolicySection from '../../components/legal/PolicySection.astro';
 import LegalCallout from '../../components/legal/LegalCallout.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
 
 const pageTitle = 'Privacy Policy – AP Score Hub Data Practices & Student Privacy';
 const pageDescription =
@@ -50,6 +51,8 @@ const keySummary = {
     title="Introduction & Overview"
     badge="Scope"
   >
+    <DisclaimerCard className="my-3" />
+
     <p>
       This Privacy Policy describes the privacy practices of <strong>AP Score Hub</strong> (referred to as "we", "us", or "our"), operated at <code>https://apushcalculator.com</code>. It applies to all calculators, rubric tools, and informational guides available on this platform.
     </p>

@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
-import DisclaimerCard from '../components/common/DisclaimerCard.astro';
 import SourceSection from '../components/common/SourceSection.astro';
 import FAQ from '../components/faq/FAQ.astro';
 import { ALL_SUBJECTS } from '../data/exam-config/subjects-registry';
@@ -106,8 +105,6 @@ const homeFaqs = [
 
   <!-- Main Body Content -->
   <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16">
-    <DisclaimerCard />
-
     <!-- 8 Subject Calculators Grid -->
     <section class="reveal-on-scroll">
       <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">

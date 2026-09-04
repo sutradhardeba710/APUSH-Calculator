@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/common/Header.astro';
 import Footer from '../../components/common/Footer.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
-import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
 import SourceSection from '../../components/common/SourceSection.astro';
 import RelatedTools from '../../components/common/RelatedTools.astro';
 import JsonLd from '../../components/common/JsonLd.astro';
@@ -60,8 +59,6 @@ const schema = {
         Calculate your score across all 3 Short-Answer Questions. SAQs account for 20% of your overall AP score, making each earned subpart worth 2.22 composite points.
       </p>
     </div>
-
-    <DisclaimerCard className="mb-8" />
 
     <!-- Interactive SAQ Scorer -->
     <SAQCalculator />

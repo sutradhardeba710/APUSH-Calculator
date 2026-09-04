@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/common/Header.astro';
 import Footer from '../../components/common/Footer.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
-import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
 import FAQ from '../../components/faq/FAQ.astro';
 import { ALL_SUBJECTS } from '../../data/exam-config/subjects-registry';
 
@@ -104,9 +103,6 @@ const categories = ['All', 'History & Social Sciences', 'Sciences', 'Math & Comp
   </section>
 
   <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-    <!-- Official Scoring Notice -->
-    <DisclaimerCard />
-
     <!-- Subject Directory Section -->
     <section id="calculators-grid">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
