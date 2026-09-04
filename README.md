@@ -1,46 +1,46 @@
-# Astro Starter Kit: Basics
+# APUSH Calculator
 
-```sh
-npm create astro@latest -- --template basics
+An interactive, high-precision educational score calculator and predictor for AP United States History (APUSH) and other Advanced Placement exams.
+
+🌐 **Live Site:** [https://apushcalculator.pages.dev](https://apushcalculator.pages.dev)
+
+---
+
+## 🎯 Features
+
+- **Weighted Composite Score Calculation:** Accurate composite conversion matching College Board AP scoring rubrics.
+- **Score Predictor (1–5):** Estimated score tier, confidence intervals, and required score projections for achieving a 4 or 5.
+- **Section Rubric Calculators:**
+  - Multiple Choice (MCQ) Calculator
+  - Short Answer Question (SAQ) Calculator
+  - Document-Based Question (DBQ) 7-Point Rubric Calculator
+  - Long Essay Question (LEQ) 6-Point Rubric Calculator
+- **Multi-Subject Support:** Calculators for AP Biology, AP Calculus AB & BC, AP Chemistry, AP Computer Science Principles, AP English Language, and AP Psychology.
+- **Modern Responsive Design:** Fast, accessible UI built with Tailwind CSS and Astro.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Astro](https://astro.build)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com)
+- **Fonts:** Inter & Outfit
+
+---
+
+## 🚀 Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Deploy to Cloudflare Pages
+npm run deploy
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
