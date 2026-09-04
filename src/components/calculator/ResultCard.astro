@@ -1,0 +1,95 @@
+---
+---
+
+<div
+  id="result-display-card"
+  class="relative overflow-hidden rounded-2xl bg-white border border-neutral-200/90 shadow-md p-6 sm:p-8 flex flex-col justify-between transition-all"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  <!-- Card Top Accent Bar -->
+  <div id="score-accent-bar" class="absolute top-0 left-0 right-0 h-2 bg-blue-600 transition-colors"></div>
+
+  <!-- Header -->
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <span class="text-xs font-bold tracking-wider uppercase text-neutral-500">Estimated AP® Score</span>
+      <h2 id="result-status-title" class="text-lg font-bold font-heading text-neutral-900 mt-0.5">
+        Well Qualified
+      </h2>
+    </div>
+
+    <!-- Status badge -->
+    <span
+      id="qualification-badge"
+      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 shadow-2xs"
+    >
+      <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+      <span id="qualification-text">Score 4</span>
+    </span>
+  </div>
+
+  <!-- Big Hero Score Display -->
+  <div class="my-6 sm:my-8 flex items-baseline justify-center gap-3">
+    <span
+      id="hero-score-number"
+      class="font-heading font-black text-7xl sm:text-8xl md:text-9xl text-neutral-900 tracking-tight transition-all"
+    >
+      4
+    </span>
+    <div class="flex flex-col text-neutral-500 text-sm">
+      <span class="font-semibold uppercase text-xs tracking-wider">Out of 5</span>
+      <span id="pass-fail-indicator" class="text-emerald-700 font-bold text-xs mt-0.5">
+        Passing (College Credit)
+      </span>
+    </div>
+  </div>
+
+  <!-- Composite Metrics Grid -->
+  <div class="grid grid-cols-2 gap-3 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 mb-6">
+    <div>
+      <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wide block">Composite Score</span>
+      <span class="text-lg sm:text-xl font-heading font-extrabold text-neutral-900">
+        <span id="composite-score-val">69.5</span>
+        <span class="text-xs font-medium text-neutral-500">/ 100</span>
+      </span>
+    </div>
+
+    <div>
+      <span class="text-[11px] font-semibold text-neutral-500 uppercase tracking-wide block">College Credit</span>
+      <span id="credit-likelihood-val" class="text-sm sm:text-base font-bold text-blue-800">
+        Very Likely
+      </span>
+    </div>
+  </div>
+
+  <!-- Distance to Next Score Notification Banner -->
+  <div
+    id="next-tier-banner"
+    class="p-3 rounded-lg bg-blue-50/70 border border-blue-200/70 text-blue-950 text-xs flex items-center justify-between gap-2"
+  >
+    <div class="flex items-center gap-2">
+      <svg class="w-4 h-4 text-blue-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+      </svg>
+      <span>
+        <span id="points-to-next-tier" class="font-bold text-blue-700">4.5</span> composite pts away from a
+        <span class="font-bold text-neutral-900">Score of 5</span>
+      </span>
+    </div>
+    <a href="#what-if-simulator" class="text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline shrink-0">
+      Simulate →
+    </a>
+  </div>
+
+  <!-- Confidence Range / Equating notice -->
+  <div class="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between text-[11px] text-neutral-500">
+    <span class="flex items-center gap-1">
+      <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+      </svg>
+      Confidence: <span id="confidence-range-text" class="font-medium text-neutral-700">67.0 – 72.0 composite</span>
+    </span>
+    <span class="text-neutral-400">Curve: <span id="active-curve-year-label">2026</span></span>
+  </div>
+</div>

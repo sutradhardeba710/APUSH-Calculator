@@ -1,0 +1,65 @@
+---
+---
+
+<div id="target-calculator" class="mt-8 p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs">
+  <div class="mb-4">
+    <div class="flex items-center gap-2">
+      <span class="p-1 rounded bg-indigo-600 text-white">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+        </svg>
+      </span>
+      <h3 class="text-base font-bold font-heading text-neutral-900">Target Score Calculator (Reverse Estimator)</h3>
+    </div>
+    <p class="text-xs text-neutral-600 mt-1">
+      Pick your target AP score and find out exactly what you need on any specific section based on your existing scores.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+    <!-- Target AP Score Selector -->
+    <div>
+      <label for="target-score-select" class="block text-xs font-semibold text-neutral-700 mb-1.5">
+        Target AP Score:
+      </label>
+      <select
+        id="target-score-select"
+        class="w-full px-3 py-2 text-sm rounded-lg bg-neutral-50 border border-neutral-300 font-semibold text-neutral-900 focus:bg-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 outline-none"
+      >
+        <option value="5" selected>Score 5 (Extremely Well Qualified - 74+ pts)</option>
+        <option value="4">Score 4 (Well Qualified - 60+ pts)</option>
+        <option value="3">Score 3 (Qualified / Passing - 47+ pts)</option>
+      </select>
+    </div>
+
+    <!-- Section to Solve For -->
+    <div>
+      <label for="target-section-select" class="block text-xs font-semibold text-neutral-700 mb-1.5">
+        Calculate Required Score For:
+      </label>
+      <select
+        id="target-section-select"
+        class="w-full px-3 py-2 text-sm rounded-lg bg-neutral-50 border border-neutral-300 font-semibold text-neutral-900 focus:bg-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 outline-none"
+      >
+        <option value="dbq" selected>Document-Based Question (DBQ / 7 pts)</option>
+        <option value="mcq">Multiple-Choice (MCQ / 55 questions)</option>
+        <option value="leq">Long Essay Question (LEQ / 6 pts)</option>
+        <option value="saq">Short-Answer Questions (SAQ / 9 pts)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Dynamic Target Requirement Output Box -->
+  <div id="target-output-card" class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-950 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="space-y-1 text-center sm:text-left">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 block">Required Section Performance</span>
+      <p id="target-output-message" class="font-medium leading-relaxed">
+        With your current MCQ (42/55), SAQ (5/9), and LEQ (4/6), you need at least <strong class="font-extrabold text-indigo-900 text-sm">6 / 7 on the DBQ</strong> to achieve an AP score of 5.
+      </p>
+    </div>
+    <div class="shrink-0 text-center">
+      <span class="text-[10px] uppercase font-bold text-indigo-500 block">Needed on DBQ</span>
+      <span id="target-needed-score-display" class="font-heading font-black text-3xl text-indigo-900">6 / 7</span>
+    </div>
+  </div>
+</div>

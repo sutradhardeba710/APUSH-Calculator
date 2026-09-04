@@ -1,0 +1,311 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import SourceSection from '../../components/common/SourceSection.astro';
+import RelatedTools from '../../components/common/RelatedTools.astro';
+import JsonLd from '../../components/common/JsonLd.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+
+const pageTitle = 'APUSH Score Predictor (2027) | Score Probabilities & Grade Forecaster';
+const pageDescription = 'Forecast your AP U.S. History score with statistical probability modeling. Calculate your chance of earning a 3, 4, or 5 based on practice tests.';
+
+const predictorFaqs = [
+  {
+    question: 'How does the APUSH Score Predictor calculate probabilities?',
+    answer: 'The predictor applies a Gaussian error model centered on your calculated composite score, using historical College Board score equating standard deviations (±3.2 composite points). This accounts for day-of-exam fluctuations, unfamiliar prompt themes, and scoring variance across different readers.',
+  },
+  {
+    question: 'What is considered a "safe" score for a 5?',
+    answer: 'A composite score of 78 or higher gives you greater than an 85% statistical likelihood of securing a 5, even if your specific exam edition features strict rubric readers or an unforgiving curve.',
+  },
+  {
+    question: 'Can my score still change significantly before exam day?',
+    answer: 'Absolutely. Because the DBQ alone represents 25% of your grade (with each point worth 3.57 composite points), mastering rubric mechanics like thesis phrasing, document grouping, and outside evidence can easily swing your composite score by 10 to 14 points within two weeks of deliberate practice.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'APUSH Score Predictor',
+  url: 'https://apushcalculator.com/apush-score-predictor/',
+  applicationCategory: 'EducationalApplication',
+  description: pageDescription,
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/apush-score-predictor/"
+>
+  <Header slot="header" activePath="/apush-score-predictor/" />
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <Breadcrumb items={[{ label: 'APUSH Score Predictor' }]} />
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+        Statistical Confidence & Probability Forecaster
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        AP U.S. History Score Predictor
+      </h1>
+      <p class="text-base sm:text-lg text-neutral-600 mt-2 max-w-3xl leading-relaxed">
+        Estimate the statistical likelihood of earning a 3, 4, or 5 on the APUSH exam. See your projected low, likely, and high scores based on test equating models.
+      </p>
+    </div>
+
+    <DisclaimerCard className="mb-8" />
+
+    <!-- Predictor Dashboard Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Input Panel (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="p-5 sm:p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-sm space-y-5">
+          <h2 class="text-lg font-bold font-heading text-neutral-900 border-b border-neutral-100 pb-3">
+            Enter Practice Exam Performance
+          </h2>
+
+          <!-- MCQ Input -->
+          <div>
+            <div class="flex justify-between items-center text-xs font-semibold mb-1">
+              <label for="pred-mcq" class="text-neutral-800">Multiple-Choice (MCQ)</label>
+              <span class="text-neutral-500"><span id="pred-mcq-val">42</span> / 55 Correct</span>
+            </div>
+            <input
+              type="range"
+              id="pred-mcq"
+              min="0"
+              max="55"
+              value="42"
+              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+            />
+          </div>
+
+          <!-- SAQ Input -->
+          <div>
+            <div class="flex justify-between items-center text-xs font-semibold mb-1">
+              <label for="pred-saq" class="text-neutral-800">Short-Answer (SAQ)</label>
+              <span class="text-neutral-500"><span id="pred-saq-val">6</span> / 9 Points</span>
+            </div>
+            <input
+              type="range"
+              id="pred-saq"
+              min="0"
+              max="9"
+              value="6"
+              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+            />
+          </div>
+
+          <!-- DBQ Input -->
+          <div>
+            <div class="flex justify-between items-center text-xs font-semibold mb-1">
+              <label for="pred-dbq" class="text-neutral-800">Document-Based Question (DBQ)</label>
+              <span class="text-neutral-500"><span id="pred-dbq-val">5</span> / 7 Points</span>
+            </div>
+            <input
+              type="range"
+              id="pred-dbq"
+              min="0"
+              max="7"
+              value="5"
+              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+            />
+          </div>
+
+          <!-- LEQ Input -->
+          <div>
+            <div class="flex justify-between items-center text-xs font-semibold mb-1">
+              <label for="pred-leq" class="text-neutral-800">Long Essay Question (LEQ)</label>
+              <span class="text-neutral-500"><span id="pred-leq-val">4</span> / 6 Points</span>
+            </div>
+            <input
+              type="range"
+              id="pred-leq"
+              min="0"
+              max="6"
+              value="4"
+              class="w-full h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 pred-slider"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Results & Probability Panel (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- Range card -->
+        <div class="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200/90 shadow-md">
+          <div class="flex items-start justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Projected Score Range</span>
+              <h2 class="text-xl font-bold font-heading text-neutral-900 mt-0.5">Statistical Outcome Model</h2>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              80% Confidence Interval
+            </span>
+          </div>
+
+          <!-- 3 Score Pills -->
+          <div class="grid grid-cols-3 gap-3 mb-6 text-center">
+            <div class="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
+              <span class="text-[11px] font-semibold text-neutral-500 uppercase block">Low Estimate</span>
+              <span id="pred-low-score" class="font-heading font-black text-3xl text-neutral-800 mt-1 block">3</span>
+              <span class="text-[10px] text-neutral-400">Strict readers</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 shadow-2xs">
+              <span class="text-[11px] font-bold text-indigo-700 uppercase block">Most Likely</span>
+              <span id="pred-likely-score" class="font-heading font-black text-4xl text-indigo-900 mt-1 block">4</span>
+              <span class="text-[10px] text-indigo-600 font-medium">Expected median</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200">
+              <span class="text-[11px] font-semibold text-neutral-500 uppercase block">High Estimate</span>
+              <span id="pred-high-score" class="font-heading font-black text-3xl text-emerald-700 mt-1 block">5</span>
+              <span class="text-[10px] text-neutral-400">Favorable curve</span>
+            </div>
+          </div>
+
+          <!-- Probabilities Bars -->
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-700 mb-3">Probability by AP Score</h3>
+          <div class="space-y-2.5">
+            <!-- Score 5 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-emerald-800 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Score 5
+                </span>
+                <span id="prob-val-5" class="font-bold text-neutral-900">28%</span>
+              </div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
+                <div id="prob-bar-5" class="h-full bg-emerald-500 rounded-full transition-all" style="width: 28%;"></div>
+              </div>
+            </div>
+
+            <!-- Score 4 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-blue-800 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Score 4
+                </span>
+                <span id="prob-val-4" class="font-bold text-neutral-900">62%</span>
+              </div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
+                <div id="prob-bar-4" class="h-full bg-blue-500 rounded-full transition-all" style="width: 62%;"></div>
+              </div>
+            </div>
+
+            <!-- Score 3 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-sky-800 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Score 3
+                </span>
+                <span id="prob-val-3" class="font-bold text-neutral-900">10%</span>
+              </div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
+                <div id="prob-bar-3" class="h-full bg-sky-500 rounded-full transition-all" style="width: 10%;"></div>
+              </div>
+            </div>
+
+            <!-- Score 2 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-amber-800 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Score 2
+                </span>
+                <span id="prob-val-2" class="font-bold text-neutral-900">0%</span>
+              </div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
+                <div id="prob-bar-2" class="h-full bg-amber-500 rounded-full transition-all" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Score 1 -->
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span class="text-rose-800 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Score 1
+                </span>
+                <span id="prob-val-1" class="font-bold text-neutral-900">0%</span>
+              </div>
+              <div class="w-full h-2.5 bg-neutral-100 rounded-full overflow-hidden">
+                <div id="prob-bar-1" class="h-full bg-rose-500 rounded-full transition-all" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Strategy Takeaway -->
+          <div class="mt-6 p-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 text-xs text-indigo-950">
+            <span class="font-bold block mb-1">Target Strategy:</span>
+            <p id="pred-strategy-text" class="leading-relaxed">
+              You are in solid 4 territory with an achievable path to a 5. Improving your DBQ by 1 point or MCQ by 3 questions will elevate your chance of a 5 above 55%.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <FAQ items={predictorFaqs} />
+    <SourceSection />
+    <RelatedTools currentPath="/apush-score-predictor/" />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={schema} />
+</Layout>
+
+<script>
+  import { predictApushScore } from '../../lib/scoring/prediction';
+  import { examConfig2026 } from '../../data/exam-config/2026';
+
+  function updatePrediction() {
+    const mcq = parseInt((document.getElementById('pred-mcq') as HTMLInputElement).value, 10) || 0;
+    const saq = parseInt((document.getElementById('pred-saq') as HTMLInputElement).value, 10) || 0;
+    const dbq = parseInt((document.getElementById('pred-dbq') as HTMLInputElement).value, 10) || 0;
+    const leq = parseInt((document.getElementById('pred-leq') as HTMLInputElement).value, 10) || 0;
+
+    const mcqVal = document.getElementById('pred-mcq-val');
+    const saqVal = document.getElementById('pred-saq-val');
+    const dbqVal = document.getElementById('pred-dbq-val');
+    const leqVal = document.getElementById('pred-leq-val');
+
+    if (mcqVal) mcqVal.textContent = mcq.toString();
+    if (saqVal) saqVal.textContent = saq.toString();
+    if (dbqVal) dbqVal.textContent = dbq.toString();
+    if (leqVal) leqVal.textContent = leq.toString();
+
+    const pred = predictApushScore({ mcq, saq, dbq, leq }, examConfig2026);
+
+    const lowEl = document.getElementById('pred-low-score');
+    const likelyEl = document.getElementById('pred-likely-score');
+    const highEl = document.getElementById('pred-high-score');
+    const strategyEl = document.getElementById('pred-strategy-text');
+
+    if (lowEl) lowEl.textContent = pred.projectedRange.low.toString();
+    if (likelyEl) likelyEl.textContent = pred.projectedRange.likely.toString();
+    if (highEl) highEl.textContent = pred.projectedRange.high.toString();
+    if (strategyEl) strategyEl.textContent = pred.summaryRecommendation;
+
+    ([5, 4, 3, 2, 1] as const).forEach((score) => {
+      const pct = pred.probabilities[score];
+      const valEl = document.getElementById(`prob-val-${score}`);
+      const barEl = document.getElementById(`prob-bar-${score}`);
+      if (valEl) valEl.textContent = `${pct}%`;
+      if (barEl) barEl.style.width = `${pct}%`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.pred-slider').forEach((slider) => {
+      slider.addEventListener('input', updatePrediction);
+    });
+    updatePrediction();
+  });
+</script>

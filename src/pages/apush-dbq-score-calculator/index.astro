@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import SourceSection from '../../components/common/SourceSection.astro';
+import RelatedTools from '../../components/common/RelatedTools.astro';
+import JsonLd from '../../components/common/JsonLd.astro';
+import DBQRubricCalculator from '../../components/rubric/DBQRubricCalculator.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+
+const pageTitle = 'APUSH DBQ Score Calculator (7-Point Rubric) | Document-Based Question Scorer';
+const pageDescription = 'Calculate your AP U.S. History DBQ score using the official 7-point College Board rubric. Features interactive scoring for thesis, context, evidence, and complexity.';
+
+const dbqFaqs = [
+  {
+    question: 'How many documents do I need to use to earn the DBQ evidence points?',
+    answer: 'Under the College Board rubric guidelines, you earn 1 point for accurately describing the content of at least 3 documents, and 2 points for using at least 4 documents to support a thesis-driven argument. However, teachers and AP readers recommend aiming to use 6 or all 7 documents to ensure a safety cushion.',
+  },
+  {
+    question: 'What counts as "Evidence Beyond the Documents"?',
+    answer: 'Outside evidence must be a specific historical proper noun (such as a named act of Congress, supreme court case, treaty, compromise, or rebellion) that is NOT referenced anywhere in the provided documents. You must name it, describe what it was, and explicitly connect it to your thesis argument.',
+  },
+  {
+    question: 'What is HIPP / HAPP sourcing?',
+    answer: 'HIPP stands for Historical situation, Intended audience, Purpose, and Point of view. To earn the sourcing point, you must explain HOW or WHY one of these four elements is significant to your argument for at least 2 separate documents.',
+  },
+  {
+    question: 'How is the complexity point earned on the APUSH DBQ?',
+    answer: 'The complexity point requires demonstrating a nuanced historical understanding throughout the essay. This can be achieved by analyzing multiple themes (e.g., comparing political versus economic outcomes), qualifying an argument by analyzing opposing viewpoints, or demonstrating continuities and changes over time.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'APUSH DBQ Score Calculator',
+  url: 'https://apushcalculator.com/apush-dbq-score-calculator/',
+  applicationCategory: 'EducationalApplication',
+  description: pageDescription,
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/apush-dbq-score-calculator/"
+>
+  <Header slot="header" activePath="/apush-dbq-score-calculator/" />
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <Breadcrumb items={[{ label: 'DBQ Score Calculator' }]} />
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        Official 7-Point College Board Scoring Rubric
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        APUSH DBQ Score Calculator
+      </h1>
+      <p class="text-base sm:text-lg text-neutral-600 mt-2 max-w-3xl leading-relaxed">
+        Score your Document-Based Question essay against official College Board criteria. The DBQ accounts for 25% of your total AP exam grade, making every rubric point worth ~3.57 composite points.
+      </p>
+    </div>
+
+    <DisclaimerCard className="mb-8" />
+
+    <!-- Interactive DBQ Rubric Scorer -->
+    <DBQRubricCalculator />
+
+    <!-- Comprehensive DBQ Rubric Breakdown Guide -->
+    <section class="mt-16 pt-10 border-t border-neutral-200 max-w-3xl">
+      <h2 class="text-2xl font-bold font-heading text-neutral-900 mb-4">
+        Mastering the 7-Point APUSH DBQ Rubric
+      </h2>
+      <p class="text-sm text-neutral-600 leading-relaxed mb-6">
+        Writing a high-scoring DBQ is a formulaic skill that can be systematically learned and perfected. Below is the step-by-step blueprint used by top AP readers.
+      </p>
+
+      <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">1. Thesis & Line of Reasoning (1 Point)</h3>
+          <p>
+            Your thesis must take an unambiguous stance on the prompt and outline distinct lines of reasoning. Avoid vague restatements like <em>"There were many political and economic impacts."</em> Instead, write: <em>"Although the New Deal failed to completely end unemployment, it fundamentally transformed the American economy by establishing federal regulatory oversight and expanding the social safety net."</em>
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">2. Contextualization (1 Point)</h3>
+          <p>
+            Dedicate 3 to 5 sentences in your introductory paragraph to paint the historical backdrop. Explain the broader political, social, or economic forces occurring in the 20 to 50 years prior that caused the events of the prompt to unfold.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">3. Document Evidence (2 Points)</h3>
+          <p>
+            To lock in the full 2 points, weave at least 4 documents directly into your body paragraph arguments (aim for 6 as insurance). Never quote long passages verbatim; summarize the essential historical claim in your own words and explain how it proves your thesis topic sentence.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">4. Evidence Beyond the Documents (1 Point)</h3>
+          <p>
+            Introduce a specific historical fact, legislation, Supreme Court decision, treaty, or rebellion not mentioned anywhere in the document set. Define the term clearly and explain its relevance to your thesis.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">5. Sourcing & HIPP Analysis (1 Point)</h3>
+          <p>
+            For at least 2 documents (aim for 3), analyze the author's Point of view, Purpose, Historical situation, or Audience. Crucially, explain <strong>why</strong> that perspective matters for evaluating the truth or bias of the document.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">6. Demonstrating Complex Understanding (1 Point)</h3>
+          <p>
+            Earn the elusive complexity point by structuring your argument around nuance: examine counter-arguments, explore both continuities and changes, or evaluate how historical consequences varied across demographic groups.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FAQ items={dbqFaqs} title="APUSH DBQ Scoring FAQs" />
+    <SourceSection />
+    <RelatedTools currentPath="/apush-dbq-score-calculator/" />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={schema} />
+</Layout>

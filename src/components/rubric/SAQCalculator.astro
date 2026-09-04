@@ -1,0 +1,143 @@
+---
+import { saqConfig } from '../../data/rubrics/saq';
+---
+
+<div id="saq-calculator-container" class="space-y-6">
+  <!-- Dynamic Summary Bar -->
+  <div class="sticky top-18 z-30 p-4 rounded-xl bg-white border border-neutral-200/90 shadow-md flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="flex flex-col">
+        <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">Total SAQ Score</span>
+        <span class="text-2xl sm:text-3xl font-heading font-black text-neutral-900">
+          <span id="saq-total-score">6</span> <span class="text-neutral-400 text-base font-normal">/ 9</span>
+        </span>
+      </div>
+      <div class="h-8 w-px bg-neutral-200 hidden sm:block"></div>
+      <div class="flex flex-col">
+        <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">Exam Contribution</span>
+        <span class="text-lg sm:text-xl font-heading font-extrabold text-blue-700">
+          <span id="saq-composite-points">13.33</span> <span class="text-xs font-medium text-neutral-500">/ 20.0 composite pts</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a
+        id="apply-saq-to-main"
+        href="/apush-score-calculator/?saq=6"
+        class="px-3.5 py-2 text-xs font-semibold text-white bg-blue-700 hover:bg-blue-800 rounded-lg shadow-xs transition-colors"
+      >
+        Send to Full Calculator →
+      </a>
+    </div>
+  </div>
+
+  <!-- ACE Formula Banner -->
+  <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-950 flex items-start gap-3">
+    <span class="p-1 rounded bg-blue-700 text-white shrink-0 mt-0.5">ACE</span>
+    <div>
+      <h4 class="font-bold text-neutral-900 mb-0.5">The Proven SAQ Response Formula:</h4>
+      <p class="text-neutral-700 leading-relaxed">
+        <strong>A</strong>nswer the prompt directly with a clear historical claim · 
+        <strong>C</strong>ite specific evidence (name a proper noun, law, person, or term) · 
+        <strong>E</strong>xplain how that evidence proves your answer. (Aim for 3 sentences per subpart).
+      </p>
+    </div>
+  </div>
+
+  <!-- SAQ Questions Grid -->
+  <div class="space-y-6">
+    {
+      saqConfig.map((q) => (
+        <div class="p-5 sm:p-6 rounded-xl bg-white border border-neutral-200/90 shadow-xs">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-neutral-100">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                {q.type} · {q.periodsCovered}
+              </span>
+              <h3 class="text-base font-bold font-heading text-neutral-900 mt-1">{q.title}</h3>
+              <p class="text-xs text-neutral-500">{q.stimulusType}</p>
+            </div>
+            <span class="text-xs font-semibold text-neutral-700 bg-neutral-100 px-2.5 py-1 rounded-md">
+              <span class="q-score-sum" data-q-id={q.id}>2</span> / 3 pts
+            </span>
+          </div>
+
+          <!-- Parts A, B, C -->
+          <div class="space-y-3">
+            {
+              q.parts.map((part) => (
+                <div class="p-3.5 rounded-lg border border-neutral-200/80 bg-neutral-50/50 hover:bg-white transition-colors">
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1">
+                      <span class="inline-block px-1.5 py-0.5 text-[10px] font-bold rounded bg-neutral-200 text-neutral-800 mr-1.5">
+                        Part {part.part}
+                      </span>
+                      <span class="text-xs font-semibold text-neutral-900">{part.promptTemplate}</span>
+                      <p class="text-[11px] text-neutral-500 mt-1 leading-snug">{part.scoringCriteria}</p>
+                      <p class="text-[10px] text-blue-800 font-medium mt-1">💡 {part.tips}</p>
+                    </div>
+
+                    <!-- Point toggle (0 or 1) -->
+                    <div class="flex items-center gap-1 shrink-0">
+                      <label class="inline-flex items-center gap-1 text-xs font-medium cursor-pointer">
+                        <input
+                          type="checkbox"
+                          data-part-id={part.id}
+                          data-q-parent={q.id}
+                          checked
+                          class="w-5 h-5 rounded text-blue-700 accent-blue-700 saq-part-checkbox cursor-pointer"
+                        />
+                        <span class="text-xs font-bold text-neutral-700">1 pt</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function updateSaqScores() {
+    const checkboxes = document.querySelectorAll('.saq-part-checkbox') as NodeListOf<HTMLInputElement>;
+    let total = 0;
+    const qTotals: Record<string, number> = {};
+
+    checkboxes.forEach((cb) => {
+      const qId = cb.getAttribute('data-q-parent') || '';
+      if (!qTotals[qId]) qTotals[qId] = 0;
+      if (cb.checked) {
+        total += 1;
+        qTotals[qId] += 1;
+      }
+    });
+
+    const scoreDisplay = document.getElementById('saq-total-score');
+    const compositeDisplay = document.getElementById('saq-composite-points');
+    const applyLink = document.getElementById('apply-saq-to-main') as HTMLAnchorElement;
+
+    if (scoreDisplay) scoreDisplay.textContent = total.toString();
+    if (compositeDisplay) compositeDisplay.textContent = ((total / 9) * 20).toFixed(2);
+    if (applyLink) applyLink.href = `/apush-score-calculator/?saq=${total}`;
+
+    // Update individual question totals
+    document.querySelectorAll('.q-score-sum').forEach((el) => {
+      const qId = el.getAttribute('data-q-id');
+      if (qId && qTotals[qId] !== undefined) {
+        el.textContent = qTotals[qId].toString();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.saq-part-checkbox').forEach((cb) => {
+      cb.addEventListener('change', updateSaqScores);
+    });
+    updateSaqScores();
+  });
+</script>

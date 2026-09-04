@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import SourceSection from '../../components/common/SourceSection.astro';
+import RelatedTools from '../../components/common/RelatedTools.astro';
+import JsonLd from '../../components/common/JsonLd.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+import { scoreDistributions } from '../../data/score-distributions';
+
+const pageTitle = 'APUSH Score Distribution (2021–2024) | Curves, Pass Rates & Trends';
+const pageDescription = 'Review historical AP U.S. History score distributions from official College Board score reports. See percentage of 5s, 4s, 3s, pass rates, and curve trends.';
+
+const distributionFaqs = [
+  {
+    question: 'What percentage of students get a 5 on the APUSH exam?',
+    answer: 'Historically, between 10.1% and 10.7% of all students earn a score of 5 on the AP U.S. History exam. In 2024, 10.7% of test takers (over 50,000 students) scored a 5.',
+  },
+  {
+    question: 'What is the overall pass rate for AP U.S. History?',
+    answer: 'The national pass rate (scores of 3, 4, or 5) consistently hovers around 47.5% to 48.2%. Roughly 52% of students earn a 1 or 2, highlighting APUSH as one of the more rigorous social science exams.',
+  },
+  {
+    question: 'Why did the score of 5 percentage change in recent years?',
+    answer: 'The College Board refined DBQ rubric guidelines in 2023–2024 to clarify document requirements (reducing the 2-point evidence threshold from 6 documents to 4 documents), helping students structure clearer arguments within the timed environment.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'APUSH Score Distributions and Historical Curves',
+  url: 'https://apushcalculator.com/apush-score-distribution/',
+  description: pageDescription,
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/apush-score-distribution/"
+>
+  <Header slot="header" activePath="/apush-score-distribution/" />
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <Breadcrumb items={[{ label: 'Score Distributions & Curves' }]} />
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        Official College Board Score Reports (2021–2024)
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        AP U.S. History Score Distributions & Curves
+      </h1>
+      <p class="text-base sm:text-lg text-neutral-600 mt-2 max-w-3xl leading-relaxed">
+        Explore official national score breakdowns, passing rates, and distribution trends across recent APUSH exam administrations.
+      </p>
+    </div>
+
+    <DisclaimerCard className="mb-8" />
+
+    <!-- High-level Metric Highlights -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
+        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Average Pass Rate</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block">48.0%</span>
+        <span class="text-[10px] text-emerald-700 font-medium">Scores 3, 4, or 5</span>
+      </div>
+
+      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
+        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">5 Score Rate</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-1 block">10.7%</span>
+        <span class="text-[10px] text-neutral-500">~50,500 students</span>
+      </div>
+
+      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
+        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Annual Test Takers</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-neutral-900 mt-1 block">470k+</span>
+        <span class="text-[10px] text-neutral-500">Nationwide cohort</span>
+      </div>
+
+      <div class="p-4 rounded-xl bg-white border border-neutral-200/90 shadow-2xs">
+        <span class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider block">Mean Score</span>
+        <span class="font-heading font-black text-2xl sm:text-3xl text-blue-700 mt-1 block">2.82</span>
+        <span class="text-[10px] text-neutral-500">Out of 5.0</span>
+      </div>
+    </div>
+
+    <!-- Yearly Breakdown Tabs / Cards -->
+    <div class="space-y-8">
+      {
+        scoreDistributions.map((dist) => (
+          <div class="p-6 sm:p-7 rounded-2xl bg-white border border-neutral-200/90 shadow-xs">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-neutral-100">
+              <div>
+                <h2 class="text-xl sm:text-2xl font-bold font-heading text-neutral-900">
+                  {dist.year} AP U.S. History Exam Results
+                </h2>
+                <p class="text-xs text-neutral-500 mt-0.5">
+                  Total Students: {dist.totalTestTakers.toLocaleString()} · Mean Score: {dist.meanScore} · Pass Rate: {dist.passRate}%
+                </p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                {dist.passRate}% Passing
+              </span>
+            </div>
+
+            <!-- Score Bar Distribution Chart -->
+            <div class="space-y-3 mb-6">
+              <!-- Score 5 -->
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-emerald-800 font-bold">Score 5 (Extremely Well Qualified)</span>
+                  <span class="text-neutral-900 font-bold">{dist.scores[5].percentage}% ({dist.scores[5].count.toLocaleString()} students)</span>
+                </div>
+                <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style={`width: ${dist.scores[5].percentage}%;`}></div>
+                </div>
+              </div>
+
+              <!-- Score 4 -->
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-blue-800 font-bold">Score 4 (Well Qualified)</span>
+                  <span class="text-neutral-900 font-bold">{dist.scores[4].percentage}% ({dist.scores[4].count.toLocaleString()} students)</span>
+                </div>
+                <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-500 rounded-full" style={`width: ${dist.scores[4].percentage}%;`}></div>
+                </div>
+              </div>
+
+              <!-- Score 3 -->
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-sky-800 font-bold">Score 3 (Qualified / Passing)</span>
+                  <span class="text-neutral-900 font-bold">{dist.scores[3].percentage}% ({dist.scores[3].count.toLocaleString()} students)</span>
+                </div>
+                <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-sky-500 rounded-full" style={`width: ${dist.scores[3].percentage}%;`}></div>
+                </div>
+              </div>
+
+              <!-- Score 2 -->
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-amber-800 font-bold">Score 2 (Possibly Qualified)</span>
+                  <span class="text-neutral-900 font-bold">{dist.scores[2].percentage}% ({dist.scores[2].count.toLocaleString()} students)</span>
+                </div>
+                <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full" style={`width: ${dist.scores[2].percentage}%;`}></div>
+                </div>
+              </div>
+
+              <!-- Score 1 -->
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-rose-800 font-bold">Score 1 (No Recommendation)</span>
+                  <span class="text-neutral-900 font-bold">{dist.scores[1].percentage}% ({dist.scores[1].count.toLocaleString()} students)</span>
+                </div>
+                <div class="w-full h-3 bg-neutral-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-rose-500 rounded-full" style={`width: ${dist.scores[1].percentage}%;`}></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Takeaways for that year -->
+            <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/70 text-xs">
+              <span class="font-bold text-neutral-900 block mb-2 uppercase tracking-wide">Chief Reader Report Highlights:</span>
+              <ul class="space-y-1.5 text-neutral-600 list-disc list-inside">
+                {dist.keyTakeaways.map((takeaway) => (
+                  <li>{takeaway}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Comparative Table -->
+    <section class="mt-14 max-w-4xl">
+      <h3 class="text-xl font-bold font-heading text-neutral-900 mb-4">Multi-Year Score Comparison Table</h3>
+      <div class="overflow-x-auto rounded-xl border border-neutral-200/90 bg-white shadow-xs">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead class="bg-neutral-50 text-neutral-600 font-semibold border-b border-neutral-200 uppercase tracking-wider text-[11px]">
+            <tr>
+              <th class="p-3.5">Year</th>
+              <th class="p-3.5 text-center text-emerald-800">Score 5</th>
+              <th class="p-3.5 text-center text-blue-800">Score 4</th>
+              <th class="p-3.5 text-center text-sky-800">Score 3</th>
+              <th class="p-3.5 text-center text-amber-800">Score 2</th>
+              <th class="p-3.5 text-center text-rose-800">Score 1</th>
+              <th class="p-3.5 text-right font-bold text-neutral-900">Pass Rate (3+)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-100 text-neutral-700">
+            {
+              scoreDistributions.map((row) => (
+                <tr class="hover:bg-neutral-50/70 transition-colors">
+                  <td class="p-3.5 font-bold text-neutral-900">{row.year}</td>
+                  <td class="p-3.5 text-center font-mono">{row.scores[5].percentage}%</td>
+                  <td class="p-3.5 text-center font-mono">{row.scores[4].percentage}%</td>
+                  <td class="p-3.5 text-center font-mono">{row.scores[3].percentage}%</td>
+                  <td class="p-3.5 text-center font-mono">{row.scores[2].percentage}%</td>
+                  <td class="p-3.5 text-center font-mono">{row.scores[1].percentage}%</td>
+                  <td class="p-3.5 text-right font-bold font-mono text-blue-700">{row.passRate}%</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <FAQ items={distributionFaqs} title="APUSH Curves & Score Distribution FAQs" />
+    <SourceSection />
+    <RelatedTools currentPath="/apush-score-distribution/" />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={schema} />
+</Layout>

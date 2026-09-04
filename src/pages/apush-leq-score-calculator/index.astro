@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import SourceSection from '../../components/common/SourceSection.astro';
+import RelatedTools from '../../components/common/RelatedTools.astro';
+import JsonLd from '../../components/common/JsonLd.astro';
+import LEQRubricCalculator from '../../components/rubric/LEQRubricCalculator.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+
+const pageTitle = 'APUSH LEQ Score Calculator (6-Point Rubric) | Long Essay Question Scorer';
+const pageDescription = 'Calculate your AP U.S. History LEQ score using the official 6-point College Board rubric. Includes thesis, contextualization, evidence, and historical reasoning.';
+
+const leqFaqs = [
+  {
+    question: 'How much does the LEQ contribute to my total APUSH score?',
+    answer: 'The Long Essay Question accounts for 15% of your total composite score. With 6 total raw points available on the rubric, each earned LEQ point equals exactly 2.5 composite points out of 100.',
+  },
+  {
+    question: 'Can I choose which LEQ prompt to answer?',
+    answer: 'Yes! On Section II Part B of the AP exam, you are presented with three prompt options and must choose exactly one: Question 2 (covering Periods 1–3, 1491–1754), Question 3 (covering Periods 4–6, 1800–1898), or Question 4 (covering Periods 7–9, 1890–Present). All three prompts assess the same historical reasoning skill (e.g., all causation or all comparison).',
+  },
+  {
+    question: 'How is the LEQ evidence scored differently from the DBQ?',
+    answer: 'Unlike the DBQ where documents are provided, the LEQ requires you to retrieve all historical evidence from memory. You earn 1 point for providing specific examples of evidence relevant to the topic, and 2 points for using multiple pieces of evidence to support your thesis argument.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'APUSH LEQ Score Calculator',
+  url: 'https://apushcalculator.com/apush-leq-score-calculator/',
+  applicationCategory: 'EducationalApplication',
+  description: pageDescription,
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/apush-leq-score-calculator/"
+>
+  <Header slot="header" activePath="/apush-leq-score-calculator/" />
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <Breadcrumb items={[{ label: 'LEQ Score Calculator' }]} />
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        Official 6-Point College Board Rubric
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        APUSH LEQ Score Calculator
+      </h1>
+      <p class="text-base sm:text-lg text-neutral-600 mt-2 max-w-3xl leading-relaxed">
+        Evaluate your Long Essay Question performance against the official 6-point scoring criteria. The LEQ represents 15% of your overall AP score, with each point yielding 2.5 composite points.
+      </p>
+    </div>
+
+    <DisclaimerCard className="mb-8" />
+
+    <!-- Interactive LEQ Rubric Scorer -->
+    <LEQRubricCalculator />
+
+    <!-- In-depth LEQ Strategy Guide -->
+    <section class="mt-16 pt-10 border-t border-neutral-200 max-w-3xl">
+      <h2 class="text-2xl font-bold font-heading text-neutral-900 mb-4">
+        Writing a 6/6 APUSH Long Essay Question
+      </h2>
+      <p class="text-sm text-neutral-600 leading-relaxed mb-6">
+        With 40 minutes on the clock, efficiency and structure are paramount. Follow these core benchmarks to maximize points on Section II Part B.
+      </p>
+
+      <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Pick the Prompt with the Deepest Recall</h3>
+          <p>
+            Spend 2 minutes quickly outlining 4 proper nouns for each prompt. Select the question where you remember the most specific historical facts (laws, treaties, politicians), rather than the era you simply find most interesting.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Align with the Historical Reasoning Skill</h3>
+          <p>
+            If the prompt asks for <strong>Causation</strong>, address both short-term triggers and long-term systemic causes. If it asks for <strong>Comparison</strong>, structure paragraphs around clear criteria comparing both subjects. If it asks for <strong>CCOT</strong>, analyze both what changed and what remained constant.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Provide at Least 4 Specific Historical Facts</h3>
+          <p>
+            Vague statements earn 0 evidence points. Ensure every body paragraph incorporates at least two named historical terms, defines them, and explains how they prove your topic argument.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FAQ items={leqFaqs} title="APUSH LEQ Scoring FAQs" />
+    <SourceSection />
+    <RelatedTools currentPath="/apush-leq-score-calculator/" />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={schema} />
+</Layout>

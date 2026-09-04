@@ -1,0 +1,115 @@
+---
+---
+
+<div class="mt-6 p-5 rounded-xl bg-white border border-neutral-200/90 shadow-xs">
+  <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-900 mb-4 flex items-center justify-between">
+    <span>Composite Score Breakdown</span>
+    <span class="text-xs text-neutral-500 font-normal">Sum = 100 Composite Pts</span>
+  </h3>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs border-collapse">
+      <thead>
+        <tr class="border-b border-neutral-200 text-neutral-500 uppercase tracking-wider text-[11px]">
+          <th scope="col" class="pb-2.5 font-semibold">Section</th>
+          <th scope="col" class="pb-2.5 font-semibold text-center">Raw Score</th>
+          <th scope="col" class="pb-2.5 font-semibold text-center">Accuracy</th>
+          <th scope="col" class="pb-2.5 font-semibold text-right">Weighted Pts</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-neutral-100 text-neutral-700">
+        <!-- MCQ Row -->
+        <tr class="hover:bg-neutral-50/70 transition-colors">
+          <td class="py-3">
+            <div class="font-bold text-neutral-900">Multiple-Choice (MCQ)</div>
+            <div class="text-[11px] text-neutral-500">40% Weight · 55 Questions</div>
+            <div class="w-28 sm:w-36 h-1.5 bg-neutral-100 rounded-full mt-1.5 overflow-hidden">
+              <div id="breakdown-bar-mcq" class="h-full bg-blue-600 rounded-full transition-all" style="width: 76%;"></div>
+            </div>
+          </td>
+          <td class="py-3 text-center font-mono font-medium text-neutral-900">
+            <span id="breakdown-raw-mcq">42</span> / 55
+          </td>
+          <td class="py-3 text-center text-neutral-600 font-medium">
+            <span id="breakdown-pct-mcq">76.4</span>%
+          </td>
+          <td class="py-3 text-right font-mono font-bold text-neutral-900">
+            <span id="breakdown-weighted-mcq">30.5</span> / 40.0
+          </td>
+        </tr>
+
+        <!-- SAQ Row -->
+        <tr class="hover:bg-neutral-50/70 transition-colors">
+          <td class="py-3">
+            <div class="font-bold text-neutral-900">Short-Answer (SAQ)</div>
+            <div class="text-[11px] text-neutral-500">20% Weight · 3 Questions (9 Pts)</div>
+            <div class="w-28 sm:w-36 h-1.5 bg-neutral-100 rounded-full mt-1.5 overflow-hidden">
+              <div id="breakdown-bar-saq" class="h-full bg-blue-600 rounded-full transition-all" style="width: 55%;"></div>
+            </div>
+          </td>
+          <td class="py-3 text-center font-mono font-medium text-neutral-900">
+            <span id="breakdown-raw-saq">5</span> / 9
+          </td>
+          <td class="py-3 text-center text-neutral-600 font-medium">
+            <span id="breakdown-pct-saq">55.6</span>%
+          </td>
+          <td class="py-3 text-right font-mono font-bold text-neutral-900">
+            <span id="breakdown-weighted-saq">11.1</span> / 20.0
+          </td>
+        </tr>
+
+        <!-- DBQ Row -->
+        <tr class="hover:bg-neutral-50/70 transition-colors">
+          <td class="py-3">
+            <div class="font-bold text-neutral-900">Document-Based Question (DBQ)</div>
+            <div class="text-[11px] text-neutral-500">25% Weight · 7-Point Rubric</div>
+            <div class="w-28 sm:w-36 h-1.5 bg-neutral-100 rounded-full mt-1.5 overflow-hidden">
+              <div id="breakdown-bar-dbq" class="h-full bg-blue-600 rounded-full transition-all" style="width: 71%;"></div>
+            </div>
+          </td>
+          <td class="py-3 text-center font-mono font-medium text-neutral-900">
+            <span id="breakdown-raw-dbq">5</span> / 7
+          </td>
+          <td class="py-3 text-center text-neutral-600 font-medium">
+            <span id="breakdown-pct-dbq">71.4</span>%
+          </td>
+          <td class="py-3 text-right font-mono font-bold text-neutral-900">
+            <span id="breakdown-weighted-dbq">17.9</span> / 25.0
+          </td>
+        </tr>
+
+        <!-- LEQ Row -->
+        <tr class="hover:bg-neutral-50/70 transition-colors">
+          <td class="py-3">
+            <div class="font-bold text-neutral-900">Long Essay Question (LEQ)</div>
+            <div class="text-[11px] text-neutral-500">15% Weight · 6-Point Rubric</div>
+            <div class="w-28 sm:w-36 h-1.5 bg-neutral-100 rounded-full mt-1.5 overflow-hidden">
+              <div id="breakdown-bar-leq" class="h-full bg-blue-600 rounded-full transition-all" style="width: 66%;"></div>
+            </div>
+          </td>
+          <td class="py-3 text-center font-mono font-medium text-neutral-900">
+            <span id="breakdown-raw-leq">4</span> / 6
+          </td>
+          <td class="py-3 text-center text-neutral-600 font-medium">
+            <span id="breakdown-pct-leq">66.7</span>%
+          </td>
+          <td class="py-3 text-right font-mono font-bold text-neutral-900">
+            <span id="breakdown-weighted-leq">10.0</span> / 15.0
+          </td>
+        </tr>
+      </tbody>
+
+      <!-- Summary Footer -->
+      <tfoot>
+        <tr class="border-t-2 border-neutral-200 font-bold text-neutral-900">
+          <td class="pt-3">Total Exam Composite</td>
+          <td class="pt-3 text-center font-mono"><span id="breakdown-total-raw">56</span> / 77</td>
+          <td class="pt-3 text-center"><span id="breakdown-total-pct">72.7</span>%</td>
+          <td class="pt-3 text-right text-sm font-mono text-blue-700">
+            <span id="breakdown-total-weighted">69.5</span> / 100
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

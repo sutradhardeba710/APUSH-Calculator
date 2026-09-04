@@ -1,11 +1,301 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import DisclaimerCard from '../components/common/DisclaimerCard.astro';
+import SourceSection from '../components/common/SourceSection.astro';
+import JsonLd from '../components/common/JsonLd.astro';
+import FAQ from '../components/faq/FAQ.astro';
+import { apushCalculatorFaqs } from '../data/faq/apush-calculator';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = 'APUSH Score Calculator & Study Hub (2026–2027) | Free Score Estimator';
+const pageDescription = 'Calculate your AP U.S. History composite score, predict your chance of a 5, and master the official DBQ, LEQ, and SAQ rubrics with our free educational tools.';
+
+const homeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'APUSH Score Calculator',
+  url: 'https://apushcalculator.com/',
+  description: pageDescription,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://apushcalculator.com/apush-score-calculator/?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/"
+>
+  <Header slot="header" activePath="/" />
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-neutral-50 pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-neutral-200/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-100/70 text-blue-800 border border-blue-200/80 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+          Updated for 2026 & 2027 AP® Exam Standards
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-neutral-900 tracking-tight leading-tight">
+          Calculate Your AP® U.S. History Score
+        </h1>
+
+        <p class="text-base sm:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+          Accurate composite scoring based on official College Board weightings: 40% MCQ, 20% SAQ, 25% DBQ, and 15% LEQ. Real curves, step-by-step rubrics, and target score planners.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="/apush-score-calculator/"
+            class="px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-md hover:shadow-lg transition-all focus-visible:outline-2 focus-visible:outline-blue-600"
+          >
+            Launch Composite Calculator →
+          </a>
+          <a
+            href="/apush-score-predictor/"
+            class="px-6 py-3.5 rounded-xl font-bold text-sm text-neutral-800 bg-white hover:bg-neutral-100 border border-neutral-300 shadow-xs transition-all"
+          >
+            Score Predictor (Probabilities)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Body Content -->
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16">
+    <DisclaimerCard />
+
+    <!-- Bento Grid of Tools -->
+    <section>
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold font-heading text-neutral-900">
+          Complete Suite of APUSH Scoring & Rubric Tools
+        </h2>
+        <p class="text-sm text-neutral-600 mt-2">
+          Everything you need to analyze your practice tests, diagnose weaknesses, and secure college credit.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Composite Calculator -->
+        <a
+          href="/apush-score-calculator/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">Core Tool</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors">
+              Composite APUSH Calculator
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Calculate your overall 1–5 AP score, composite points out of 100, and simulate what-if scenarios with live curve toggling.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-blue-700 mt-4 flex items-center gap-1">
+            Open Calculator →
+          </span>
+        </a>
+
+        <!-- Card 2: Score Predictor -->
+        <a
+          href="/apush-score-predictor/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-indigo-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center group-hover:bg-indigo-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full">Probability</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-indigo-700 transition-colors">
+              Score Predictor & Curve Model
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Predict probabilities of earning a 3, 4, or 5 under varying curve conditions and reader strictness.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-indigo-700 mt-4 flex items-center gap-1">
+            Predict Your Score →
+          </span>
+        </a>
+
+        <!-- Card 3: DBQ Rubric Scorer -->
+        <a
+          href="/apush-dbq-score-calculator/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-neutral-600 bg-neutral-100 px-2.5 py-0.5 rounded-full">25% Weight</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors">
+              DBQ Rubric Calculator
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Interactive 7-point rubric scorer covering thesis, context, 4-document evidence, HIPP sourcing, and complexity.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-blue-700 mt-4 flex items-center gap-1">
+            Score Your DBQ →
+          </span>
+        </a>
+
+        <!-- Card 4: LEQ Rubric Scorer -->
+        <a
+          href="/apush-leq-score-calculator/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-neutral-600 bg-neutral-100 px-2.5 py-0.5 rounded-full">15% Weight</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors">
+              LEQ Rubric Scorer
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Step-by-step 6-point Long Essay Question evaluator with historical reasoning analysis (causation, comparison, CCOT).
+            </p>
+          </div>
+          <span class="text-xs font-bold text-blue-700 mt-4 flex items-center gap-1">
+            Score Your LEQ →
+          </span>
+        </a>
+
+        <!-- Card 5: SAQ Scoring Tool -->
+        <a
+          href="/apush-saq-score-calculator/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-neutral-600 bg-neutral-100 px-2.5 py-0.5 rounded-full">20% Weight</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors">
+              SAQ Scoring Calculator
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Check off earned subparts (A, B, C) across all 3 Short-Answer Questions with ACE writing method tips.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-blue-700 mt-4 flex items-center gap-1">
+            Score Your SAQs →
+          </span>
+        </a>
+
+        <!-- Card 6: Distributions -->
+        <a
+          href="/apush-score-distribution/"
+          class="group p-6 rounded-2xl bg-white border border-neutral-200/90 shadow-xs hover:shadow-md hover:border-blue-400 transition-all flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </span>
+              <span class="text-xs font-bold text-neutral-600 bg-neutral-100 px-2.5 py-0.5 rounded-full">College Board Data</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-neutral-900 group-hover:text-blue-700 transition-colors">
+              Score Distributions & Pass Rates
+            </h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Explore national score statistics, percentage of 5s, and historical curves from 2021 through 2024.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-blue-700 mt-4 flex items-center gap-1">
+            View Score Curves →
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Exam Section Breakdown Table -->
+    <section class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold font-heading text-neutral-900">AP® U.S. History Exam Structure & Weighting</h2>
+        <p class="text-xs sm:text-sm text-neutral-600 mt-1">Total exam time: 3 hours and 15 minutes · 4 required sections</p>
+      </div>
+
+      <div class="overflow-hidden rounded-2xl border border-neutral-200/90 bg-white shadow-xs">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+          <thead class="bg-neutral-50 text-neutral-600 font-semibold border-b border-neutral-200 uppercase tracking-wider text-[11px]">
+            <tr>
+              <th class="p-4">Section</th>
+              <th class="p-4 text-center">Questions</th>
+              <th class="p-4 text-center">Time Limit</th>
+              <th class="p-4 text-right">Weight</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-100 text-neutral-700">
+            <tr>
+              <td class="p-4 font-bold text-neutral-900">Section I, Part A: Multiple Choice</td>
+              <td class="p-4 text-center">55 questions</td>
+              <td class="p-4 text-center">55 minutes</td>
+              <td class="p-4 text-right font-bold text-blue-700">40%</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-neutral-900">Section I, Part B: Short Answer</td>
+              <td class="p-4 text-center">3 questions (9 parts)</td>
+              <td class="p-4 text-center">40 minutes</td>
+              <td class="p-4 text-right font-bold text-blue-700">20%</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-neutral-900">Section II, Part A: Document-Based Question (DBQ)</td>
+              <td class="p-4 text-center">1 essay (7 documents)</td>
+              <td class="p-4 text-center">60 minutes (incl. reading)</td>
+              <td class="p-4 text-right font-bold text-blue-700">25%</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-neutral-900">Section II, Part B: Long Essay Question (LEQ)</td>
+              <td class="p-4 text-center">1 essay (choice of 3)</td>
+              <td class="p-4 text-center">40 minutes</td>
+              <td class="p-4 text-right font-bold text-blue-700">15%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <FAQ items={apushCalculatorFaqs} />
+
+    <!-- Official Sources -->
+    <SourceSection />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={homeSchema} />
 </Layout>

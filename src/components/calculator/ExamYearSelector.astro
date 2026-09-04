@@ -1,0 +1,39 @@
+---
+import { AVAILABLE_YEARS, DEFAULT_YEAR } from '../../data/exam-config';
+
+interface Props {
+  selectedYear?: number;
+}
+
+const { selectedYear = DEFAULT_YEAR } = Astro.props;
+---
+
+<div class="flex items-center justify-between flex-wrap gap-3 p-3 bg-neutral-100/80 rounded-xl border border-neutral-200">
+  <div class="flex items-center gap-2">
+    <span class="text-xs font-semibold uppercase tracking-wider text-neutral-600">Exam Curve Year:</span>
+    <div class="inline-flex rounded-lg bg-white p-0.5 border border-neutral-200 shadow-xs" role="radiogroup" aria-label="Exam curve calibration year">
+      {
+        AVAILABLE_YEARS.map((yr) => (
+          <button
+            type="button"
+            data-year-btn={yr}
+            class={`year-toggle-btn px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+              yr === selectedYear
+                ? 'bg-blue-700 text-white shadow-xs'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+            }`}
+            role="radio"
+            aria-checked={yr === selectedYear ? 'true' : 'false'}
+          >
+            {yr}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <span class="text-[11px] text-neutral-500 font-medium flex items-center gap-1.5">
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+    College Board 40/20/25/15 Standard
+  </span>
+</div>

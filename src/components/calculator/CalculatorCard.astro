@@ -1,0 +1,103 @@
+---
+import ExamYearSelector from './ExamYearSelector.astro';
+import ScoreInput from './ScoreInput.astro';
+import type { ExamConfig } from '../../data/exam-config/types';
+
+interface Props {
+  config: ExamConfig;
+  defaultScores?: {
+    mcq: number;
+    saq: number;
+    dbq: number;
+    leq: number;
+  };
+}
+
+const {
+  config,
+  defaultScores = { mcq: 42, saq: 5, dbq: 5, leq: 4 },
+} = Astro.props;
+---
+
+<div class="space-y-4">
+  <!-- Year Selector Bar -->
+  <ExamYearSelector selectedYear={config.year} />
+
+  <!-- Quick Presets -->
+  <div class="flex items-center justify-between flex-wrap gap-2 px-1 text-xs">
+    <span class="text-neutral-500 font-medium">Quick Presets:</span>
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <button
+        type="button"
+        data-preset="five"
+        class="preset-btn px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-semibold transition-colors border border-emerald-200"
+      >
+        Score 5 Preset
+      </button>
+      <button
+        type="button"
+        data-preset="four"
+        class="preset-btn px-2.5 py-1 rounded-md bg-blue-50 text-blue-800 hover:bg-blue-100 font-semibold transition-colors border border-blue-200"
+      >
+        Score 4 Preset
+      </button>
+      <button
+        type="button"
+        data-preset="three"
+        class="preset-btn px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 hover:bg-sky-100 font-semibold transition-colors border border-sky-200"
+      >
+        Passing 3 Preset
+      </button>
+    </div>
+  </div>
+
+  <!-- Form inputs container -->
+  <form id="apush-calc-form" class="space-y-3" onsubmit="return false;">
+    <!-- Section 1 Part A: MCQ -->
+    <ScoreInput
+      id="mcq"
+      label="Section I, Part A: Multiple Choice"
+      shortName="MCQ"
+      max={config.sections.mcq.rawMax}
+      weightPercent={config.sections.mcq.weightPercent}
+      defaultValue={defaultScores.mcq}
+      description="55 stimulus-based questions (55 minutes). No penalty for incorrect guesses."
+    />
+
+    <!-- Section 1 Part B: SAQ -->
+    <ScoreInput
+      id="saq"
+      label="Section I, Part B: Short-Answer Questions"
+      shortName="SAQ"
+      max={config.sections.saq.rawMax}
+      weightPercent={config.sections.saq.weightPercent}
+      defaultValue={defaultScores.saq}
+      description="3 questions total, 3 parts each (9 raw points, 40 minutes)."
+      rubricLink="/apush-saq-score-calculator/"
+    />
+
+    <!-- Section 2 Part A: DBQ -->
+    <ScoreInput
+      id="dbq"
+      label="Section II, Part A: Document-Based Question"
+      shortName="DBQ"
+      max={config.sections.dbq.rawMax}
+      weightPercent={config.sections.dbq.weightPercent}
+      defaultValue={defaultScores.dbq}
+      description="1 essay based on 7 historical documents (60 minutes). Worth ~3.57 composite pts per raw point."
+      rubricLink="/apush-dbq-score-calculator/"
+    />
+
+    <!-- Section 2 Part B: LEQ -->
+    <ScoreInput
+      id="leq"
+      label="Section II, Part B: Long Essay Question"
+      shortName="LEQ"
+      max={config.sections.leq.rawMax}
+      weightPercent={config.sections.leq.weightPercent}
+      defaultValue={defaultScores.leq}
+      description="Choice of 1 out of 3 prompts (40 minutes). Focuses on causation, comparison, or CCOT."
+      rubricLink="/apush-leq-score-calculator/"
+    />
+  </form>
+</div>

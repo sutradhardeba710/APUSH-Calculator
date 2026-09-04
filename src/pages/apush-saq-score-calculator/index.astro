@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import DisclaimerCard from '../../components/common/DisclaimerCard.astro';
+import SourceSection from '../../components/common/SourceSection.astro';
+import RelatedTools from '../../components/common/RelatedTools.astro';
+import JsonLd from '../../components/common/JsonLd.astro';
+import SAQCalculator from '../../components/rubric/SAQCalculator.astro';
+import FAQ from '../../components/faq/FAQ.astro';
+
+const pageTitle = 'APUSH SAQ Score Calculator (9-Point Rubric) | Short-Answer Question Scorer';
+const pageDescription = 'Calculate your AP U.S. History SAQ score across all 3 questions and 9 subparts. Features ACE framework guidance and official 20% exam weighting.';
+
+const saqFaqs = [
+  {
+    question: 'How much are Short-Answer Questions worth on the APUSH exam?',
+    answer: 'SAQs account for exactly 20% of your total composite exam score. With 9 total subparts (3 questions × 3 parts A, B, and C), each earned point adds 2.22 composite points to your total.',
+  },
+  {
+    question: 'What is the ACE strategy for APUSH SAQs?',
+    answer: 'ACE is a 3-sentence writing template: A = Answer the prompt directly with a clear historical assertion. C = Cite a specific piece of historical evidence (proper noun, law, or event). E = Explain how that evidence proves the assertion you made.',
+  },
+  {
+    question: 'Do I get partial credit on an SAQ part?',
+    answer: 'No. Each subpart (A, B, or C) is scored dichotomously as either 0 or 1 point. There are no half points awarded.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'APUSH SAQ Score Calculator',
+  url: 'https://apushcalculator.com/apush-saq-score-calculator/',
+  applicationCategory: 'EducationalApplication',
+  description: pageDescription,
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://apushcalculator.com/apush-saq-score-calculator/"
+>
+  <Header slot="header" activePath="/apush-saq-score-calculator/" />
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <Breadcrumb items={[{ label: 'SAQ Score Calculator' }]} />
+
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        Section I, Part B · 9 Points Total
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-neutral-900 tracking-tight">
+        APUSH SAQ Score Calculator
+      </h1>
+      <p class="text-base sm:text-lg text-neutral-600 mt-2 max-w-3xl leading-relaxed">
+        Calculate your score across all 3 Short-Answer Questions. SAQs account for 20% of your overall AP score, making each earned subpart worth 2.22 composite points.
+      </p>
+    </div>
+
+    <DisclaimerCard className="mb-8" />
+
+    <!-- Interactive SAQ Scorer -->
+    <SAQCalculator />
+
+    <!-- In-depth SAQ Strategy Guide -->
+    <section class="mt-16 pt-10 border-t border-neutral-200 max-w-3xl">
+      <h2 class="text-2xl font-bold font-heading text-neutral-900 mb-4">
+        Mastering Section I Part B: Short-Answer Tactics
+      </h2>
+      <p class="text-sm text-neutral-600 leading-relaxed mb-6">
+        You have 40 minutes to complete 3 questions (9 subparts total). That gives you approximately 13 minutes per question, or just over 4 minutes per lettered part.
+      </p>
+
+      <div class="space-y-6 text-sm text-neutral-700 leading-relaxed">
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Avoid Introductions and Thesis Statements</h3>
+          <p>
+            Unlike essays, SAQs require no thesis, introduction, or conclusion. Begin your answer immediately: <em>"One major cause of the Market Revolution was the construction of the Erie Canal, which lowered transportation costs between western farms and northeastern manufacturing hubs."</em>
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Question 1: Secondary Source Comparison</h3>
+          <p>
+            Question 1 always features two opposing historians. Focus on identifying the conceptual contrast (e.g., whether the American Revolution was a conservative defense of existing British liberties or a radical social transformation).
+          </p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-200/80">
+          <h3 class="font-bold text-neutral-900 text-base mb-1">Choose Wisely Between Question 3 and 4</h3>
+          <p>
+            Question 3 covers Periods 1–5 (1491–1877), while Question 4 covers Periods 6–9 (1865–Present). Pick the question where you can immediately identify at least two specific proper nouns for parts B and C.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <FAQ items={saqFaqs} title="APUSH SAQ Scoring FAQs" />
+    <SourceSection />
+    <RelatedTools currentPath="/apush-saq-score-calculator/" />
+  </div>
+
+  <Footer slot="footer" />
+  <JsonLd slot="head" schema={schema} />
+</Layout>
